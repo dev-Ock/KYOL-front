@@ -92,6 +92,7 @@ export default {
     confirmPassword: ''
     // loading: false
   }),
+  //
   methods: {
     async signUp(e) {
       e.preventDefault()
