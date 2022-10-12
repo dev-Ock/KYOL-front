@@ -1,7 +1,7 @@
 <template>
   <div>
     <NavBar></NavBar>
-    mypage
+    mypage//
   </div>
 </template>
 
