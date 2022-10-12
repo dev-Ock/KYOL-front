@@ -1,7 +1,7 @@
 <template>
   <div>
     <NavBar></NavBar>
-    Item상점싫어요
+    Item상점
   </div>
 </template>
 
