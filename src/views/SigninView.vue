@@ -112,10 +112,6 @@ export default {
       if (this.loading) return
       this.loading = true
       e.preventDefault()
-      console.log(this.response)
-      if (this.response) return
-      e.preventDefault()
-      console.log('email:', this.email)
 
       await axios
         .post(process.env.VUE_APP_API + '/auth/login', {
@@ -123,7 +119,8 @@ export default {
           password: this.password
         })
         .then(response => {
-          console.log('editcategories - response : ', response)
+          console.log('login - response : ', response)
+          localStorage.setItem('token', response.data.token)
           this.$router.push({ name: 'home' })
         })
       // if (!user) return
