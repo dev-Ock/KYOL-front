@@ -44,3 +44,11 @@ export default {
   }
 }
 </script>
+
+<style>
+.home {
+  background: url('~@/assets/images/space2.gif') 50% 50% / cover no-repeat;
+  height: 100vh;
+  width: 100vw;
+}
+</style>
