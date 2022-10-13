@@ -58,14 +58,22 @@
 
                 <!-- Submit button -->
                 <div class="loginbtn">
-                  <button type="submit" class="btn btn-primary btn-block mb-4" :loading="loading" @click="signin">
+                  <button
+                    type="submit"
+                    class="btn btn-primary btn-block mb-4"
+                    :loading="loading"
+                    style="width: 300px"
+                    @click="signin"
+                  >
                     Sign in
                   </button>
                 </div>
                 <div class="loginbtn2">
                   <!-- Submit button -->
                   <router-link to="/signup"
-                    ><button type="submit" class="btn btn-primary btn-block mb-4 butter">Sign up</button></router-link
+                    ><button type="submit" class="btn btn-primary btn-block mb-4" style="width: 300px">
+                      Sign up
+                    </button></router-link
                   >
                 </div>
 
@@ -77,14 +85,14 @@
                   </button>
 
                   <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-google"></i>
+                    <i class="fabfa-google"></i>
                   </button>
 
-                  <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-twitter"></i>
+                  <button type="button" class="btn-btn-link btn-floating mx-1">
+                    <i class="fabfa-twitter"></i>
                   </button>
 
-                  <button type="button" class="btn btn-link btn-floating mx-1">
+                  <button type="button" class="btn-btn-link btn-floating mx-1">
                     <i class="fab fa-github"></i>
                   </button>
                 </div>
@@ -120,8 +128,18 @@ export default {
         })
         .then(response => {
           console.log('login - response : ', response)
+
           localStorage.setItem('token', response.data.token)
+          localStorage.setItem('userNick', response.data.user.nick)
+
+          console.log(localStorage.getItem('userNick'))
+
           this.$router.push({ name: 'home' })
+          // 토큰저장
+
+          // 아래에 로컬스토리지에서 사용할 유저정보 저장
+          // await axios
+          // .post()
         })
       // if (!user) return
       // this.$router.push({ name: 'home' })
@@ -162,6 +180,7 @@ export default {
   margin: 0px;
   padding: 0px;
   height: 40px;
+  widows: 400px;
 }
 .loginbtn2 {
   text-align: center;
