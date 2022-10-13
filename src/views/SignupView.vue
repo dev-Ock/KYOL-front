@@ -23,6 +23,7 @@
                     type="email"
                     class="form-control"
                     placeholder="Email address"
+                    autocomplete="on"
                   />
                 </div>
 
@@ -34,6 +35,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Nickname"
+                    autocomplete="on"
                   />
                 </div>
 
@@ -45,6 +47,7 @@
                     type="password"
                     class="form-control"
                     placeholder="Password"
+                    autocomplete="on"
                   />
                 </div>
 
@@ -56,6 +59,7 @@
                     type="password"
                     class="form-control"
                     placeholder="Confirm Password"
+                    autocomplete="on"
                   />
                 </div>
 

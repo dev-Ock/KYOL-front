@@ -1,33 +1,32 @@
 <template>
-  <div class="home">
+  <div>
     <NavBar></NavBar>
-    HOME//
-    <button @click="gamestart">게임시작</button>
+    Item상점내놔
   </div>
 </template>
 
 <script>
-// import { component } from 'vue/types/umd'
-import axios from 'axios'
 import NavBar from '@/components/NavBar.vue'
+import axios from 'axios'
 export default {
-  name: 'HomeView',
+  name: 'ItemstoreView',
   components: {
     NavBar
   },
+  mounted() {
+    this.shop()
+  },
   methods: {
-    async gamestart() {
+    async shop() {
       console.log('token', localStorage.getItem('token'))
-
       await axios
-        .get(process.env.VUE_APP_API + '/game', {
+        .get(process.env.VUE_APP_API + '/shop', {
           headers: {
             Authorization: `${localStorage.getItem('token')}`
           }
         })
         .then(response => {
-          console.log('gamestart - response : ', response)
-
+          console.log('shop - response : ', response)
           // if (this.showFriendListStatus === true) {
           //   this.showFriendListStatus = false
           //   console.log(this.showFriendListStatus)
@@ -47,10 +46,4 @@ export default {
 }
 </script>
 
-<style>
-.home {
-  background: url('~@/assets/images/space2.gif') 50% 50% / cover no-repeat;
-  height: 100vh;
-  width: 100vw;
-}
-</style>
+<style lang="scss" scoped></style>
