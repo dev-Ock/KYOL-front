@@ -133,6 +133,7 @@ export default {
           localStorage.setItem('userNick', response.data.user.nick)
 
           console.log(localStorage.getItem('userNick'))
+
           this.$router.push({ name: 'home' })
           // 토큰저장
 
