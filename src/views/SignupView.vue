@@ -64,12 +64,12 @@
 
                 <div class="text-center">
                   <p>or sign up with:</p>
-                  <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-kakao"></i>
+                  <button type="button" class="btn-btn-link2 btn-floating mx-1">
+                    <i class="fab fa-kakao">카카오</i>
                   </button>
 
-                  <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-google"></i>
+                  <button type="button" class="btn-btn-link1">
+                    <i class="fab fa-google">구글</i>
                   </button>
                 </div>
               </form>
@@ -146,6 +146,20 @@ export default {
   background-color: hsla(0, 0%, 100%, 0.9) !important;
   backdrop-filter: saturate(200%) blur(25px);
 }
+/* .btn-btn-link1 {
+  background: url('~@/assets/images/google.png') 50% 50% / cover no-repeat;
+  height: 50px;
+  width: 50px;
+  border: 0;
+  outline: 0;
+}
+.btn-btn-link2 {
+  background: url('~@/assets/images/kakao.png') 50% 50% / cover no-repeat;
+  height: 50px;
+  width: 50px;
+  border: 0;
+  outline: 0;
+} */
 </style>
 
 <!-- Section: Design Block -->
