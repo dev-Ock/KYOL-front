@@ -21,9 +21,9 @@ const routes = [
     component: () => import('@/views/SignupView.vue')
   },
   {
-    path: '/itemstore',
-    name: 'itemstore',
-    component: () => import('@/views/ItemstoreView.vue')
+    path: '/shop',
+    name: 'shop',
+    component: () => import('@/views/ShopView.vue')
   },
   {
     path: '/mypage',

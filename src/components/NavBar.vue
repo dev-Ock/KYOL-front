@@ -17,13 +17,13 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <!-- <span @click="goRanking"> ranking1</span> -->
-            <a class="nav-link" href="/ranking" @click="ranking">ranking</a>
+            <a class="nav-link" href="/ranking">Ranking</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/mypage" @click="mypage">mypage</a>
+            <a class="nav-link" href="/mypage">My Page</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/itemstore" @click="itemstore">itemstore</a>
+            <a class="nav-link" href="/shop">Shop</a>
           </li>
         </ul>
       </div>
@@ -39,21 +39,20 @@
         <router-link to="/signin">
           <button type="button" class="btn btn-outline-success button" @click="logout">로그아웃</button>
         </router-link>
-        <!-- 로컬스토리지에서 userNick 이랑 token 삭제 -->
       </div>
     </div>
   </nav>
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 export default {
   name: 'NavBar',
   data: () => ({
     loading: false
   }),
   mounted() {
-    this.checkls()
+    this.checkLocalstorage()
   },
   methods: {
     goRanking() {
@@ -70,21 +69,12 @@ export default {
       console.log('로그아웃성공')
       this.loading = false
     },
-    checkls() {
+    checkLocalstorage() {
       if (localStorage.getItem('userNick') && localStorage.getItem('token')) {
         this.loading = true
       } else {
         this.loading = false
       }
-    },
-    async ranking() {
-      await axios.get(process.env.VUE_APP_API + '/ranking').then()
-    },
-    async mypage() {
-      await axios.get(process.env.VUE_APP_API + '/mypage').then()
-    },
-    async itemstore() {
-      await axios.get(process.env.VUE_APP_API + '/shop').then()
     }
   }
 }

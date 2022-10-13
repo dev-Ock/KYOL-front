@@ -31,6 +31,7 @@
                     type="email"
                     class="form-control"
                     placeholder="Email address"
+                    autocomplete="on"
                   />
 
                   <!-- <label class="form-label" for="form3Example3">Email address</label> -->
@@ -44,6 +45,7 @@
                     type="password"
                     class="form-control"
                     placeholder="Password"
+                    autocomplete="on"
                   />
                   <!-- <label class="form-label" for="form3Example4">Password</label> -->
                 </div>
@@ -51,7 +53,14 @@
                 <!-- Checkbox -->
                 <div class="form-check d-flex justify-content-center mb-4">
                   <div>
-                    <input id="form2Example33" class="form-check-input me-2" type="checkbox" value="" checked />
+                    <input
+                      id="form2Example33"
+                      class="form-check-input me-2"
+                      type="checkbox"
+                      value=""
+                      checked
+                      autocomplete="on"
+                    />
                     <label class="form-check-label" for="form2Example33"> 자동로그인 할 사람~~~ </label>
                   </div>
                 </div>
