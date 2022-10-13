@@ -17,13 +17,13 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <!-- <span @click="goRanking"> ranking1</span> -->
-            <a class="nav-link" href="/ranking">ranking</a>
+            <a class="nav-link" href="/ranking" @click="ranking">ranking</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/mypage">mypage</a>
+            <a class="nav-link" href="/mypage" @click="mypage">mypage</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/itemstore">itemstore</a>
+            <a class="nav-link" href="/itemstore" @click="itemstore">itemstore</a>
           </li>
         </ul>
       </div>
@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'NavBar',
   data: () => ({
@@ -75,6 +76,15 @@ export default {
       } else {
         this.loading = false
       }
+    },
+    async ranking() {
+      await axios.get(process.env.VUE_APP_API + '/ranking').then()
+    },
+    async mypage() {
+      await axios.get(process.env.VUE_APP_API + '/mypage').then()
+    },
+    async itemstore() {
+      await axios.get(process.env.VUE_APP_API + '/shop').then()
     }
   }
 }
