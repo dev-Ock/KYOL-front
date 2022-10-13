@@ -27,7 +27,7 @@
           </li>
         </ul>
       </div>
-      <div v-show="loading">
+      <div v-show="!loading">
         <router-link to="/signin">
           <button type="button" class="btn btn-outline-success button">로그인</button>
         </router-link>
@@ -35,7 +35,7 @@
           <button type="button" class="btn btn-outline-success button">회원가입</button>
         </router-link>
       </div>
-      <div v-show="token">
+      <div v-show="loading">
         <router-link to="/signin">
           <button type="button" class="btn btn-outline-success button" @click="logout">로그아웃</button>
         </router-link>
@@ -49,9 +49,11 @@
 export default {
   name: 'NavBar',
   data: () => ({
-    token: true,
     loading: false
   }),
+  mounted() {
+    this.checkls()
+  },
   methods: {
     goRanking() {
       this.$router.push('/ranking')
@@ -59,13 +61,20 @@ export default {
     logincheck() {
       if (localStorage.getItem('userNick') == !null) {
         this.loading = true
-        this.token = false
       }
     },
     logout() {
       localStorage.removeItem('userNick')
       localStorage.removeItem('token')
       console.log('로그아웃성공')
+      this.loading = false
+    },
+    checkls() {
+      if (localStorage.getItem('userNick') && localStorage.getItem('token')) {
+        this.loading = true
+      } else {
+        this.loading = false
+      }
     }
   }
 }
