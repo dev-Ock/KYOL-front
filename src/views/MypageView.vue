@@ -18,11 +18,12 @@ export default {
   },
   methods: {
     async mypage() {
-      console.log('token', localStorage.getItem('token'))
       await axios
         .get(process.env.VUE_APP_API + '/mypage', {
           headers: {
-            Authorization: `${localStorage.getItem('token')}`
+            Authorization: `${localStorage.getItem('token')}`,
+            userid: `${localStorage.getItem('userId')}`,
+            usernick: `${localStorage.getItem('userNick')}`
           }
         })
         .then(response => {

@@ -66,6 +66,7 @@ export default {
     logout() {
       localStorage.removeItem('userNick')
       localStorage.removeItem('token')
+      localStorage.removeItem('userId')
       console.log('로그아웃성공')
       this.loading = false
     },
