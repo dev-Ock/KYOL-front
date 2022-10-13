@@ -27,18 +27,19 @@
           </li>
         </ul>
       </div>
-      <div v-if="true">
-        <router-link to="/signin"
-          ><button type="button" class="btn btn-outline-success button">로그인</button></router-link
-        >
-        <router-link to="/signup"
-          ><button type="button" class="btn btn-outline-success button">회원가입</button></router-link
-        >
+      <div v-show="loading">
+        <router-link to="/signin">
+          <button type="button" class="btn btn-outline-success button">로그인</button>
+        </router-link>
+        <router-link to="/signup">
+          <button type="button" class="btn btn-outline-success button">회원가입</button>
+        </router-link>
       </div>
-      <div v-else>
-        <router-link to="/logout"
-          ><button type="button" class="btn btn-outline-success button">로그아웃</button></router-link
-        >
+      <div v-show="token">
+        <router-link to="/signin">
+          <button type="button" class="btn btn-outline-success button" @click="logout">로그아웃</button>
+        </router-link>
+        <!-- 로컬스토리지에서 userNick 이랑 token 삭제 -->
       </div>
     </div>
   </nav>
@@ -47,9 +48,24 @@
 <script>
 export default {
   name: 'NavBar',
+  data: () => ({
+    token: true,
+    loading: false
+  }),
   methods: {
     goRanking() {
       this.$router.push('/ranking')
+    },
+    logincheck() {
+      if (localStorage.getItem('userNick') == !null) {
+        this.loading = true
+        this.token = false
+      }
+    },
+    logout() {
+      localStorage.removeItem('userNick')
+      localStorage.removeItem('token')
+      console.log('로그아웃성공')
     }
   }
 }
