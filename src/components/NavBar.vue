@@ -25,6 +25,9 @@
           <li class="nav-item">
             <a class="nav-link" href="/shop">Shop</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/game">Game</a>
+          </li>
         </ul>
       </div>
       <div v-show="!loading">
