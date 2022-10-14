@@ -4,9 +4,15 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {},
+  state: {
+    number: 2
+  },
   getters: {},
-  mutations: {},
+  mutations: {
+    증가(state, payload) {
+      state.number += payload
+    }
+  },
   actions: {},
   modules: {}
 })

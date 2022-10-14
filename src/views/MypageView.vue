@@ -1,7 +1,9 @@
 <template>
   <div>
     <NavBar></NavBar>
-    mypage//ssss
+    mypage//
+    <p>{{ $store.state.number }}</p>
+    <button @click="$store.commit('증가', 10)">숫자증가</button>
   </div>
 </template>
 
