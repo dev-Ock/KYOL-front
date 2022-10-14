@@ -1,7 +1,6 @@
 <template>
   <div>
     <NavBar></NavBar>
-
     <div class="score">
       <table class="table table-striped">
         <thead>
