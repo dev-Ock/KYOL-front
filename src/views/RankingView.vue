@@ -1,6 +1,25 @@
 <template>
   <div>
     <NavBar></NavBar>
+    <div class="container"></div>
+    <div class="score">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">순위</th>
+            <th scope="col">닉네임</th>
+            <th scope="col">Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(user, i) in data" :key="i">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ nick[i] }}</td>
+            <td>{{ score[i] }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <div class="score">
       <table class="table table-striped">
         <thead>
@@ -81,4 +100,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>
