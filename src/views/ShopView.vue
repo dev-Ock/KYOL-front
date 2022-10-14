@@ -20,14 +20,16 @@
                   <div class="card-body p-4">
                     <div class="text-center">
                       <!-- Product name-->
-                      <h5 class="fw-bolder">rocket1</h5>
+                      <h5 class="fw-bolder">{{ rocket1.name }}</h5>
                       <!-- Product price-->
-                      ￦50,000
+                      ￦{{ rocket1.price }}
                     </div>
                   </div>
                   <!-- Product actions-->
                   <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">당장 사버렷</a></div>
+                    <div v-show="rocketone" class="text-center">
+                      <a class="btn btn-outline-dark mt-auto" href="#">당장 사버렷</a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -41,7 +43,7 @@
                   <div class="card-body p-4">
                     <div class="text-center">
                       <!-- Product name-->
-                      <h5 class="fw-bolder">rocket2</h5>
+                      <h5 class="fw-bolder">{{ rocket2.name }}</h5>
                       <!-- Product reviews-->
                       <div class="d-flex justify-content-center small text-warning mb-2">
                         <div class="bi-star-fill"></div>
@@ -52,12 +54,14 @@
                       </div>
                       <!-- Product price-->
                       <span class="text-muted text-decoration-line-through">￦50,000</span>
-                      ￦45,000
+                      ￦{{ rocket2.price }}
                     </div>
                   </div>
                   <!-- Product actions-->
                   <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">당장 사버렷</a></div>
+                    <div v-show="rockettwo" class="text-center">
+                      <a class="btn btn-outline-dark mt-auto" href="#">당장 사버렷</a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -71,27 +75,29 @@
                   <div class="card-body p-4">
                     <div class="text-center">
                       <!-- Product name-->
-                      <h5 class="fw-bolder">rocket3</h5>
+                      <h5 class="fw-bolder">{{ rocket3.name }}</h5>
                       <!-- Product price-->
                       <span class="text-muted text-decoration-line-through">￦50,000</span>
-                      ￦50,000
+                      ￦{{ rocket3.price }}
                     </div>
                   </div>
                   <!-- Product actions-->
                   <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">당장 사버렷</a></div>
+                    <div v-show="rocketthree" class="text-center">
+                      <a class="btn btn-outline-dark mt-auto" href="#">당장 사버렷</a>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="col mb-5">
-                <div class="card h-100">
+                <div class="card h-100 {black-bg : isActive}">
                   <!-- Product image-->
                   <img class="card-img-top" src="~@/assets/item/rocket4.png" alt="..." />
                   <!-- Product details-->
                   <div class="card-body p-4">
                     <div class="text-center">
                       <!-- Product name-->
-                      <h5 class="fw-bolder">rocket4</h5>
+                      <h5 class="fw-bolder">{{ rocket4.name }}</h5>
                       <!-- Product reviews-->
                       <div class="d-flex justify-content-center small text-warning mb-2">
                         <div class="bi-star-fill"></div>
@@ -101,12 +107,14 @@
                         <div class="bi-star-fill"></div>
                       </div>
                       <!-- Product price-->
-                      ￦50,000
+                      ￦{{ rocket4.price }}
                     </div>
                   </div>
                   <!-- Product actions-->
                   <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">당장 사버렷</a></div>
+                    <div v-show="rocketfour" class="text-center">
+                      <a class="btn btn-outline-dark mt-auto" href="#">당장 사버렷</a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -115,7 +123,6 @@
         </section>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -127,6 +134,20 @@ export default {
   components: {
     NavBar
   },
+  data: () => ({
+    gold: '',
+    isActive: true,
+    data: [],
+    spaceships: [],
+    rocket1: { imgname: 'rocket1.png', price: 150000, name: 'rocket1' },
+    rocket2: { imgname: 'rocket2.png', price: 45000, name: 'rocket2' },
+    rocket3: { imgname: 'rocket3.png', price: 100001, name: 'rocket3' },
+    rocket4: { imgname: 'rocket4.png', price: 50000, name: 'rocket4' },
+    rocketone: true,
+    rockettwo: true,
+    rocketthree: true,
+    rocketfour: true
+  }),
   mounted() {
     this.shop()
   },
@@ -143,6 +164,56 @@ export default {
         })
         .then(response => {
           console.log('shop - response : ', response)
+          this.gold = response.data.data.gold
+          this.data = response.data.data.Spaceships
+          console.log(this.data)
+          console.log(this.gold)
+          for (let i in this.data) {
+            let a = this.data[i].shipName
+            this.spaceships.push(a)
+          }
+          console.log('spaceships', this.spaceships)
+          //내가 가지고 있는 골드랑 우주선 가격 비교 후 버튼 비활성화
+          if (this.gold < this.rocket1.price) {
+            console.log('돈부족')
+            this.rocketone = false
+          }
+          if (this.gold < this.rocket2.price) {
+            console.log('돈부족')
+            this.rockettwo = false
+          }
+          if (this.gold < this.rocket3.price) {
+            console.log('돈부족')
+            this.rocketthree = false
+          }
+          if (this.gold < this.rocket4.price) {
+            console.log('돈부족')
+            this.rocketfour = false
+          }
+
+          console.log('spaceshipsname', this.rocket1.imgname)
+          console.log('비교', this.rocket1.imgname == this.spaceships[3])
+
+          //우주선 이미 가지고 있으면 상점 버튼 비활성화
+          for (let key in this.spaceships) {
+            if (this.spaceships[key] == this.rocket1.imgname) {
+              console.log('가지고 있음')
+              this.rocketone = false
+            }
+            if (this.spaceships[key] == this.rocket2.imgname) {
+              console.log('가지고 있음')
+              this.rockettwo = false
+            }
+            if (this.spaceships[key] == this.rocket3.imgname) {
+              console.log('가지고 있음')
+              this.rocketthree = false
+            }
+            if (this.spaceships[key] == this.rocket4.imgname) {
+              console.log('가지고 있음')
+              this.rocketfour = false
+            }
+          }
+
           // if (this.showFriendListStatus === true) {
           //   this.showFriendListStatus = false
           //   console.log(this.showFriendListStatus)
@@ -163,13 +234,12 @@ export default {
 </script>
 
 <style scoped>
-
 .black-bg {
-  width: 100%;
-  height: 100%;
+  /* width: 100%; */
+  /* height: 100%; */
   background: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  padding: 20px;
+  /* position: fixed; */
+  /* padding: 20px; */
 }
 .white-bg {
   width: 100%;
@@ -177,7 +247,7 @@ export default {
   border-radius: 8px;
   padding: 20px;
   position: fixed;
-  }
+}
 .container {
   height: -10vh;
   width: 70vw;
