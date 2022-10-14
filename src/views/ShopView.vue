@@ -1,7 +1,6 @@
 <template>
   <div>
     <NavBar></NavBar>
-    Item상점내놔
   </div>
 </template>
 
@@ -48,4 +47,22 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.inline {
+  display: inline-block;
+}
+.black-bg {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  padding: 20px;
+}
+.white-bg {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  position: fixed;
+}
+</style>
