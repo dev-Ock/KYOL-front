@@ -5,9 +5,8 @@
       <div class="row">
         <div class="col-md-3 border-right">
           <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-            <img class="rounded-circle mt-5" width="150px" src="../assets/item/rocket1.png" /><span
-              class="font-weight-bold"
-              >내우주선</span
+            <img class="rounded-circle mt-5" width="150px" :src="rocket" /><span class="font-weight-bold"
+              >{{ nick }}님의 우주선</span
             >
           </div>
         </div>
@@ -32,8 +31,15 @@
             </div>
 
             <div class="mt-5 text-center">
-              <button class="btn btn-primary profile-button" type="button" @click="update">Save Profile</button>
+              <button class="btn btn-primary profile-button" type="button" @click="update">회원수정</button>
+              <button class="btn btn-primary profile-button mg" type="button" @click="delete2">회원탈퇴</button>
             </div>
+          </div>
+        </div>
+        <div>
+          <div>&lt;{{ nick }}님의 보유우주선&gt;</div>
+          <div v-for="(a, i) in rocket2" :key="i" class="bb">
+            <img class="rounded-circle mt-5 bb" width="150px" :src="rocket2[i]" />
           </div>
         </div>
       </div>
@@ -51,7 +57,11 @@ export default {
   },
   data: () => ({
     email: '',
-    nick: ''
+    nick: '',
+    rocket: '',
+    ssdata: [],
+    spaceships: [],
+    rocket2: []
   }),
   mounted() {
     this.mypage()
@@ -68,9 +78,20 @@ export default {
         })
         .then(response => {
           console.log('My Page - response : ', response)
-          console.log()
           this.email = response.data.user.email
           this.nick = response.data.user.nick
+          this.rocket = require(`../assets/item/${response.data.user.curentShipImage}`)
+
+          this.ssdata = response.data.user.Spaceships
+          for (let i in this.ssdata) {
+            let a = this.ssdata[i].shipName
+            this.spaceships.push(a)
+          }
+          for (let i in this.spaceships) {
+            let b = require(`../assets/item/${this.spaceships[i]}`)
+            this.rocket2.push(b)
+          }
+
           // if (this.showFriendListStatus === true) {
           //   this.showFriendListStatus = false
           //   console.log(this.showFriendListStatus)
@@ -105,6 +126,15 @@ export default {
         .catch(error => {
           console.log(error)
         })
+    },
+    async delete2() {
+      await axios.delete(process.env.VUE_APP_API + '/mypage', {
+        headers: {
+          Authorization: `${localStorage.getItem('token')}`,
+          userid: `${localStorage.getItem('userId')}`,
+          usernick: `${localStorage.getItem('userNick')}`
+        }
+      })
     }
   }
 }
@@ -154,5 +184,11 @@ body {
   color: #fff;
   cursor: pointer;
   border: solid 1px #ba68c8;
+}
+.bb {
+  display: inline-block;
+}
+.mg {
+  margin: 5px;
 }
 </style>
