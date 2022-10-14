@@ -1,6 +1,11 @@
 <template>
   <div>
     <NavBar></NavBar>
+    <div class="black-bg">
+      <div class="white-bg">
+        <h4>KYOR에게 기부하시겠습니까?</h4>
+      </div>
+    </div>
     <div class="home">
       <div class="container">
         <header class="bg-dark py-5">
@@ -126,6 +131,12 @@ export default {
   components: {
     NavBar
   },
+  data() {
+    return {
+      rocket: [],
+      usergold: {}
+    }
+  },
   mounted() {
     this.shop()
   },
@@ -165,5 +176,18 @@ export default {
 .container {
   height: -10vh;
   width: 70vw;
+}
+.balck-bg {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  padding: 20px;
+}
+.white-bg {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
 }
 </style>
