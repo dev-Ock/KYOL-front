@@ -115,6 +115,7 @@
         </section>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -162,6 +163,21 @@ export default {
 </script>
 
 <style scoped>
+
+.black-bg {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  padding: 20px;
+}
+.white-bg {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  position: fixed;
+  }
 .container {
   height: -10vh;
   width: 70vw;
