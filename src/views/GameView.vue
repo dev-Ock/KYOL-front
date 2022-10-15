@@ -22,9 +22,9 @@ export default {
       await axios
         .get(process.env.VUE_APP_API + '/game', {
           headers: {
-            Authorization: `${localStorage.getItem('token')}`,
-            userid: `${localStorage.getItem('userId')}`,
-            usernick: `${localStorage.getItem('userNick')}`
+            Authorization: `${localStorage.getItem('token')}`
+            // userid: `${localStorage.getItem('userId')}`,
+            // usernick: `${localStorage.getItem('userNick')}`
           }
         })
         .then(response => {

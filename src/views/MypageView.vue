@@ -71,9 +71,9 @@ export default {
       await axios
         .get(process.env.VUE_APP_API + '/mypage', {
           headers: {
-            Authorization: `${localStorage.getItem('token')}`,
-            userid: `${localStorage.getItem('userId')}`,
-            usernick: `${localStorage.getItem('userNick')}`
+            Authorization: `${localStorage.getItem('token')}`
+            // userid: `${localStorage.getItem('userId')}`,
+            // usernick: `${localStorage.getItem('userNick')}`
           }
         })
         .then(response => {
@@ -114,9 +114,9 @@ export default {
           { nick: this.nick, password: this.password },
           {
             headers: {
-              Authorization: `${localStorage.getItem('token')}`,
-              userid: `${localStorage.getItem('userId')}`,
-              usernick: `${localStorage.getItem('userNick')}`
+              Authorization: `${localStorage.getItem('token')}`
+              // userid: `${localStorage.getItem('userId')}`,
+              // usernick: `${localStorage.getItem('userNick')}`
             }
           }
         )
@@ -130,9 +130,9 @@ export default {
     async delete2() {
       await axios.delete(process.env.VUE_APP_API + '/mypage', {
         headers: {
-          Authorization: `${localStorage.getItem('token')}`,
-          userid: `${localStorage.getItem('userId')}`,
-          usernick: `${localStorage.getItem('userNick')}`
+          Authorization: `${localStorage.getItem('token')}`
+          // userid: `${localStorage.getItem('userId')}`,
+          // usernick: `${localStorage.getItem('userNick')}`
         }
       })
     }
