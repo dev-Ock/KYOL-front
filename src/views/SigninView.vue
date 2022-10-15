@@ -97,11 +97,11 @@
                     <i class="fabfa-google"></i>
                   </button>
 
-                  <button type="button" class="btn-btn-link btn-floating mx-1">
+                  <button type="button" class="btn btn-link btn-floating mx-1">
                     <i class="fabfa-twitter"></i>
                   </button>
 
-                  <button type="button" class="btn-btn-link btn-floating mx-1">
+                  <button type="button" class="btn btn-link btn-floating mx-1">
                     <i class="fab fa-github"></i>
                   </button>
                 </div>

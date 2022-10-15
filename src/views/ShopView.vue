@@ -146,7 +146,7 @@ export default {
     spaceships: [],
     rocket1: { imgname: 'rocket1.png', price: 150000, name: 'rocket1' },
     rocket2: { imgname: 'rocket2.png', price: 45000, name: 'rocket2' },
-    rocket3: { imgname: 'rocket3.png', price: 100001, name: 'rocket3' },
+    rocket3: { imgname: 'rocket3.png', price: 10000, name: 'rocket3' },
     rocket4: { imgname: 'rocket4.png', price: 50000, name: 'rocket4' },
     rocketone: true,
     rockettwo: true,
@@ -163,13 +163,14 @@ export default {
       await axios
         .get(process.env.VUE_APP_API + '/shop', {
           headers: {
-            Authorization: `${localStorage.getItem('token')}`,
-            userid: `${localStorage.getItem('userId')}`,
-            usernick: `${localStorage.getItem('userNick')}`
+            Authorization: `${localStorage.getItem('token')}`
+            // userid: `${localStorage.getItem('userId')}`,
+            // usernick: `${localStorage.getItem('userNick')}`
           }
         })
         .then(response => {
           console.log('shop - response : ', response)
+          localStorage.setItem('token', response.data.token)
           this.gold = response.data.data.gold
           this.data = response.data.data.Spaceships
           console.log(this.data)
