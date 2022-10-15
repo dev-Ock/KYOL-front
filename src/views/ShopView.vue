@@ -4,6 +4,7 @@
     <div class="black-bg">
       <div class="white-bg">
         <h4>KYOR에게 기부하시겠습니까?</h4>
+        <button class="btn btn-outline-dark mt-auto" @click="modal = false">다음에 기부하기</button>
       </div>
     </div>
     <div class="home">
@@ -33,7 +34,7 @@
                   <!-- Product actions-->
                   <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                     <div v-show="rocketone" class="text-center">
-                      <a class="btn btn-outline-dark mt-auto" href="#">당장 사버렷</a>
+                      <a class="btn btn-outline-dark mt-auto" href="#" @click="modal = true">당장 사버렷</a>
                     </div>
                   </div>
                 </div>
@@ -65,7 +66,7 @@
                   <!-- Product actions-->
                   <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                     <div v-show="rockettwo" class="text-center">
-                      <a class="btn btn-outline-dark mt-auto" href="#">당장 사버렷</a>
+                      <a class="btn btn-outline-dark mt-auto" href="#" @click="modal = true">당장 사버렷</a>
                     </div>
                   </div>
                 </div>
@@ -89,7 +90,7 @@
                   <!-- Product actions-->
                   <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                     <div v-show="rocketthree" class="text-center">
-                      <a class="btn btn-outline-dark mt-auto" href="#">당장 사버렷</a>
+                      <a class="btn btn-outline-dark mt-auto" href="#" @click="modal = true">당장 사버렷</a>
                     </div>
                   </div>
                 </div>
@@ -118,7 +119,7 @@
                   <!-- Product actions-->
                   <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                     <div v-show="rocketfour" class="text-center">
-                      <a class="btn btn-outline-dark mt-auto" href="#">당장 사버렷</a>
+                      <a class="btn btn-outline-dark mt-auto" href="#" @click="modal = true">당장 사버렷</a>
                     </div>
                   </div>
                 </div>
@@ -140,6 +141,7 @@ export default {
     NavBar
   },
   data: () => ({
+    modal: false,
     gold: '',
     isActive: true,
     data: [],
@@ -170,7 +172,7 @@ export default {
         })
         .then(response => {
           console.log('shop - response : ', response)
-          localStorage.setItem('token', response.data.token)
+          // localStorage.setItem('token', response.data.token)
           this.gold = response.data.data.gold
           this.data = response.data.data.Spaceships
           console.log(this.data)
@@ -180,7 +182,7 @@ export default {
             this.spaceships.push(a)
           }
           console.log('spaceships', this.spaceships)
-          //내가 가지고 있는 골드랑 우주선 가격 비교 후 버튼 비활성화
+          // 내가 가지고 있는 골드랑 우주선 가격 비교 후 버튼 비활성화
           if (this.gold < this.rocket1.price) {
             console.log('돈부족')
             this.rocketone = false
@@ -202,24 +204,24 @@ export default {
           console.log('비교', this.rocket1.imgname == this.spaceships[3])
 
           //우주선 이미 가지고 있으면 상점 버튼 비활성화
-          for (let key in this.spaceships) {
-            if (this.spaceships[key] == this.rocket1.imgname) {
-              console.log('가지고 있음')
-              this.rocketone = false
-            }
-            if (this.spaceships[key] == this.rocket2.imgname) {
-              console.log('가지고 있음')
-              this.rockettwo = false
-            }
-            if (this.spaceships[key] == this.rocket3.imgname) {
-              console.log('가지고 있음')
-              this.rocketthree = false
-            }
-            if (this.spaceships[key] == this.rocket4.imgname) {
-              console.log('가지고 있음')
-              this.rocketfour = false
-            }
-          }
+          // for (let key in this.spaceships) {
+          //   if (this.spaceships[key] == this.rocket1.imgname) {
+          //     console.log('가지고 있음')
+          //     this.rocketone = false
+          //   }
+          //   if (this.spaceships[key] == this.rocket2.imgname) {
+          //     console.log('가지고 있음')
+          //     this.rockettwo = false
+          //   }
+          //   if (this.spaceships[key] == this.rocket3.imgname) {
+          //     console.log('가지고 있음')
+          //     this.rocketthree = false
+          //   }
+          //   if (this.spaceships[key] == this.rocket4.imgname) {
+          //     console.log('가지고 있음')
+          //     this.rocketfour = false
+          //   }
+          // }
 
           // if (this.showFriendListStatus === true) {
           //   this.showFriendListStatus = false

@@ -24,9 +24,12 @@
               <div class="col-md-12">
                 <label class="labels">nick</label><input v-model="nick" type="text" class="form-control" value="" />
               </div>
+
               <div class="col-md-12">
-                <label class="labels">password</label
-                ><input type="password" class="form-control" placeholder="password" value="" />
+                <form>
+                  <label class="labels">password</label
+                  ><input type="password" class="form-control" placeholder="password" value="" autocomplete="on" />
+                </form>
               </div>
             </div>
 
@@ -61,7 +64,8 @@ export default {
     rocket: '',
     ssdata: [],
     spaceships: [],
-    rocket2: []
+    rocket2: [],
+    loading: false
   }),
   mounted() {
     this.mypage()
@@ -78,6 +82,7 @@ export default {
         })
         .then(response => {
           console.log('My Page - response : ', response)
+
           this.email = response.data.user.email
           this.nick = response.data.user.nick
           this.rocket = require(`../assets/item/${response.data.user.curentShipImage}`)
@@ -110,7 +115,7 @@ export default {
     async update() {
       await axios
         .put(
-          process.env.VUE_APP_API + '/mypage',
+          process.env.VUE_APP_API + '/auth/update',
           { nick: this.nick, password: this.password },
           {
             headers: {
@@ -122,19 +127,40 @@ export default {
         )
         .then(response => {
           console.log('update:', response)
+          localStorage.setItem('userNick', response.data.data.nick)
+          if (response.data.message == 'update-success') {
+            alert('회원정보수정완료')
+          }
         })
         .catch(error => {
           console.log(error)
         })
     },
     async delete2() {
-      await axios.delete(process.env.VUE_APP_API + '/mypage', {
-        headers: {
-          Authorization: `${localStorage.getItem('token')}`
-          // userid: `${localStorage.getItem('userId')}`,
-          // usernick: `${localStorage.getItem('userNick')}`
-        }
-      })
+      await axios
+        .delete(process.env.VUE_APP_API + '/auth/delete', {
+          headers: {
+            Authorization: `${localStorage.getItem('token')}`
+            // userid: `${localStorage.getItem('userId')}`,
+            // usernick: `${localStorage.getItem('userNick')}`
+          }
+        })
+        .then(response => {
+          console.log('delete:', response)
+
+          if (response.data.message == 'delete-success') {
+            alert('탈퇴완료')
+            console.log('탈퇴확인창 확인 눌렀음')
+            localStorage.removeItem('userNick')
+            localStorage.removeItem('token')
+            localStorage.removeItem('userId')
+            console.log('이제 남남입니다.')
+            NavBar.loading = false
+          }
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
 }
