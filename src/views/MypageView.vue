@@ -115,7 +115,7 @@ export default {
     async update() {
       await axios
         .put(
-          process.env.VUE_APP_API + '/auth/update',
+          process.env.VUE_APP_API + '/mypage/auth-update',
           { nick: this.nick, password: this.password },
           {
             headers: {
@@ -138,7 +138,7 @@ export default {
     },
     async delete2() {
       await axios
-        .delete(process.env.VUE_APP_API + '/auth/delete', {
+        .delete(process.env.VUE_APP_API + '/mypage/auth-delete', {
           headers: {
             Authorization: `${localStorage.getItem('token')}`
             // userid: `${localStorage.getItem('userId')}`,
