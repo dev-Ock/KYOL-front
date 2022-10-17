@@ -6,7 +6,7 @@
       <div>Game Screen</div>
       <div>Score</div>
       <div>Gold</div>
-      <GameScreen style="width: 100%; height: 600px"> </GameScreen>
+      <GameScreen style="width: 100%; height: 600px"></GameScreen>
     </div>
   </div>
 </template>
@@ -24,11 +24,27 @@ export default {
   },
   data: () => ({
     gold: 0,
-    currentShipImg: ''
+    currentShipImg: '',
+    gameScore: 0,
+    getGold: 0,
+    gameOver: false
   }),
+  computed: {
+    GettingGameScore(data) {
+      let gameScore = data
+      console.log('gameScore :', gameScore)
+      return gameScore
+    },
+    GettingGetGold(data) {
+      let getGold = data
+      console.log('getGold : ', getGold)
+      return getGold
+    }
+  },
   mounted() {
     this.game()
-    this.checkInfo()
+    // this.GettingGameScore()
+    // this.GettingGetGold()
   },
   methods: {
     async game() {
@@ -47,9 +63,6 @@ export default {
         .catch(error => {
           console.log(error)
         })
-    },
-    checkInfo() {
-      console.log('뭘 체크해야 할까?', this.ctx)
     }
   }
 }
