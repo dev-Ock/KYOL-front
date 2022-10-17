@@ -145,11 +145,20 @@ export default {
           console.log(localStorage.getItem('userNick'))
 
           this.$router.push({ name: 'home' })
+
           // 토큰저장
 
           // 아래에 로컬스토리지에서 사용할 유저정보 저장
           // await axios
           // .post()
+        })
+        .catch(error => {
+          console.log('에러다 : ', error)
+          console.log(error.response.data.message)
+          if (error.response.data.message == 'login-failure') {
+            alert('아이디 또는 비밀번호가 틀렸습니다.')
+            this.$router.go() // 로그인 화면 새로고침 (아이디, 비번 입력란 초기화를 위해)
+          }
         })
       // if (!user) return
       // this.$router.push({ name: 'home' })
