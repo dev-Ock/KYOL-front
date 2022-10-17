@@ -17,16 +17,19 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <!-- <span @click="goRanking"> ranking1</span> -->
+
             <a class="nav-link" href="/ranking">Ranking</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/mypage">My Page</a>
+
+          <li class="nav-item" @click="mypagecheck">
+            <a class="nav-link" :href="href">My Page</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/shop">Shop</a>
+
+          <li class="nav-item" @click="shopcheck">
+            <a class="nav-link" :href="href2">Shop</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/game">Game</a>
+          <li class="nav-item" @click="gamecheck">
+            <a class="nav-link" :href="href3">Game</a>
           </li>
         </ul>
       </div>
@@ -39,7 +42,7 @@
         </router-link>
       </div>
       <div v-show="loading">
-        <router-link to="/signin">
+        <router-link to="/">
           <button type="button" class="btn btn-outline-success button" @click="logout">로그아웃</button>
         </router-link>
       </div>
@@ -52,7 +55,10 @@
 export default {
   name: 'NavBar',
   data: () => ({
-    loading: false
+    loading: false,
+    href: '/mypage',
+    href2: '/shop',
+    href3: '/game'
   }),
   mounted() {
     this.checkLocalstorage()
@@ -78,6 +84,25 @@ export default {
         this.loading = true
       } else {
         this.loading = false
+        // this.$router.go(0)
+      }
+    },
+    mypagecheck() {
+      if (localStorage.getItem('token') == null) {
+        alert('로그인하시라우')
+        this.href = '/signin'
+      }
+    },
+    shopcheck() {
+      if (localStorage.getItem('token') == null) {
+        alert('로그인하시라우')
+        this.href2 = '/signin'
+      }
+    },
+    gamecheck() {
+      if (localStorage.getItem('token') == null) {
+        alert('로그인하시라우')
+        this.href3 = '/signin'
       }
     }
   }

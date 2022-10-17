@@ -1,7 +1,7 @@
 <template>
   <div>
     <NavBar></NavBar>
-    <div class="black-bg">
+    <div v-show="modal" class="black-bg">
       <div class="white-bg">
         <h4>KYOR에게 기부하시겠습니까?</h4>
         <button class="btn btn-outline-dark mt-auto" @click="modal = false">다음에 기부하기</button>
@@ -34,7 +34,9 @@
                   <!-- Product actions-->
                   <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                     <div v-show="rocketone" class="text-center">
-                      <a class="btn btn-outline-dark mt-auto" href="#" @click="modal = true">당장 사버렷</a>
+                      <a v-show="modal" class="btn btn-outline-dark mt-auto" href="#" @click="modal = true"
+                        >당장 사버렷</a
+                      >
                     </div>
                   </div>
                 </div>
