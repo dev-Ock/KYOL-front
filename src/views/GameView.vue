@@ -2,8 +2,10 @@
   <div>
     <NavBar></NavBar>
     game
-    <div id="app">
-      <h2>Game Screen</h2>
+    <div id="app" class="status">
+      <div>Game Screen</div>
+      <div>Score</div>
+      <div>Gold</div>
       <GameScreen style="width: 100%; height: 600px"> </GameScreen>
     </div>
   </div>
@@ -20,8 +22,13 @@ export default {
     NavBar,
     GameScreen
   },
+  data: () => ({
+    gold: 0,
+    currentShipImg: ''
+  }),
   mounted() {
     this.game()
+    this.checkInfo()
   },
   methods: {
     async game() {
@@ -40,6 +47,9 @@ export default {
         .catch(error => {
           console.log(error)
         })
+    },
+    checkInfo() {
+      console.log('뭘 체크해야 할까?', this.ctx)
     }
   }
 }
