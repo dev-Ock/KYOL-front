@@ -35,6 +35,7 @@
 
             <div class="mt-5 text-center">
               <button class="btn btn-primary profile-button" type="button" @click="update">회원수정</button>
+
               <button class="btn btn-primary profile-button mg" type="button" @click="delete2">회원탈퇴</button>
             </div>
           </div>
@@ -72,14 +73,19 @@ export default {
   },
   methods: {
     async mypage() {
+      console.log('token', localStorage.getItem('token'))
       await axios
-        .get(process.env.VUE_APP_API + '/mypage', {
-          headers: {
-            Authorization: `${localStorage.getItem('token')}`
-            // userid: `${localStorage.getItem('userId')}`,
-            // usernick: `${localStorage.getItem('userNick')}`
+        .get(
+          process.env.VUE_APP_API + '/mypage',
+
+          {
+            headers: {
+              Authorization: `${localStorage.getItem('token')}`
+              // userid: `${localStorage.getItem('userId')}`,
+              // usernick: `${localStorage.getItem('userNick')}`
+            }
           }
-        })
+        )
         .then(response => {
           console.log('My Page - response : ', response)
 
@@ -155,7 +161,8 @@ export default {
             localStorage.removeItem('token')
             localStorage.removeItem('userId')
             console.log('이제 남남입니다.')
-            NavBar.loading = false
+            this.$router.push({ name: 'home' })
+            // NavBar.loading = false
           }
         })
         .catch(error => {
