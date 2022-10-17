@@ -10,10 +10,87 @@
 </template>
 
 <script>
-// import Vue from 'vue'
-// import Bullet from './Bullet.vue'
-// const vmClass = Vue.extend(Bullet)
-// const vm = new Bullet()
+// class User {
+//   constructor(name) {
+//     this.name = name
+//   }
+
+//   sayHi() {
+//     alert(this.name)
+//   }
+// }
+
+const bulletList = []
+const enemyList = []
+
+class Bullet {
+  constructor(all) {
+    console.log('bullet 안쪽 인데?', all)
+    // console.log('bullet 안쪽 인데?', this.bulletList)
+    console.log('bullet 안쪽 인데?', bulletList)
+    this.x = 0
+    this.y = 0
+    this.init = function (all) {
+      this.x = all.spaceshipX
+      this.y = all.spaceshipY
+      this.alive = true
+      bulletList.push(this)
+    }
+    this.update = function () {
+      this.x += 7
+    }
+    this.checkHit = function () {
+      console.log('check hit 안쪽 총알 리스트', bulletList)
+      console.log('check hit 안쪽 점수판', this.score)
+      for (let i = 0; i < enemyList.length; i++) {
+        if (this.x >= enemyList[i].x - 10 && this.y >= enemyList[i].y - 20 && this.y <= enemyList[i].y + 35) {
+          all.score += 100
+          this.alive = false
+          enemyList.splice(i, 1)
+        }
+        if (this.x >= all.ctx.canvas.clientWidth) this.alive = false
+      }
+    }
+  }
+}
+
+// class generateRandomValue {
+//   constructor(min, max) {
+//     console.log('미니멈 값', min)
+//     console.log('맥시멈 값', max)
+//     let randomNum = Math.floor(Math.random() * (max - min + 1)) + min
+//     console.log('랜덤숫자', randomNum)
+//     return randomNum
+//   }
+// }
+
+class Enemy {
+  constructor(all) {
+    this.x = 0
+    this.y = 0
+    this.init = function () {
+      let generateRandomValue = function (min, max) {
+        let randomNum = Math.floor(Math.random() * (max - min + 1)) + min
+        console.log('랜덤숫자', randomNum)
+        return randomNum
+      }
+
+      console.log('here ?', all.ctx.canvas.clientWidth)
+      this.x = all.ctx.canvas.clientWidth
+      this.y = generateRandomValue(0, all.ctx.canvas.clientHeight - 60)
+      console.log('적 x 좌표', this.x)
+      console.log('적 y 좌표', this.y)
+      enemyList.push(this)
+    }
+    this.update = function () {
+      this.x -= 3
+      if (this.x <= 0) {
+        all.gameOver = true
+        console.log('game Over')
+      }
+    }
+  }
+}
 
 export default {
   name: 'GameScreen',
@@ -38,19 +115,23 @@ export default {
     spaceshipX: 0,
     spaceshipY: 0,
     // canvas: document.createElement('canvas'),
-    bulletList: [],
-    enemyList: [],
+    // bulletList: [],
+    // enemyList: [],
     keysDown: {}
   }),
 
   async mounted() {
-    console.log(this.keysDown)
-    this.ctx = this.$refs.myClass.getContext('2d')
+    // 사용법
+    // let user = new User('John')
+    // user.sayHi()
 
-    await this.loadImage()
-    await this.setupKeyboardListener()
-    // this.createEnemy()
+    console.log(this.keysDown)
+    console.log('이것이 this 다 : ', this)
+    this.ctx = this.$refs.myClass.getContext('2d')
+    this.loadImage()
+    this.setupKeyboardListener()
     this.main()
+    this.createEnemy(this)
   },
   methods: {
     loadImage() {
@@ -81,72 +162,24 @@ export default {
 
         if (event.code == 'Space') {
           console.log('총알발사', event.code)
-          this.createBullet()
+          this.createBullet(this)
         }
       })
     },
 
-    generateRandomValue(min, max) {
-      let randomNum = Math.floor(Math.random() * (max - min + 1)) + min
-      return randomNum
-    },
+    createEnemy(all) {
+      console.log('game over????', all.gameOver)
 
-    Bullet() {
-      this.x = 0
-      this.y = 0
-      this.init = function () {
-        this.x = this.spaceshipX
-        this.y = this.spaceshipY
-        this.alive = true
-        this.bulletList.push(this)
-      }
-      this.update = function () {
-        this.x += 7
-      }
-      this.checkHit = function () {
-        for (let i = 0; i < this.enemyList.length; i++) {
-          if (
-            this.x >= this.enemyList[i].x - 10 &&
-            this.y >= this.enemyList[i].y - 20 &&
-            this.y <= this.enemyList[i].y + 35
-          ) {
-            this.score += 100
-            this.alive = false
-            this.enemyList.splice(i, 1)
-          }
-          if (this.x >= this.ctx.canvas.clientWidth) this.alive = false
-        }
-      }
-    },
-
-    Enemy() {
-      this.x = 0
-      this.y = 0
-      this.init = function () {
-        this.x = this.ctx.canvas.clientWidth
-        this.y = this.generateRandomValue(0, this.canvas.height - 60)
-        this.enemyList.push(this)
-      }
-      this.update = function () {
-        this.x -= 3
-        if (this.x <= 0) {
-          this.gameOver = true
-          console.log('game Over')
-        }
-      }
-    },
-
-    createEnemy() {
       const interval = setInterval(function () {
-        let e = new this.Enemy()
+        let e = new Enemy(all)
         e.init()
       }, 400)
       console.log('적군생성')
     },
 
-    createBullet() {
-      let b = new this.Bullet()
-      b.init()
+    createBullet(all) {
+      let b = new Bullet(all)
+      b.init(all)
       console.log('Bullet created')
     },
 
@@ -175,52 +208,57 @@ export default {
         this.spaceshipX = 0
       }
       if (this.spaceshipX >= this.ctx.canvas.clientWidth - 48) {
-        this.spaceshipX = this.ctx.canvas.clientWidths - 48
+        this.spaceshipX = this.ctx.canvas.clientWidth - 48
       }
-      console.log()
-      for (let i = 0; i < this.bulletList.length; i++) {
-        if (this.bulletList[i].alive) {
-          this.bulletList[i].update()
-          this.bulletList[i].checkHit()
+
+      for (let i = 0; i < bulletList.length; i++) {
+        if (bulletList[i].alive) {
+          bulletList[i].update()
+          bulletList[i].checkHit()
           console.log('hit !')
         }
       }
 
-      for (let i = 0; i < this.enemyList.length; i++) {
-        this.enemyList[i].update()
+      for (let i = 0; i < enemyList.length; i++) {
+        enemyList[i].update()
       }
     },
 
     main() {
+      console.log('게임 상태는 : ', this.gameOver)
       if (!this.gameOver) {
         console.log('main - game is not over')
+
         this.update()
-        // this.render()
-        // requestAnimationFrame(this.main)
+        this.render()
+        requestAnimationFrame(this.main)
       } else {
-        this.ctx.drawImage(this.gameOverImage, 400, 200, 600, 300)
+        this.ctx.drawImage(
+          this.gameOverImage,
+          this.ctx.canvas.clientWidth / 2 - 200,
+          this.ctx.canvas.clientHeight / 2 - 100,
+          400,
+          200
+        )
       }
     },
 
     render() {
-      console.log('render')
-      console.log('render draw background', this.ctx.canvas.clientWidth, this.ctx.canvas.clientHeight)
       this.ctx.drawImage(this.backgroundImage, 0, 0, this.ctx.canvas.clientWidth, this.ctx.canvas.clientHeight)
-      console.log('render draw ship', this.spaceshipX)
       this.ctx.drawImage(this.spaceshipImage, this.spaceshipX, this.spaceshipY)
-
-      console.log('render draw score', this.score)
-      this.ctx.fillText(`Score: ${this.score}`, 1100, 30)
+      this.ctx.fillText(`Score: ${this.score}`, 850, 30)
       this.ctx.fillStyle = 'white'
-      console.log('bulletList 렝쓰', this.bulletList)
-      for (let i = 0; i < this.bulletList.length; i++) {
-        if (this.bulletList[i].alive) {
-          this.ctx.drawImage(this.bulletImage, this.bulletList[i].x + 48, this.bulletList[i].y + 12)
+      this.ctx.font = '25px gothic'
+
+      for (let i = 0; i < bulletList.length; i++) {
+        if (bulletList[i].alive) {
+          console.log('총알 이미지', this.bulletImage)
+          this.ctx.drawImage(this.bulletImage, bulletList[i].x + 48, bulletList[i].y + 12)
         }
       }
 
-      for (let i = 0; i < this.enemyList.length; i++) {
-        this.ctx.drawImage(this.enemyImage, this.enemyList[i].x, this.enemyList[i].y)
+      for (let i = 0; i < enemyList.length; i++) {
+        this.ctx.drawImage(this.enemyImage, enemyList[i].x, enemyList[i].y)
       }
     }
   }
