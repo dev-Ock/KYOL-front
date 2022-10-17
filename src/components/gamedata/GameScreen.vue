@@ -9,15 +9,7 @@
 </template>
 
 <script>
-// class User {
-//   constructor(name) {
-//     this.name = name
-//   }
-
-//   sayHi() {
-//     alert(this.name)
-//   }
-// }
+import axios from 'axios'
 
 const bulletList = []
 const enemyList = []
@@ -78,7 +70,7 @@ class Meteor {
           all.gameOver = true
           all.sendGameOver()
         } else if (this.x <= -70) meteorList.splice(i, 1)
-        console.log('메테오 목록 : ', meteorList)
+        // console.log('메테오 목록 : ', meteorList)
       }
 
       // for (let i = 0; i < meteor2List.length; i++) {
@@ -207,9 +199,9 @@ export default {
       const interval = setInterval(function () {
         let e = new Enemy(all)
         e.init()
-        console.log('적군생성 인터벌', interval)
+        // console.log('적군생성 인터벌', interval)
         if (all.gameOver) {
-          console.log('이걸 왜타지?', all.gameOver)
+          // console.log('이걸 왜타지?', all.gameOver)
           clearInterval(interval)
         }
       }, 1000)
@@ -219,7 +211,7 @@ export default {
       const interval2 = setInterval(function () {
         let m = new Meteor(all)
         m.init()
-        console.log('메테오 생성 인터벌', interval2)
+        // console.log('메테오 생성 인터벌', interval2)
         if (all.gameOver) {
           clearInterval(interval2)
         }
@@ -285,12 +277,12 @@ export default {
 
       for (let i = 0; i < enemyList.length; i++) {
         enemyList[i].update()
-        console.log('적 숫자 체크', enemyList)
+        // console.log('적 숫자 체크', enemyList)
       }
     },
 
     main() {
-      console.log('게임 상태는 : ', this.gameOver)
+      // console.log('게임 상태는 : ', this.gameOver)
       if (!this.gameOver) {
         this.update()
         this.render()
@@ -339,8 +331,34 @@ export default {
       }
     },
     sendGameOver() {
-      this.$emit('gameScore', this.score)
-      this.$emit('getGold', this.score / 10)
+      this.$emit('GettingGameScore', this.score)
+      this.$emit('GettingGetGold', this.score / 10)
+      console.log('GettingGameScore', this.score)
+      console.log('GettingGetGold', this.score / 10)
+      this.sendingResultData()
+    },
+    async sendingResultData() {
+      const getScore = this.score
+      const getGold = this.score / 10
+      await axios
+        .put(
+          process.env.VUE_APP_API + '/game/update',
+          { nick: this.nick },
+          {
+            headers: {
+              Authorization: `${localStorage.getItem('token')}`,
+              gold: getGold,
+              score: getScore,
+              usedShip: `${localStorage.getItem('userNick')}`
+            }
+          }
+        )
+        .then(response => {
+          console.log('update: ', response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
 }
