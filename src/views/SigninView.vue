@@ -10,7 +10,7 @@
           <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
             <!-- Game game game game shootinh shootihg shooting shooting game
           give me the money money money I'm so tired. I bought an iPhone.
-          2 million won, It's too expensive.  -->
+          2 million won, It's too expensive.  // Dj.Jiyoon-->
           </p>
         </div>
 
@@ -19,7 +19,6 @@
           <!-- <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div> -->
 
           <!-- <div class="card bg-glass"> -->
-
           <div class="card">
             <div class="card-body px-4 py-5 px-md-5">
               <form>
@@ -50,21 +49,6 @@
                   <!-- <label class="form-label" for="form3Example4">Password</label> -->
                 </div>
 
-                <!-- Checkbox -->
-                <div class="form-check d-flex justify-content-center mb-4">
-                  <div>
-                    <input
-                      id="form2Example33"
-                      class="form-check-input me-2"
-                      type="checkbox"
-                      value=""
-                      checked
-                      autocomplete="on"
-                    />
-                    <label class="form-check-label" for="form2Example33"> 자동로그인 할 사람~~~ </label>
-                  </div>
-                </div>
-
                 <!-- Submit button -->
                 <div class="loginbtn">
                   <button
@@ -84,26 +68,6 @@
                       Sign up
                     </button></router-link
                   >
-                </div>
-
-                <!-- Register buttons -->
-                <div class="text-center">
-                  <p>or sign up with:</p>
-                  <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-facebook-f"></i>
-                  </button>
-
-                  <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fabfa-google"></i>
-                  </button>
-
-                  <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fabfa-twitter"></i>
-                  </button>
-
-                  <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-github"></i>
-                  </button>
                 </div>
               </form>
             </div>
