@@ -16,15 +16,17 @@
             <div class="card-body px-4 py-5 px-md-5">
               <form>
                 <!-- Email input -->
-                <div class="form-outline mb-4">
+
+                <div class="mb-3">
                   <input
-                    id="form3Example5"
+                    id="validationTextarea"
                     v-model="email"
-                    type="email"
-                    class="form-control"
-                    placeholder="Email address"
-                    autocomplete="on"
-                  />
+                    class="form-control cf"
+                    :class="{ 'is-invalid': emailInspection }"
+                    placeholder="예) kyor@kyor.com"
+                    required
+                  /><button class="cf" @click="duplication">중복확인</button>
+                  <div class="invalid-feedback">이메일 주소를 정확히 입력해주세요.</div>
                 </div>
 
                 <!-- Nickname input -->
@@ -34,9 +36,13 @@
                     v-model="nickname"
                     type="text"
                     class="form-control"
+                    :class="{ 'is-invalid': nickInspection }"
                     placeholder="Nickname"
                     autocomplete="on"
+                    required
+                    @blur="duplicationNick"
                   />
+                  <div class="invalid-feedback">중복된 닉네임 입니다.</div>
                 </div>
 
                 <!-- Password input -->
@@ -46,9 +52,12 @@
                     v-model="password"
                     type="password"
                     class="form-control"
-                    placeholder="Password"
+                    :class="{ 'is-invalid': pwInspection }"
+                    placeholder="영문, 숫자, 특수문자 조합 8-16자"
                     autocomplete="on"
+                    required
                   />
+                  <div class="invalid-feedback">좀 더 길게 입력해보는 건 어떨까요</div>
                 </div>
 
                 <!-- Confirm Password input -->
@@ -58,9 +67,12 @@
                     v-model="confirmPassword"
                     type="password"
                     class="form-control"
+                    :class="{ 'is-invalid': cfpwInspection }"
                     placeholder="Confirm Password"
                     autocomplete="on"
+                    required
                   />
+                  <div class="invalid-feedback">비밀번호가 틀립니다.</div>
                 </div>
 
                 <!-- Submit button -->
@@ -87,22 +99,81 @@
 
 <script>
 import axios from 'axios'
+import { flip } from '@popperjs/core'
 export default {
   name: 'SignupView',
   data: () => ({
     email: '',
+    email2: '',
     nickname: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    emailInspection: false,
+    pwInspection: false,
+    cfpwInspection: false,
+    nickInspection: false
+
     // loading: false
   }),
+  watch: {
+    email(a) {
+      this.checkEmail(a)
+    },
+    password(a) {
+      this.checkPassword(a)
+    },
+    confirmPassword(a) {
+      this.checkPassword2(a)
+    },
+    nick(a) {
+      this.duplicationNick(a)
+    }
+  },
   //
   methods: {
+    checkEmail(str) {
+      var reg_email = /^[A-Za-z0-9_\\.\\-]+@[A-Za-z0-9\\-]+\.[A-Za-z0-9\\-]+/
+      if (!reg_email.test(str)) {
+        return (this.emailInspection = true)
+      } else {
+        return (this.emailInspection = false)
+      }
+    },
+    checkPassword(str) {
+      var reg_password = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/
+      if (!reg_password.test(str)) {
+        return (this.pwInspection = true)
+      } else {
+        return (this.pwInspection = false)
+      }
+    },
+    checkPassword2() {
+      if (this.password == this.confirmPassword) {
+        return (this.cfpwInspection = false)
+      } else {
+        return (this.cfpwInspection = true)
+      }
+    },
+    // checkNick(str) {
+    //   if (!reg_email.test(str)) {
+    //     return (this.emailInspection = true)
+    //   } else {
+    //     return (this.emailInspection = false)
+    //   }
+    // },
     async signUp(e) {
       e.preventDefault()
-      console.log('email:', this.email)
+      if (
+        this.emailInspectionm == true ||
+        this.pwInspection == true ||
+        this.cfpwInspection == true ||
+        this.nickInspection == true
+      ) {
+        alert('값을 제대로 입력하지 않았습니다.')
+      }
 
       await axios
+
         .post(
           process.env.VUE_APP_API + '/auth/join',
           {
@@ -122,6 +193,57 @@ export default {
         })
         .catch(error => {
           console.log('editcategories - error : ', error)
+          alert('값을 제대로 입력해주세요.')
+        })
+    },
+    async duplication(e) {
+      e.preventDefault()
+      console.log('duplicationemail:', this.email)
+
+      await axios
+        .post(
+          process.env.VUE_APP_API + '/auth/join/email-check',
+          {
+            email: this.email
+          }
+          // {
+          //   headers: {
+          //     Authorization: `Bearer ${localStorage.getItem('token')}`
+          //   }
+          // }
+        )
+        .then(response => {
+          console.log('duplication - response : ', response, response.data)
+          alert('사용 가능한 아이디입니다.')
+        })
+        .catch(error => {
+          console.log('editcategories - error : ', error)
+          alert('중복된 아이디입니다.')
+        })
+    },
+    async duplicationNick(e) {
+      e.preventDefault()
+      console.log('duplicationNick:', this.nickname)
+
+      await axios
+        .post(
+          process.env.VUE_APP_API + '/auth/join/nick-check',
+          {
+            nick: this.nickname
+          }
+          // {
+          //   headers: {
+          //     Authorization: `Bearer ${localStorage.getItem('token')}`
+          //   }
+          // }
+        )
+        .then(response => {
+          console.log('duplicationNick - response : ', response, response.data)
+          this.nickInspection = false
+        })
+        .catch(error => {
+          console.log('duplicationNick - error : ', error)
+          this.nickInspection = true
         })
     }
   }
@@ -149,6 +271,9 @@ export default {
 .bg-glass {
   background-color: hsla(0, 0%, 100%, 0.9) !important;
   backdrop-filter: saturate(200%) blur(25px);
+}
+.cf {
+  display: inline-block;
 }
 /* .btn-btn-link1 {
   background: url('~@/assets/images/google.png') 50% 50% / cover no-repeat;
