@@ -29,14 +29,13 @@ class Bullet {
     this.updateBullet = function () {
       this.x += 7
     }
-    this.checkHit = function () {
+    this.checkHit = function (i) {
       for (let i = 0; i < enemyList.length; i++) {
-        if (this.x >= enemyList[i].x - 10 && this.y >= enemyList[i].y - 20 && this.y <= enemyList[i].y + 35) {
+        if (this.x + 10 >= enemyList[i].x && this.y >= enemyList[i].y - 20 && this.y <= enemyList[i].y + 35) {
           all.score += 100
           this.alive = false
           enemyList.splice(i, 1)
-        }
-        if (this.x >= all.ctx.canvas.clientWidth) this.alive = false
+        } else if (this.x >= all.ctx.canvas.clientWidth) this.alive = false
       }
     }
   }
@@ -59,19 +58,19 @@ class Meteor {
     this.updateMove = function () {
       this.x -= 8
     }
-    this.checkHit2 = function () {
-      for (let i = 0; i < meteorList.length; i++) {
-        if (
-          this.x >= all.spaceshipX &&
-          this.x <= all.spaceshipX + 25 &&
-          this.y >= all.spaceshipY - 25 &&
-          this.y <= all.spaceshipY + 20
-        ) {
-          all.gameOver = true
-          all.sendGameOver()
-        } else if (this.x <= -70) meteorList.splice(i, 1)
-        // console.log('메테오 목록 : ', meteorList)
-      }
+    this.checkHit2 = function (i) {
+      // for (let i = 0; i < meteorList.length; i++) {
+      if (
+        this.x >= all.spaceshipX &&
+        this.x <= all.spaceshipX + 25 &&
+        this.y >= all.spaceshipY - 25 &&
+        this.y <= all.spaceshipY + 20
+      ) {
+        all.gameOver = true
+        all.sendGameOver()
+      } else if (this.x <= -70) meteorList.splice(i, 1)
+      // console.log('메테오 목록 : ', meteorList)
+      // }
 
       // for (let i = 0; i < meteor2List.length; i++) {
       //   if (
@@ -106,7 +105,7 @@ class Enemy {
       this.x -= 3
       if (this.x <= 0) {
         all.gameOver = true
-        this.sendGameOver()
+        all.sendGameOver()
         console.log('game Over')
       }
     }
@@ -210,7 +209,7 @@ export default {
     createMeteor(all) {
       const interval2 = setInterval(function () {
         let m = new Meteor(all)
-        m.init()
+        m.init(all)
         // console.log('메테오 생성 인터벌', interval2)
         if (all.gameOver) {
           clearInterval(interval2)
@@ -257,23 +256,16 @@ export default {
       for (let i = 0; i < bulletList.length; i++) {
         if (bulletList[i].alive) {
           bulletList[i].updateBullet()
-          bulletList[i].checkHit()
+          bulletList[i].checkHit(i)
         }
       }
 
       for (let i = 0; i < meteorList.length; i++) {
         if (meteorList[i].alive) {
           meteorList[i].updateMove()
-          meteorList[i].checkHit2()
+          meteorList[i].checkHit2(i)
         }
       }
-
-      // for (let i = 0; i < meteor2List.length; i++) {
-      //   if (meteor2List[i].alive) {
-      //     meteor2List[i].updateMove()
-      //     meteor2List[i].checkHit2()
-      //   }
-      // }
 
       for (let i = 0; i < enemyList.length; i++) {
         enemyList[i].update()
