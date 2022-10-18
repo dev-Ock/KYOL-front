@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="$store.dispatch('gear')">게임하기</button>
+    <router-link to="/game"><button>게임하기</button></router-link>
     <div>
       <div>&lt;{{ data.nick }}님의 보유우주선&gt;</div>
       <div v-for="(a, i) in array" :key="i">
