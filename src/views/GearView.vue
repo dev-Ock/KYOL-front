@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 // import axios from 'axios'
 export default {
   name: 'GearView',
@@ -32,8 +32,11 @@ export default {
   },
   computed: {
     ...mapState({
-      data: 'data',
-      currentShipImage: 'currentShipImage'
+      data: 'data'
+      // currentShipImage: 'currentShipImage'
+    }),
+    ...mapGetters({
+      currentShipImage: 'example'
     })
   },
   created() {
@@ -56,17 +59,18 @@ export default {
         console.log('어레이확인', this.array)
       })
     },
-    open2() {
-      this.gear2(this.image2)
-      this.gear2().then(() => {
-        console.log(this.currentShipImage)
-      })
-    },
+    // open2() {
+    //   this.gear2(this.image2)
+    //   this.gear2().then(() => {
+    //     console.log('여기서 선택하나? : ', this.currentShipImage)
+    //   })
+    // },
 
     select(spaceship) {
       this.currentship = this.ship[spaceship].shipName
       this.gear2(this.currentship)
-      console.log('표시', this.currentship)
+      console.log('클릭한 아이템 표시', this.currentship)
+      console.log('값이 ?', this.gear2(this.currentship))
     }
     // arr() {
     //   const ship = this.data.Spaceships
