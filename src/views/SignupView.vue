@@ -100,7 +100,8 @@ export default {
     emailInspection: false,
     pwInspection: false,
     cfpwInspection: false,
-    nickInspection: false
+    nickInspection: false,
+    check: false
 
     // loading: false
   }),
@@ -160,6 +161,9 @@ export default {
       ) {
         alert('값을 제대로 입력하지 않았습니다.')
       }
+      if (this.check == false) {
+        alert('이메일 중복확인을 해주세요.')
+      }
 
       await axios
 
@@ -187,6 +191,7 @@ export default {
     },
     async duplication(e) {
       e.preventDefault()
+      this.check = true
       console.log('duplicationemail:', this.email)
 
       await axios
