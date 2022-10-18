@@ -40,7 +40,7 @@ export default {
     })
   },
   created() {
-    this.open(), this.open2()
+    this.open()
   },
 
   methods: {
