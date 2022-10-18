@@ -4,14 +4,8 @@
     <div v-show="purchasemodal" class="black-bg">
       <div class="white-bg">
         <h4>구매하시겠습니까?</h4>
-        <button class="btn btn-outline-dark mt-auto" @click="purchaserocket1">구매하기</button>
+        <button class="btn btn-outline-dark mt-auto" @click="purchaserocket">구매하기</button>
         <button class="btn btn-outline-dark mt-auto" @click="purchasemodal = false">닫기</button>
-      </div>
-    </div>
-    <div v-show="nopurchasemodal" class="black-bg">
-      <div class="white-bg">
-        <h4>상품 구매가 불가능합니다.</h4>
-        <button class="btn btn-outline-dark mt-auto" @click="nopurchasemodal = false">닫기</button>
       </div>
     </div>
 
@@ -50,19 +44,13 @@
                   </div>
                   <!-- Product actions-->
                   <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                    <!-- <div v-show="rocketone" class="text-center"> -->
                     <div class="text-center">
-                      <div value="1">
-                        <a
-                          v-if="showbtn == false"
-                          class="btn btn-outline-dark mt-auto"
-                          href="#"
-                          @click="purchasemodal = false"
-                          >구매 가능</a
-                        >
+                      <div v-if="showbtn == true">
+                        <a class="btn btn-outline-dark mt-auto" href="#" @click="purchaseOpen1">구매 가능</a>
                       </div>
-                      <a v-if="showbtn2 == false" class="btn btn-secondary btn mt-auto disabled" href="#">보유중</a>
-                      <!-- <a v-if="showbtn2 == false" class="btn btn-secondary btn mt-auto disabled" href="#">KYOR부족</a> -->
+                      <div v-else>
+                        <a class="btn btn-secondary btn mt-auto disabled" href="#">보유중</a>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -94,16 +82,12 @@
                   <!-- Product actions-->
                   <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                     <div class="text-center">
-                      <a
-                        v-if="showbtn == true"
-                        class="btn btn-outline-dark mt-auto"
-                        href="#"
-                        @click="purchasemodal = true"
-                        >구매 가능</a
-                      >
-
-                      <a v-if="showbtn == false" class="btn btn-secondary btn mt-auto disabled" href="#">보유중</a>
-                      <!-- <a v-if="showbtn2 == false" class="btn btn-secondary btn mt-auto disabled" href="#">KYOR부족</a> -->
+                      <div v-if="showbtn2 == true">
+                        <a class="btn btn-outline-dark mt-auto" href="#" @click="purchaseOpen2">구매 가능</a>
+                      </div>
+                      <div v-else>
+                        <a class="btn btn-secondary btn mt-auto disabled" href="#">보유중</a>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -127,16 +111,12 @@
                   <!-- Product actions-->
                   <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                     <div class="text-center">
-                      <a
-                        v-if="showbtn == true"
-                        class="btn btn-outline-dark mt-auto"
-                        href="#"
-                        @click="purchasemodal = true"
-                        >구매 가능</a
-                      >
-
-                      <a v-if="showbtn == false" class="btn btn-secondary btn mt-auto disabled" href="#">보유중</a>
-                      <!-- <a v-if="showbtn2 == false" class="btn btn-secondary btn mt-auto disabled" href="#">KYOR부족</a> -->
+                      <div v-if="showbtn3 == true">
+                        <a class="btn btn-outline-dark mt-auto" href="#" @click="purchaseOpen3">구매 가능</a>
+                      </div>
+                      <div v-else>
+                        <a class="btn btn-secondary btn mt-auto disabled" href="#">보유중</a>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -165,15 +145,12 @@
                   <!-- Product actions-->
                   <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                     <div class="text-center">
-                      <a
-                        v-if="showbtn == true"
-                        class="btn btn-outline-dark mt-auto"
-                        href="#"
-                        @click="purchasemodal = true"
-                        >구매 가능</a
-                      >
-                      <a v-if="showbtn == false" class="btn btn-secondary btn mt-auto disabled" href="#">보유중</a>
-                      <!-- <a v-if="showbtn2 == false" class="btn btn-secondary btn mt-auto disabled" href="#">KYOR부족</a> -->
+                      <div v-if="showbtn4 == true">
+                        <a class="btn btn-outline-dark mt-auto" href="#" @click="purchaseOpen4">구매 가능</a>
+                      </div>
+                      <div v-else>
+                        <a class="btn btn-secondary btn mt-auto disabled" href="#">보유중</a>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -196,9 +173,10 @@ export default {
   },
   data: () => ({
     purchasemodal: false,
-    nopurchasemodal: false,
     showbtn: true,
-    // showbtn2: false,
+    showbtn2: true,
+    showbtn3: true,
+    showbtn4: true,
     gold: '',
     isActive: true,
     data: [],
@@ -207,13 +185,11 @@ export default {
     rocket2: { imgname: 'rocket2.png', price: 45000, name: 'rocket2' },
     rocket3: { imgname: 'rocket3.png', price: 10000, name: 'rocket3' },
     rocket4: { imgname: 'rocket4.png', price: 50000, name: 'rocket4' },
-    rocketone: true,
-    rockettwo: true,
-    rocketthree: true,
-    rocketfour: true,
     nick: '',
     spaceshipsimg: '',
-    spaceShipsList: []
+    spaceShipsList: [],
+    rocketbox: '',
+    rocketprice: 0
   }),
 
   mounted() {
@@ -245,21 +221,23 @@ export default {
             let a = this.spaceShips[i].shipName
             this.spaceShipsList.push(a)
           }
-
           // (1순위) 우주선 이미 가지고 있으면 상점 버튼 비활성화
           for (let i in this.spaceShipsList) {
-            console.log('이건머지: ', this.spaceShipsList[i])
             if (this.spaceShipsList[i] == this.rocket1.imgname) {
-              this.showbtn = true
+              this.showbtn = false
+              // this.showbtn2 = false
             }
-            if (this.rocketlist[i] == this.rocket2.imgname) {
-              this.showbtn = true
+            if (this.spaceShipsList[i] == this.rocket2.imgname) {
+              this.showbtn2 = false
+              // this.showbtn2 = false
             }
-            if (this.rocketlist[i] == this.rocket3.imgname) {
-              this.showbtn = true
+            if (this.spaceShipsList[i] == this.rocket3.imgname) {
+              this.showbtn3 = false
+              // this.showbtn2 = false
             }
-            if (this.rocketlist[i] == this.rocket4.imgname) {
-              this.showbtn = true
+            if (this.spaceShipsList[i] == this.rocket4.imgname) {
+              this.showbtn4 = false
+              // this.showbtn2 = false
             }
           }
 
@@ -299,105 +277,49 @@ export default {
           console.log(error)
         })
     },
-    async purchaserocket1() {
+    async purchaserocket() {
       await axios
         .post(
           process.env.VUE_APP_API + '/shop/purchase',
-          { selectedShip: this.rocket1.imgname, selectedCost: this.rocket1.price },
+          { selectedShip: this.rocketbox, selectedCost: this.rocketprice },
           {
             headers: {
               Authorization: `${localStorage.getItem('token')}`
             }
           }
         )
+
         .then(response => {
           console.log('purchase - response : ', response)
+          console.log(this.rocketbox)
           // localStorage.setItem('token', response.data.token)
           // localStorage.setItem('userId', response.data.user.id)
           // localStorage.setItem('userNick', response.data.user.nick)
           // console.log(localStorage.getItem('userNick'))
 
-          this.$router.go()
+          // this.$router.go()
         })
         .catch(error => {
           console.log('에러다 : ', error)
           console.log(error.response.data.message)
         })
     },
-    async purchaserocket2() {
-      await axios
-        .post(
-          process.env.VUE_APP_API + '/shop/purchase',
-          { selectedShip: this.rocket2.imgname, selectedCost: this.rocket2.price },
-          {
-            headers: {
-              Authorization: `${localStorage.getItem('token')}`
-            }
-          }
-        )
-        .then(response => {
-          console.log('purchase - response : ', response)
-          // localStorage.setItem('token', response.data.token)
-          // localStorage.setItem('userId', response.data.user.id)
-          // localStorage.setItem('userNick', response.data.user.nick)
-          // console.log(localStorage.getItem('userNick'))
-
-          this.$router.go()
-        })
-        .catch(error => {
-          console.log('에러다 : ', error)
-          console.log(error.response.data.message)
-        })
+    purchaseOpen1() {
+      this.purchasemodal = true
+      ;(this.rocketbox = 'rocket1.png'), (this.rocketprice = 150)
     },
-    async purchaserocket3() {
-      await axios
-        .post(
-          process.env.VUE_APP_API + '/shop/purchase',
-          { selectedShip: this.rocket3.imgname, selectedCost: this.rocket3.price },
-          {
-            headers: {
-              Authorization: `${localStorage.getItem('token')}`
-            }
-          }
-        )
-        .then(response => {
-          console.log('purchase - response : ', response)
-          // localStorage.setItem('token', response.data.token)
-          // localStorage.setItem('userId', response.data.user.id)
-          // localStorage.setItem('userNick', response.data.user.nick)
-          // console.log(localStorage.getItem('userNick'))
-
-          this.$router.go()
-        })
-        .catch(error => {
-          console.log('에러다 : ', error)
-          console.log(error.response.data.message)
-        })
+    purchaseOpen2() {
+      this.purchasemodal = true
+      ;(this.rocketbox = 'rocket2.png'), (this.rocketprice = 45000)
     },
-    async purchaserocket4() {
-      await axios
-        .post(
-          process.env.VUE_APP_API + '/shop/purchase',
-          { selectedShip: this.rocket4.imgname, selectedCost: this.rocket4.price },
-          {
-            headers: {
-              Authorization: `${localStorage.getItem('token')}`
-            }
-          }
-        )
-        .then(response => {
-          console.log('purchase - response : ', response)
-          // localStorage.setItem('token', response.data.token)
-          // localStorage.setItem('userId', response.data.user.id)
-          // localStorage.setItem('userNick', response.data.user.nick)
-          // console.log(localStorage.getItem('userNick'))
-
-          this.$router.go()
-        })
-        .catch(error => {
-          console.log('에러다 : ', error)
-          console.log(error.response.data.message)
-        })
+    purchaseOpen3() {
+      this.purchasemodal = true
+      this.rocketbox = 'rocket3.png'
+      this.rocketprice = 10000
+    },
+    purchaseOpen4() {
+      this.purchasemodal = true
+      ;(this.rocketbox = 'rocket4.png'), (this.rocketprice = 50000)
     }
   }
 }
