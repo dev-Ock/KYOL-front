@@ -10,7 +10,7 @@
 
 <script>
 import axios from 'axios'
-import { mapState, mapGetters } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 
 const bulletList = []
 const enemyList = []
@@ -57,10 +57,9 @@ class Meteor {
       meteorList.push(this)
     }
     this.updateMove = function () {
-      this.x -= 8
+      this.x -= 10
     }
     this.checkHit2 = function (i) {
-      // for (let i = 0; i < meteorList.length; i++) {
       if (
         this.x >= all.spaceshipX &&
         this.x <= all.spaceshipX + 25 &&
@@ -70,20 +69,6 @@ class Meteor {
         all.gameOver = true
         all.sendGameOver()
       } else if (this.x <= -70) meteorList.splice(i, 1)
-      // console.log('메테오 목록 : ', meteorList)
-      // }
-
-      // for (let i = 0; i < meteor2List.length; i++) {
-      //   if (
-      //     this.x >= all.spaceshipX &&
-      //     this.x <= all.spaceshipX + 25 &&
-      //     this.y >= all.spaceshipY - 25 &&
-      //     this.y <= all.spaceshipY + 20
-      //   ) {
-      //     all.gameOver = true
-      //   }
-      //   if (this.x <= all.ctx.canvas.clientWidth) meteor2List.splice(i, 1)
-      // }
     }
   }
 }
@@ -120,24 +105,14 @@ export default {
       provider: this.provider
     }
   },
-  props: {
-    gold: {
-      type: Number,
-      gold: `${localStorage.getItem('gold')}`,
-      default: 0
-    },
-    currentShipImg: {
-      type: String,
-      currentShipImage: `${localStorage.getItem('currentShipImage')}`,
-      default: 'rocket1.png'
-    }
-  },
 
   data: () => ({
     provider: {
       context: null
     },
-    spaceshipImage: '',
+    spaceshipImage: {
+      src: localStorage.getItem('currentShipData')
+    },
     bulletImage: '',
     enemyImage: '',
     gameOverImage: '',
@@ -146,7 +121,8 @@ export default {
     score: 0,
     spaceshipX: 0,
     spaceshipY: 0,
-    keysDown: {}
+    keysDown: {},
+    inGameShip: ''
   }),
   computed: {
     ...mapState({
@@ -157,6 +133,7 @@ export default {
     })
   },
   async mounted() {
+    this.checkStartInformation()
     this.ctx = this.$refs.myClass.getContext('2d')
     this.loadImage()
     this.setupKeyboardListener()
@@ -165,6 +142,17 @@ export default {
     this.createMeteor(this)
   },
   methods: {
+    ...mapActions(['gear', 'gear2']),
+
+    checkStartInformation() {
+      console.log('로컬 스토리지 쉽정보 : ', localStorage.getItem('currentShipData'))
+      if (this.currentShipImage) {
+        this.inGameShip = this.currentShipImage
+      } else {
+        this.inGameShip = localStorage.getItem('currentShipData')
+      }
+    },
+
     loadImage() {
       this.backgroundImage = new Image()
       this.spaceshipImage = new Image()
@@ -178,7 +166,7 @@ export default {
       this.backgroundImage.src = require('../../assets/images/space.jpg')
       this.collisionImage.src = require('../../assets/images/collision16.png')
       // this.spaceshipImage.src = require('../../assets/images/rocket1ingame.png')
-      this.spaceshipImage.src = require(`../../assets/item/ingame${this.currentShipImage}`)
+      this.spaceshipImage.src = require(`../../assets/item/ingame${this.inGameShip}`)
       this.enemyImage.src = require('../../assets/images/enemy4.png')
       this.bulletImage.src = require('../../assets/images/bulletHorizon.png')
       this.gameOverImage.src = require('../../assets/images/gameOver3.png')
@@ -209,7 +197,7 @@ export default {
           // console.log('이걸 왜타지?', all.gameOver)
           clearInterval(interval)
         }
-      }, 1000)
+      }, 400)
     },
 
     createMeteor(all) {
@@ -220,7 +208,7 @@ export default {
         if (all.gameOver) {
           clearInterval(interval2)
         }
-      }, 1000)
+      }, 400)
     },
 
     createBullet(all) {
@@ -347,7 +335,7 @@ export default {
               Authorization: `${localStorage.getItem('token')}`,
               gold: getGold,
               score: getScore,
-              usedShip: `${this.currentShipImage}`
+              usedShip: `${this.inGameShip}`
             }
           }
         )
