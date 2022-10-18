@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/">KYOL</a>
+      <a class="navbar-brand" href="/"><img src="../assets/item/logo3.png" /></a>
       <button
         class="navbar-toggler"
         type="button"
