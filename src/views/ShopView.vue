@@ -240,38 +240,6 @@ export default {
               // this.showbtn2 = false
             }
           }
-
-          // 내가 가지고 있는 골드랑 우주선 가격 비교 후 버튼 비활성화
-          // if (this.gold < this.rocket1.price) {
-          //   console.log('돈부족')
-          //   this.purchasemodal = false
-          // }
-          // if (this.gold < this.rocket2.price) {
-          //   console.log('돈부족')
-          //   this.purchasemodal = false
-          // }
-          // if (this.gold < this.rocket3.price) {
-          //   console.log('돈부족')
-          //   this.purchasemodal = false
-          // }
-          // if (this.gold < this.rocket4.price) {
-          //   console.log('돈부족')
-          //   this.purchasemodal = false
-          // }
-
-          // console.log('spaceshipsname', this.rocket1.imgname)
-          // console.log('비교', this.rocket1.imgname == this.spaceships[3])
-
-          // if (this.showFriendListStatus === true) {
-          //   this.showFriendListStatus = false
-          //   console.log(this.showFriendListStatus)
-          // } else {
-          //   console.log(response)
-          //   this.friendInfoList = response.data.friendInfoList
-          //   console.log('loadFriendList - response : ', this.friendInfoList)
-          //   this.showFriendListStatus = true
-          //   console.log(this.showFriendListStatus)
-          // }
         })
         .catch(error => {
           console.log(error)
@@ -292,11 +260,6 @@ export default {
         .then(response => {
           console.log('purchase - response : ', response)
           console.log(this.rocketbox)
-          // localStorage.setItem('token', response.data.token)
-          // localStorage.setItem('userId', response.data.user.id)
-          // localStorage.setItem('userNick', response.data.user.nick)
-          // console.log(localStorage.getItem('userNick'))
-
           // this.$router.go()
         })
         .catch(error => {
