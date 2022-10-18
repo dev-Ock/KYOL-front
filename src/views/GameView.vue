@@ -16,7 +16,7 @@
 import NavBar from '@/components/NavBar.vue'
 import axios from 'axios'
 import GameScreen from '../components/gamedata/GameScreen.vue'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'GameView',
@@ -26,11 +26,15 @@ export default {
   },
   computed: {
     ...mapState({
-      data: 'data',
-      currentShipImage: 'currentShipImage'
+      data: 'data'
+      // currentShipImage: 'currentShipImage'
+    }),
+    ...mapGetters({
+      currentShipImage: 'example'
     })
   },
   mounted() {
+    this.checkinformation()
     this.game()
     // this.GettingGameScore()
     // this.GettingGetGold()
@@ -52,6 +56,10 @@ export default {
         .catch(error => {
           console.log(error)
         })
+    },
+    checkinformation() {
+      console.log('체크하자 currentShipImage : ', this.currentShipImage)
+      console.log('체크하자 data : ', this.data)
     }
   }
 }

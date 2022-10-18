@@ -10,7 +10,7 @@
 
 <script>
 import axios from 'axios'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 const bulletList = []
 const enemyList = []
@@ -152,8 +152,11 @@ export default {
   }),
   computed: {
     ...mapState({
-      data: 'data',
-      currentShipImage: 'currentShipImage'
+      data: 'data'
+      // currentShipImage: 'currentShipImage'
+    }),
+    ...mapGetters({
+      currentShipImage: 'example'
     })
   },
   async mounted() {
@@ -347,7 +350,7 @@ export default {
               Authorization: `${localStorage.getItem('token')}`,
               gold: getGold,
               score: getScore,
-              usedShip: `${localStorage.getItem('userNick')}`
+              usedShip: `${this.currentShipImage}`
             }
           }
         )

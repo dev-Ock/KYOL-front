@@ -12,13 +12,17 @@ export default new Vuex.Store({
     rocket: [],
     currentShipImage: 'basicAircraftHorizon.png'
   },
-  getters: {},
+  getters: {
+    example: state => state.currentShipImage
+  },
   mutations: {
     ai(state, sss) {
       state.data = sss
     },
     changeShip(state, payload) {
+      console.log('뮤테이션 안쪽 before : ', payload)
       state.currentShipImage = payload
+      console.log('뮤테이션 안쪽 after : ', state.currentShipImage)
     }
   },
   actions: {
@@ -39,7 +43,8 @@ export default new Vuex.Store({
         })
     },
 
-    async gear2({ commit, payload }) {
+    async gear2({ commit }, payload) {
+      console.log('액션스 안쪽 : ', payload)
       console.log('gear2', localStorage.getItem('token'))
       commit('changeShip', payload)
       // await axios
