@@ -2,10 +2,10 @@
   <div>
     <NavBar></NavBar>
     <div class="score">
-      <table class="table table-striped">
+      <table class="table table-dark table-hover">
         <thead>
           <tr>
-            <td colspan="3">&lt; Top Ranking&gt;</td>
+            <td colspan="4">&lt; Top Ranking &gt;</td>
           </tr>
           <tr>
             <th scope="col">순위</th>
@@ -18,7 +18,7 @@
           <tr v-for="(user, i) in data" :key="i">
             <th scope="row">{{ i + 1 }}</th>
             <td>
-              <img width="50px" :src="ship[i]" />
+              <img width="35px" :src="ship[i]" />
             </td>
             <td>{{ nick[i] }}</td>
             <td>{{ score[i] }}</td>
@@ -31,7 +31,7 @@
       <table class="table table-dark table-hover">
         <thead>
           <tr>
-            <td colspan="3">&lt; Weekly Ranking&gt;</td>
+            <td colspan="4">&lt; Weekly Ranking &gt;</td>
           </tr>
           <tr>
             <th scope="col">순위</th>
@@ -44,7 +44,7 @@
           <tr v-for="(user, i) in data2" :key="i">
             <th scope="row">{{ i + 1 }}</th>
             <td>
-              <img width="50px" :src="ship2[i]" />
+              <img width="35px" :src="ship2[i]" />
             </td>
             <td>{{ nick2[i] }}</td>
             <td>{{ score2[i] }}</td>
@@ -153,6 +153,14 @@ export default {
   width: 700px;
   height: 700px;
   display: inline-block;
-  margin: 50px;
+  margin: 30px;
+}
+th td tr {
+  text-align: center;
+  vertical-align: middle;
+}
+tbody {
+  text-align: center;
+  vertical-align: middle;
 }
 </style>

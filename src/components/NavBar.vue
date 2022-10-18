@@ -76,6 +76,7 @@ export default {
       localStorage.removeItem('userNick')
       localStorage.removeItem('token')
       localStorage.removeItem('userId')
+      localStorage.removeItem('currentShipData')
       console.log('로그아웃성공')
       this.loading = false
     },
