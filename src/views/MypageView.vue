@@ -91,7 +91,7 @@ export default {
 
           this.email = response.data.user.email
           this.nick = response.data.user.nick
-          this.rocket = require(`../assets/item/${response.data.user.curentShipImage}`)
+          this.rocket = require(`../assets/item/${response.data.user.currentShipImage}`)
 
           this.ssdata = response.data.user.Spaceships
           for (let i in this.ssdata) {
