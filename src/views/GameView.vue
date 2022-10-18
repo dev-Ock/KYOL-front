@@ -13,12 +13,18 @@
 import NavBar from '@/components/NavBar.vue'
 import axios from 'axios'
 import GameScreen from '../components/gamedata/GameScreen.vue'
+import { mapState } from 'vuex'
 
 export default {
   name: 'GameView',
   components: {
     NavBar,
     GameScreen
+  },
+  computed: {
+    ...mapState({
+      currentShipImage: 'currentShipImage'
+    })
   },
   mounted() {
     this.game()
