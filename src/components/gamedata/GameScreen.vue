@@ -4,7 +4,12 @@
     <canvas ref="myClass" class="my-canvas" width="1200" height="500">
       <img src="../../assets/images/space.jpg" />
     </canvas>
-    <div>방향 조작법 : w, a, s, d // 미사일발사 : space</div>
+    <div>
+      방향 조작법 : w, a, s, d // 미사일발사 : space
+      <figure>
+        <audio autoplay loop src="../../assets/videos/videoplayback.mp3"></audio>
+      </figure>
+    </div>
   </div>
 </template>
 
@@ -52,12 +57,28 @@ class Meteor {
         let randomNum = Math.floor(Math.random() * (max - min + 1)) + min
         return randomNum
       }
-      this.x = all.ctx.canvas.clientWidth
-      this.y = generateRandomValue(0, all.ctx.canvas.clientHeight - 60)
-      meteorList.push(this)
+      if (all.score < 1000) {
+        this.x = all.ctx.canvas.clientWidth
+        this.y = generateRandomValue(0, all.ctx.canvas.clientHeight - 60)
+        meteorList.push(this)
+      } else if (all.score > 1000) {
+        console.log('설마???')
+        this.x = all.ctx.canvas.clientWidth
+        this.y = generateRandomValue(0, all.ctx.canvas.clientHeight - 60)
+        meteor2List.push(this)
+      }
     }
     this.updateMove = function () {
-      this.x -= 10
+      this.x -= 6
+    }
+    this.updateMove2 = function () {
+      if (all.score < 1000) {
+        this.x -= 6
+      } else if (all.score >= 1000 && all.score <= 5000) {
+        this.x -= 12
+      } else if (all.score > 5000) {
+        this.x -= 18
+      }
     }
     this.checkHit2 = function (i) {
       if (
@@ -261,6 +282,12 @@ export default {
         }
       }
 
+      for (let i = 0; i < meteor2List.length; i++) {
+        if (meteor2List[i].alive) {
+          meteor2List[i].updateMove2()
+          meteor2List[i].checkHit2(i)
+        }
+      }
       for (let i = 0; i < enemyList.length; i++) {
         enemyList[i].update()
         // console.log('적 숫자 체크', enemyList)

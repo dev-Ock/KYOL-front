@@ -1,15 +1,12 @@
 <template>
   <div class="home">
     <NavBar></NavBar>
-    HOME//
     <div>
-      <video class="video" src="~@/assets/videos/gametest.mp4" autoplay muted loop></video>
+      <video class="video" src="~@/assets/videos/HomebackgroundVideo.mp4" autoplay muted loop></video>
       <div></div>
       <router-link to="/gear">
         <button v-if="logined" class="btn2" type="button">{{ nick }}님 게임 시작하실라우?</button>
         <button v-else class="btn2" type="button">게스트님 게임 시작하실라우?</button>
-
-        <!-- 버튼 반응형으로 만들기 -->
       </router-link>
     </div>
   </div>
@@ -51,16 +48,6 @@ export default {
           } else {
             this.nick = '게스트'
           }
-          // if (this.showFriendListStatus === true) {
-          //   this.showFriendListStatus = false
-          //   console.log(this.showFriendListStatus)
-          // } else {
-          //   console.log(response)
-          //   this.friendInfoList = response.data.friendInfoList
-          //   console.log('loadFriendList - response : ', this.friendInfoList)
-          //   this.showFriendListStatus = true
-          //   console.log(this.showFriendListStatus)
-          // }
         })
         .catch(error => {
           console.log(error)
@@ -90,6 +77,7 @@ export default {
   height: 7vh;
   widows: 30vw;
   color: #fff;
-  background: url('~@/assets/images/sky.png');
+  background: grey;
+  border-radius: 50px;
 }
 </style>

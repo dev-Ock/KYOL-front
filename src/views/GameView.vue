@@ -1,13 +1,9 @@
 <template>
   <div>
     <NavBar></NavBar>
-    game
     {{ currentShipImage }}
     <div id="app" class="status">
-      <div>Game Screen</div>
-      <div>Score</div>
-      <div>Gold</div>
-      <GameScreen style="width: 100%; height: 600px"></GameScreen>
+      <GameScreen style="width: 100%; height: 600px"> </GameScreen>
     </div>
   </div>
 </template>
@@ -36,8 +32,6 @@ export default {
   mounted() {
     this.checkinformation()
     this.game()
-    // this.GettingGameScore()
-    // this.GettingGetGold()
   },
   methods: {
     async game() {
