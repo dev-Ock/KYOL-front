@@ -77,17 +77,6 @@
 
                 <!-- Submit button -->
                 <button type="submit" class="btn btn-primary btn-block mb-4" @click="signUp">Sign up</button>
-
-                <div class="text-center">
-                  <p>or sign up with:</p>
-                  <button type="button" class="btn-btn-link2 btn-floating mx-1">
-                    <i class="fab fa-kakao">카카오</i>
-                  </button>
-
-                  <button type="button" class="btn-btn-link1">
-                    <i class="fab fa-google">구글</i>
-                  </button>
-                </div>
               </form>
             </div>
           </div>

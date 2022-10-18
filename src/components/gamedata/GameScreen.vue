@@ -4,30 +4,20 @@
     <canvas ref="myClass" class="my-canvas" width="1200" height="500">
       <img src="../../assets/images/space.jpg" />
     </canvas>
-
-    <slot></slot>
+    <div>여긴?</div>
   </div>
 </template>
 
 <script>
-// class User {
-//   constructor(name) {
-//     this.name = name
-//   }
-
-//   sayHi() {
-//     alert(this.name)
-//   }
-// }
+import axios from 'axios'
 
 const bulletList = []
 const enemyList = []
+const meteorList = []
+const meteor2List = []
 
 class Bullet {
   constructor(all) {
-    console.log('bullet 안쪽 인데?', all)
-    // console.log('bullet 안쪽 인데?', this.bulletList)
-    console.log('bullet 안쪽 인데?', bulletList)
     this.x = 0
     this.y = 0
     this.init = function (all) {
@@ -36,12 +26,10 @@ class Bullet {
       this.alive = true
       bulletList.push(this)
     }
-    this.update = function () {
+    this.updateBullet = function () {
       this.x += 7
     }
     this.checkHit = function () {
-      console.log('check hit 안쪽 총알 리스트', bulletList)
-      console.log('check hit 안쪽 점수판', this.score)
       for (let i = 0; i < enemyList.length; i++) {
         if (this.x >= enemyList[i].x - 10 && this.y >= enemyList[i].y - 20 && this.y <= enemyList[i].y + 35) {
           all.score += 100
@@ -54,15 +42,51 @@ class Bullet {
   }
 }
 
-// class generateRandomValue {
-//   constructor(min, max) {
-//     console.log('미니멈 값', min)
-//     console.log('맥시멈 값', max)
-//     let randomNum = Math.floor(Math.random() * (max - min + 1)) + min
-//     console.log('랜덤숫자', randomNum)
-//     return randomNum
-//   }
-// }
+class Meteor {
+  constructor(all) {
+    this.x = 0
+    this.y = 0
+    this.init = function () {
+      this.alive = true
+      let generateRandomValue = function (min, max) {
+        let randomNum = Math.floor(Math.random() * (max - min + 1)) + min
+        return randomNum
+      }
+      this.x = all.ctx.canvas.clientWidth
+      this.y = generateRandomValue(0, all.ctx.canvas.clientHeight - 60)
+      meteorList.push(this)
+    }
+    this.updateMove = function () {
+      this.x -= 8
+    }
+    this.checkHit2 = function () {
+      for (let i = 0; i < meteorList.length; i++) {
+        if (
+          this.x >= all.spaceshipX &&
+          this.x <= all.spaceshipX + 25 &&
+          this.y >= all.spaceshipY - 25 &&
+          this.y <= all.spaceshipY + 20
+        ) {
+          all.gameOver = true
+          all.sendGameOver()
+        } else if (this.x <= -70) meteorList.splice(i, 1)
+        // console.log('메테오 목록 : ', meteorList)
+      }
+
+      // for (let i = 0; i < meteor2List.length; i++) {
+      //   if (
+      //     this.x >= all.spaceshipX &&
+      //     this.x <= all.spaceshipX + 25 &&
+      //     this.y >= all.spaceshipY - 25 &&
+      //     this.y <= all.spaceshipY + 20
+      //   ) {
+      //     all.gameOver = true
+      //   }
+      //   if (this.x <= all.ctx.canvas.clientWidth) meteor2List.splice(i, 1)
+      // }
+    }
+  }
+}
 
 class Enemy {
   constructor(all) {
@@ -71,21 +95,18 @@ class Enemy {
     this.init = function () {
       let generateRandomValue = function (min, max) {
         let randomNum = Math.floor(Math.random() * (max - min + 1)) + min
-        console.log('랜덤숫자', randomNum)
         return randomNum
       }
 
-      console.log('here ?', all.ctx.canvas.clientWidth)
       this.x = all.ctx.canvas.clientWidth
       this.y = generateRandomValue(0, all.ctx.canvas.clientHeight - 60)
-      console.log('적 x 좌표', this.x)
-      console.log('적 y 좌표', this.y)
       enemyList.push(this)
     }
     this.update = function () {
       this.x -= 3
       if (this.x <= 0) {
         all.gameOver = true
+        this.sendGameOver()
         console.log('game Over')
       }
     }
@@ -99,12 +120,25 @@ export default {
       provider: this.provider
     }
   },
+  props: {
+    gold: {
+      type: Number,
+      gold: `${localStorage.getItem('gold')}`,
+      default: 0
+    },
+    currentShipImg: {
+      type: String,
+      currentShipImage: `${localStorage.getItem('currentShipImage')}`,
+      default: 'basicAircraftHorizon.png'
+    }
+  },
 
   data: () => ({
     provider: {
       context: null
     },
-
+    // gameScore: 0,
+    // getGold: 0,
     spaceshipImage: '',
     bulletImage: '',
     enemyImage: '',
@@ -114,24 +148,16 @@ export default {
     score: 0,
     spaceshipX: 0,
     spaceshipY: 0,
-    // canvas: document.createElement('canvas'),
-    // bulletList: [],
-    // enemyList: [],
     keysDown: {}
   }),
 
   async mounted() {
-    // 사용법
-    // let user = new User('John')
-    // user.sayHi()
-
-    console.log(this.keysDown)
-    console.log('이것이 this 다 : ', this)
     this.ctx = this.$refs.myClass.getContext('2d')
     this.loadImage()
     this.setupKeyboardListener()
     this.main()
     this.createEnemy(this)
+    this.createMeteor(this)
   },
   methods: {
     loadImage() {
@@ -141,46 +167,60 @@ export default {
       this.enemyImage = new Image()
       this.gameOverImage = new Image()
       this.collisionImage = new Image()
+      this.meteor1Image = new Image()
+      this.meteor2Image = new Image()
 
       this.backgroundImage.src = require('../../assets/images/space.jpg')
       this.collisionImage.src = require('../../assets/images/collision16.png')
       this.spaceshipImage.src = require('../../assets/images/basicAircraftHorizon.png')
+      // this.spaceshipImage.src = require(`../../assets/images/${localStorage.getItem('currentShipImage')}`)
       this.enemyImage.src = require('../../assets/images/enemy4.png')
       this.bulletImage.src = require('../../assets/images/bulletHorizon.png')
       this.gameOverImage.src = require('../../assets/images/gameOver3.png')
+      this.meteor1Image.src = require('../../assets/images/meteor/meteor1.png')
+      this.meteor2Image.src = require('../../assets/images/meteor/meteor2.png')
     },
 
     setupKeyboardListener() {
       // function 도 스코핑영역을 가지기 때문에 function (event) 로 사용불가
       document.addEventListener('keydown', event => {
-        console.log('여긴가', event.key)
         this.keysDown[event.key] = true
       })
       document.addEventListener('keyup', event => {
-        console.log(event)
         delete this.keysDown[event.key]
 
         if (event.code == 'Space') {
-          console.log('총알발사', event.code)
           this.createBullet(this)
         }
       })
     },
 
     createEnemy(all) {
-      console.log('game over????', all.gameOver)
-
       const interval = setInterval(function () {
         let e = new Enemy(all)
         e.init()
-      }, 400)
-      console.log('적군생성')
+        // console.log('적군생성 인터벌', interval)
+        if (all.gameOver) {
+          // console.log('이걸 왜타지?', all.gameOver)
+          clearInterval(interval)
+        }
+      }, 1000)
+    },
+
+    createMeteor(all) {
+      const interval2 = setInterval(function () {
+        let m = new Meteor(all)
+        m.init()
+        // console.log('메테오 생성 인터벌', interval2)
+        if (all.gameOver) {
+          clearInterval(interval2)
+        }
+      }, 1000)
     },
 
     createBullet(all) {
       let b = new Bullet(all)
       b.init(all)
-      console.log('Bullet created')
     },
 
     update() {
@@ -196,6 +236,9 @@ export default {
       if ('d' in this.keysDown) {
         this.spaceshipX += 4
       } // move to left side
+
+      // console.log('우주선의 현재 죄표', this.spaceshipX)
+      // console.log('우주선의 현재 죄표', this.spaceshipY)
 
       // 우주선의 이동 범위를 제한해서 update
       if (this.spaceshipY <= 0) {
@@ -213,22 +256,34 @@ export default {
 
       for (let i = 0; i < bulletList.length; i++) {
         if (bulletList[i].alive) {
-          bulletList[i].update()
+          bulletList[i].updateBullet()
           bulletList[i].checkHit()
-          console.log('hit !')
         }
       }
 
+      for (let i = 0; i < meteorList.length; i++) {
+        if (meteorList[i].alive) {
+          meteorList[i].updateMove()
+          meteorList[i].checkHit2()
+        }
+      }
+
+      // for (let i = 0; i < meteor2List.length; i++) {
+      //   if (meteor2List[i].alive) {
+      //     meteor2List[i].updateMove()
+      //     meteor2List[i].checkHit2()
+      //   }
+      // }
+
       for (let i = 0; i < enemyList.length; i++) {
         enemyList[i].update()
+        // console.log('적 숫자 체크', enemyList)
       }
     },
 
     main() {
-      console.log('게임 상태는 : ', this.gameOver)
+      // console.log('게임 상태는 : ', this.gameOver)
       if (!this.gameOver) {
-        console.log('main - game is not over')
-
         this.update()
         this.render()
         requestAnimationFrame(this.main)
@@ -247,19 +302,63 @@ export default {
       this.ctx.drawImage(this.backgroundImage, 0, 0, this.ctx.canvas.clientWidth, this.ctx.canvas.clientHeight)
       this.ctx.drawImage(this.spaceshipImage, this.spaceshipX, this.spaceshipY)
       this.ctx.fillText(`Score: ${this.score}`, 850, 30)
-      this.ctx.fillStyle = 'white'
+      this.ctx.fillStyle = 'Yellow'
+      this.ctx.font = '25px gothic'
+      this.ctx.fillText(`Gold: ${this.score / 10}`, 1050, 30)
+      this.ctx.fillStyle = 'White'
       this.ctx.font = '25px gothic'
 
       for (let i = 0; i < bulletList.length; i++) {
         if (bulletList[i].alive) {
-          console.log('총알 이미지', this.bulletImage)
           this.ctx.drawImage(this.bulletImage, bulletList[i].x + 48, bulletList[i].y + 12)
+        }
+      }
+
+      for (let i = 0; i < meteorList.length; i++) {
+        if (meteorList[i].alive) {
+          this.ctx.drawImage(this.meteor1Image, meteorList[i].x, meteorList[i].y)
+        }
+      }
+
+      for (let i = 0; i < meteor2List.length; i++) {
+        if (meteor2List[i].alive) {
+          this.ctx.drawImage(this.meteor2Image, meteor2List[i].x, meteor2List[i].y)
         }
       }
 
       for (let i = 0; i < enemyList.length; i++) {
         this.ctx.drawImage(this.enemyImage, enemyList[i].x, enemyList[i].y)
       }
+    },
+    sendGameOver() {
+      this.$emit('GettingGameScore', this.score)
+      this.$emit('GettingGetGold', this.score / 10)
+      console.log('GettingGameScore', this.score)
+      console.log('GettingGetGold', this.score / 10)
+      this.sendingResultData()
+    },
+    async sendingResultData() {
+      const getScore = this.score
+      const getGold = this.score / 10
+      await axios
+        .put(
+          process.env.VUE_APP_API + '/game/update',
+          { nick: this.nick },
+          {
+            headers: {
+              Authorization: `${localStorage.getItem('token')}`,
+              gold: getGold,
+              score: getScore,
+              usedShip: `${localStorage.getItem('userNick')}`
+            }
+          }
+        )
+        .then(response => {
+          console.log('update: ', response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
 }
