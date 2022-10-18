@@ -163,9 +163,16 @@ export default {
         this.nickInspection == true
       ) {
         alert('값을 제대로 입력하지 않았습니다.')
+        throw new Error('에러 발생!')
       }
+      // if (this.nickname == null || this.email == null || this.password == null || this.confirmPassword == null) {
+      //   alert('빈칸을 입력해주세요')
+      //   console.log('확인용', this.nickname)
+      //   throw new Error('에러 발생!')
+      // }
       if (this.check == false) {
         alert('이메일 중복확인을 해주세요.')
+        throw new Error('에러 발생!')
       }
 
       await axios
