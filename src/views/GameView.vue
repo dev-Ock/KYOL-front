@@ -15,6 +15,7 @@
 import NavBar from '@/components/NavBar.vue'
 import axios from 'axios'
 import GameScreen from '../components/gamedata/GameScreen.vue'
+import { mapState } from 'vuex'
 
 export default {
   name: 'GameView',
@@ -22,24 +23,10 @@ export default {
     NavBar,
     GameScreen
   },
-  data: () => ({
-    gold: 0,
-    currentShipImg: '',
-    gameScore: 0,
-    getGold: 0,
-    gameOver: false
-  }),
   computed: {
-    GettingGameScore(data) {
-      let gameScore = data
-      console.log('gameScore :', gameScore)
-      return gameScore
-    },
-    GettingGetGold(data) {
-      let getGold = data
-      console.log('getGold : ', getGold)
-      return getGold
-    }
+    ...mapState({
+      currentShipImage: 'currentShipImage'
+    })
   },
   mounted() {
     this.game()

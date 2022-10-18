@@ -88,7 +88,7 @@
 
 <script>
 import axios from 'axios'
-import { flip } from '@popperjs/core'
+// import { flip } from '@popperjs/core'
 export default {
   name: 'SignupView',
   data: () => ({
