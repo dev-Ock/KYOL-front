@@ -86,7 +86,7 @@ export default {
             this.score.push(a)
           }
           for (let i in this.data) {
-            let a = response.data.data.topRanking[i].User.nick
+            let a = response.data.data.topRanking[i].nick
             this.nick.push(a)
           }
 
