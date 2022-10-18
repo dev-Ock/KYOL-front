@@ -1,16 +1,24 @@
 <template>
   <div>
-    <router-link to="/game"><button>게임하기</button></router-link>
     <div>
-      <div>&lt;{{ data.nick }}님의 보유우주선&gt;</div>
-      <div v-for="(a, i) in array" :key="i">
-        <img class="rounded-circle mt-5 bb" width="150px" :src="array[i]" />
-        <button @click="select(i)">선택</button>
-      </div>
-      <!-- <div v-for="(a, i) in array" :key="i" class="bb">
+      <img src="../assets/item/logo2.png" />
+      <!-- <div>&lt;{{ data.nick }}님의 보유우주선&gt;</div> -->
+      <div>
+        <div v-for="(a, i) in array" id="i" :key="i" class="hh">
+          <img class="mt-5 bb" width="150px" :src="array[i]" :class="ft === i ? 'choose' : ''" />
+          <div></div>
+          <button type="button" class="btn btn-warning" @click="select(i)">선택</button>
+          <!-- <button @click="select(i)">선택</button> -->
+        </div>
+        <!-- <div v-for="(a, i) in array" :key="i" class="bb">
         <h3>{{ a }}</h3> -->
-      <!-- <img class="rounded-circle mt-5 bb" width="150px" :src=`../assets/item/${a.shipName}` /> -->
+        <!-- <img class="rounded-circle mt-5 bb" width="150px" :src=`../assets/item/${a.shipName}` /> -->
+      </div>
     </div>
+
+    <router-link to="/game"
+      ><button type="button" class="btn btn-secondary btn-lg btnmargin">Game Start</button></router-link
+    >
   </div>
   <!-- </div> -->
 </template>
@@ -27,7 +35,8 @@ export default {
       rocket: [],
       array: [],
       ship: [],
-      currentship: ''
+      currentship: '',
+      ft: null
     }
   },
   computed: {
@@ -56,6 +65,9 @@ export default {
         }
       })
     },
+    choose() {
+      this.ft = true
+    },
     // open2() {
     //   this.gear2(this.image2)
     //   this.gear2().then(() => {
@@ -66,7 +78,14 @@ export default {
     select(spaceship) {
       this.currentship = this.ship[spaceship].shipName
       this.gear2(this.currentship)
+
+      this.ft = spaceship
+
+      // console.log('클릭한 아이템 표시', this.currentship)
+      // console.log('값이 ?', this.gear2(this.currentship))
+
       localStorage.setItem('currentShipData', `${this.currentship}`)
+
     }
     // arr() {
     //   const ship = this.data.Spaceships
@@ -122,4 +141,17 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.btnmargin {
+  margin-top: 50px;
+}
+
+.hh {
+  display: inline-block;
+  text-align: center;
+}
+.choose {
+  border: 2px solid yellow;
+  /* background-image: url('~@/assets/images/login_border.png'); */
+}
+</style>
