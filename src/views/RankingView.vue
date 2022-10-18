@@ -9,6 +9,7 @@
           </tr>
           <tr>
             <th scope="col">순위</th>
+            <th scope="col">우주선</th>
             <th scope="col">닉네임</th>
             <th scope="col">Score</th>
           </tr>
@@ -16,6 +17,9 @@
         <tbody>
           <tr v-for="(user, i) in data" :key="i">
             <th scope="row">{{ i + 1 }}</th>
+            <td>
+              <img width="50px" :src="ship[i]" />
+            </td>
             <td>{{ nick[i] }}</td>
             <td>{{ score[i] }}</td>
           </tr>
@@ -31,6 +35,7 @@
           </tr>
           <tr>
             <th scope="col">순위</th>
+            <th scope="col">우주선</th>
             <th scope="col">닉네임</th>
             <th scope="col">Score</th>
           </tr>
@@ -38,6 +43,9 @@
         <tbody>
           <tr v-for="(user, i) in data2" :key="i">
             <th scope="row">{{ i + 1 }}</th>
+            <td>
+              <img width="50px" :src="ship2[i]" />
+            </td>
             <td>{{ nick2[i] }}</td>
             <td>{{ score2[i] }}</td>
           </tr>
@@ -58,9 +66,11 @@ export default {
   data: () => ({
     score: [],
     nick: [],
+    ship: [],
     data: [],
     data2: [],
     score2: [],
+    ship2: [],
     nick2: [],
     loading: false
   }),
@@ -89,6 +99,11 @@ export default {
             let a = response.data.data.topRanking[i].nick
             this.nick.push(a)
           }
+          for (let i in this.data) {
+            let a = response.data.data.topRanking[i].usedShip
+            let b = require(`../assets/item/${a}`)
+            this.ship.push(b)
+          }
 
           this.data2 = response.data.data.weeklyRanking[0]
           for (let i in this.data2) {
@@ -102,6 +117,11 @@ export default {
           for (let i in this.data2) {
             let a = response.data.data.weeklyRanking[0][i].nick
             this.nick2.push(a)
+          }
+          for (let i in this.data2) {
+            let a = response.data.data.topRanking[i].usedShip
+            let b = require(`../assets/item/${a}`)
+            this.ship2.push(b)
           }
           // if (localStorage.getItem('token') == null) {
           //   alert('로그인하세요')

@@ -4,7 +4,7 @@
     <canvas ref="myClass" class="my-canvas" width="1200" height="500">
       <img src="../../assets/images/space.jpg" />
     </canvas>
-    <div>여긴?</div>
+    <div>방향 조작법 : w, a, s, d // 미사일발사 : space</div>
   </div>
 </template>
 
