@@ -37,7 +37,12 @@ class Bullet {
     }
     this.checkHit = function () {
       for (let i = 0; i < enemyList.length; i++) {
-        if (this.x + 10 >= enemyList[i].x && this.y >= enemyList[i].y - 20 && this.y <= enemyList[i].y + 35) {
+        if (
+          all.spaceshipX < enemyList[i].x &&
+          this.x + 10 >= enemyList[i].x &&
+          this.y >= enemyList[i].y - 20 &&
+          this.y <= enemyList[i].y + 35
+        ) {
           all.score += 100
           this.alive = false
           enemyList.splice(i, 1)
@@ -69,15 +74,19 @@ class Meteor {
       }
     }
     this.updateMove = function () {
-      this.x -= 6
-    }
-    this.updateMove2 = function () {
       if (all.score < 1000) {
         this.x -= 6
       } else if (all.score >= 1000 && all.score <= 5000) {
         this.x -= 12
-      } else if (all.score > 5000) {
+      }
+    }
+    this.updateMove2 = function () {
+      if (all.score >= 1000 && all.score <= 5000) {
+        this.x -= 15
+      } else if (all.score >= 5000 && all.score <= 10000) {
         this.x -= 18
+      } else if (all.score > 10000) {
+        this.x -= 22
       }
     }
     this.checkHit2 = function (i) {
@@ -237,7 +246,7 @@ export default {
       b.init(all)
     },
 
-    update() {
+    update(ship) {
       if ('s' in this.keysDown) {
         this.spaceshipY += 4
       } // move to right side
@@ -251,10 +260,6 @@ export default {
         this.spaceshipX += 4
       } // move to left side
 
-      // console.log('우주선의 현재 죄표', this.spaceshipX)
-      // console.log('우주선의 현재 죄표', this.spaceshipY)
-
-      // 우주선의 이동 범위를 제한해서 update
       if (this.spaceshipY <= 0) {
         this.spaceshipY = 0
       }
@@ -294,10 +299,66 @@ export default {
       }
     },
 
+    update2() {
+      if ('s' in this.keysDown) {
+        this.spaceshipY += 6
+      } // move to right side
+      if ('w' in this.keysDown) {
+        this.spaceshipY -= 6
+      } // move to left side
+      if ('a' in this.keysDown) {
+        this.spaceshipX -= 6
+      } // move to left side
+      if ('d' in this.keysDown) {
+        this.spaceshipX += 6
+      } // move to left side
+
+      if (this.spaceshipY <= 0) {
+        this.spaceshipY = 0
+      }
+      if (this.spaceshipY >= this.ctx.canvas.clientHeight - 48) {
+        this.spaceshipY = this.ctx.canvas.clientHeight - 48
+      }
+      if (this.spaceshipX <= 0) {
+        this.spaceshipX = 0
+      }
+      if (this.spaceshipX >= this.ctx.canvas.clientWidth - 48) {
+        this.spaceshipX = this.ctx.canvas.clientWidth - 48
+      }
+
+      for (let i = 0; i < bulletList.length; i++) {
+        if (bulletList[i].alive) {
+          bulletList[i].updateBullet()
+          bulletList[i].checkHit(i)
+        }
+      }
+
+      for (let i = 0; i < meteorList.length; i++) {
+        if (meteorList[i].alive) {
+          meteorList[i].updateMove()
+          meteorList[i].checkHit2(i)
+        }
+      }
+
+      for (let i = 0; i < meteor2List.length; i++) {
+        if (meteor2List[i].alive) {
+          meteor2List[i].updateMove2()
+          meteor2List[i].checkHit2(i)
+        }
+      }
+      for (let i = 0; i < enemyList.length; i++) {
+        enemyList[i].update()
+        // console.log('적 숫자 체크', enemyList)
+      }
+    },
     main() {
-      // console.log('게임 상태는 : ', this.gameOver)
-      if (!this.gameOver) {
+      console.log('ingame ship : ', this, this.inGameShip)
+      if (!this.gameOver && (this.inGameShip == 'rocket1.png' || this.inGameShip == 'rocket2.png')) {
         this.update()
+        this.render()
+        requestAnimationFrame(this.main)
+      } else if (!this.gameOver && (this.inGameShip == 'rocket3.png' || this.inGameShip == 'rocket4.png')) {
+        this.update2()
         this.render()
         requestAnimationFrame(this.main)
       } else {

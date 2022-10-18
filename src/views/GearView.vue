@@ -56,6 +56,7 @@ export default {
     ...mapActions(['gear', 'gear2']),
     open() {
       this.gear().then(() => {
+        console.log('aaa')
         const ship = this.data.Spaceships
         this.ship = ship
         for (let i in ship) {
@@ -86,57 +87,7 @@ export default {
 
       localStorage.setItem('currentShipData', `${this.currentship}`)
     }
-    // arr() {
-    //   const ship = this.data.Spaceships
-    //   this.ship = ship
-    //   console.log('쉽', ship)
-    //   for (let i in ship) {
-    //     let a = ship[i].shipName
-    //     let b = require(`../assets/item/${a}`)
-    //     this.array = b
-    //   }
-    // }
   }
-  // components: {}
-  // data: () => ({
-  //   nick: '',
-  //   spaceships: [],
-  //   data: [],
-  //   rocket: []
-  // }),
-  // mounted() {
-  //   this.gear()
-  // },
-  // methods: {
-  //   async gear() {
-  //     console.log('gear', localStorage.getItem('token'))
-
-  //     await axios
-  //       .get(process.env.VUE_APP_API + '/game/gear', {
-  //         headers: {
-  //           Authorization: `${localStorage.getItem('token')}`,
-  //           userid: `${localStorage.getItem('userId')}`
-  //         }
-  //       })
-  //       .then(response => {
-  //         console.log('gear - response : ', response)
-  //         this.nick = response.data.data.nick
-  //         this.data = response.data.data.Spaceships
-  //         for (let i in this.data) {
-  //           let a = this.data[i].shipName
-  //           this.spaceships.push(a)
-  //         }
-
-  //         for (let i in this.spaceships) {
-  //           let b = require(`../assets/item/${this.spaceships[i]}`)
-  //           this.rocket.push(b)
-  //         }
-  //       })
-  //       .catch(error => {
-  //         console.log(error)
-  //       })
-  //   }
-  // }
 }
 </script>
 
