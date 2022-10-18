@@ -118,6 +118,9 @@ export default {
       this.duplicationNick(a)
     }
   },
+  mounted() {
+    this.checkLocalStorage()
+  },
   //
   methods: {
     checkEmail(str) {
@@ -234,6 +237,12 @@ export default {
           console.log('duplicationNick - error : ', error)
           this.nickInspection = true
         })
+    },
+    checkLocalStorage() {
+      console.log('check signin')
+      if (localStorage.getItem('token')) {
+        this.$router.go(-1)
+      }
     }
   }
 }

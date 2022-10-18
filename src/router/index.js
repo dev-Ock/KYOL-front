@@ -44,6 +44,11 @@ const routes = [
     path: '/gear',
     name: 'gear',
     component: () => import('@/views/GearView.vue')
+  },
+  {
+    path: '*',
+    name: 'gohome',
+    component: () => import('@/views/HomeView.vue')
   }
 ]
 
