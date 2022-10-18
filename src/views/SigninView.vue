@@ -81,6 +81,7 @@
 <!-- Section: Design Block -->
 <script>
 import axios from 'axios'
+
 export default {
   name: 'SigninView',
   data: () => ({
@@ -88,6 +89,9 @@ export default {
     password: '',
     loading: false
   }),
+  mounted() {
+    this.checkLocalStorage()
+  },
   methods: {
     async signin(e) {
       if (this.loading) return
@@ -126,6 +130,12 @@ export default {
         })
       // if (!user) return
       // this.$router.push({ name: 'home' })
+    },
+    checkLocalStorage() {
+      console.log('check signin')
+      if (localStorage.getItem('token')) {
+        this.$router.go(-1)
+      }
     }
   }
 }

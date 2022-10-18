@@ -58,14 +58,11 @@ export default {
       this.gear().then(() => {
         const ship = this.data.Spaceships
         this.ship = ship
-        console.log(this.data)
-        console.log('쉽', ship)
         for (let i in ship) {
           let a = ship[i].shipName
           let b = require(`../assets/item/${a}`)
           this.array.push(b)
         }
-        console.log('어레이확인', this.array)
       })
     },
     choose() {
@@ -81,10 +78,14 @@ export default {
     select(spaceship) {
       this.currentship = this.ship[spaceship].shipName
       this.gear2(this.currentship)
+
       this.ft = spaceship
 
       // console.log('클릭한 아이템 표시', this.currentship)
       // console.log('값이 ?', this.gear2(this.currentship))
+
+      localStorage.setItem('currentShipData', `${this.currentship}`)
+
     }
     // arr() {
     //   const ship = this.data.Spaceships

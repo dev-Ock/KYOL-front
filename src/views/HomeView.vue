@@ -47,6 +47,7 @@ export default {
           console.log('gamestart - response : ', response)
           if (response.data.data.nick) {
             this.nick = response.data.data.nick
+            localStorage.setItem('currentShipData', response.data.data.currentShipImage)
           } else {
             this.nick = '게스트'
           }
