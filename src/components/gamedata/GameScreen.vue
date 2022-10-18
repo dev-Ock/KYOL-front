@@ -129,7 +129,7 @@ export default {
     currentShipImg: {
       type: String,
       currentShipImage: `${localStorage.getItem('currentShipImage')}`,
-      default: 'basicAircraftHorizon.png'
+      default: 'rocket1.png'
     }
   },
 

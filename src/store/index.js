@@ -10,7 +10,7 @@ export default new Vuex.Store({
     spaceships: [],
     data: {},
     rocket: [],
-    currentShipImage: 'basicAircraftHorizon.png'
+    currentShipImage: 'rocket1.png'
   },
   getters: {
     example: state => state.currentShipImage
