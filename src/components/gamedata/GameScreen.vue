@@ -137,8 +137,6 @@ export default {
     provider: {
       context: null
     },
-    // gameScore: 0,
-    // getGold: 0,
     spaceshipImage: '',
     bulletImage: '',
     enemyImage: '',
@@ -153,7 +151,6 @@ export default {
   computed: {
     ...mapState({
       data: 'data'
-      // currentShipImage: 'currentShipImage'
     }),
     ...mapGetters({
       currentShipImage: 'example'
@@ -180,8 +177,8 @@ export default {
 
       this.backgroundImage.src = require('../../assets/images/space.jpg')
       this.collisionImage.src = require('../../assets/images/collision16.png')
-      // this.spaceshipImage.src = require('../../assets/images/basicAircraftHorizon.png')
-      this.spaceshipImage.src = require(`../../assets/item/${this.currentShipImage}`)
+      // this.spaceshipImage.src = require('../../assets/images/rocket1ingame.png')
+      this.spaceshipImage.src = require(`../../assets/item/ingame${this.currentShipImage}`)
       this.enemyImage.src = require('../../assets/images/enemy4.png')
       this.bulletImage.src = require('../../assets/images/bulletHorizon.png')
       this.gameOverImage.src = require('../../assets/images/gameOver3.png')
