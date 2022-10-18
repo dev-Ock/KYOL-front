@@ -10,7 +10,7 @@ export default new Vuex.Store({
     spaceships: [],
     data: {},
     rocket: [],
-    currentShipImage: 'rocket1ingame.png'
+    currentShipImage: ''
   },
   getters: {
     example: state => state.currentShipImage
@@ -35,7 +35,6 @@ export default new Vuex.Store({
           }
         })
         .then(response => commit('ai', response.data.data))
-        // .then(response => commit('changeShip', response.data.data.curentShipImage))
         .catch(error => {
           console.log('gear 에러', error)
         })
