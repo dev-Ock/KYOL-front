@@ -10,6 +10,7 @@
 
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex'
 
 const bulletList = []
 const enemyList = []
@@ -29,7 +30,7 @@ class Bullet {
     this.updateBullet = function () {
       this.x += 7
     }
-    this.checkHit = function (i) {
+    this.checkHit = function () {
       for (let i = 0; i < enemyList.length; i++) {
         if (this.x + 10 >= enemyList[i].x && this.y >= enemyList[i].y - 20 && this.y <= enemyList[i].y + 35) {
           all.score += 100
@@ -149,7 +150,12 @@ export default {
     spaceshipY: 0,
     keysDown: {}
   }),
-
+  computed: {
+    ...mapState({
+      data: 'data',
+      currentShipImage: 'currentShipImage'
+    })
+  },
   async mounted() {
     this.ctx = this.$refs.myClass.getContext('2d')
     this.loadImage()
@@ -171,8 +177,8 @@ export default {
 
       this.backgroundImage.src = require('../../assets/images/space.jpg')
       this.collisionImage.src = require('../../assets/images/collision16.png')
-      this.spaceshipImage.src = require('../../assets/images/basicAircraftHorizon.png')
-      // this.spaceshipImage.src = require(`../../assets/images/${localStorage.getItem('currentShipImage')}`)
+      // this.spaceshipImage.src = require('../../assets/images/basicAircraftHorizon.png')
+      this.spaceshipImage.src = require(`../../assets/item/${this.currentShipImage}`)
       this.enemyImage.src = require('../../assets/images/enemy4.png')
       this.bulletImage.src = require('../../assets/images/bulletHorizon.png')
       this.gameOverImage.src = require('../../assets/images/gameOver3.png')

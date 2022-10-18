@@ -10,7 +10,7 @@ export default new Vuex.Store({
     spaceships: [],
     data: {},
     rocket: [],
-    currentShipImage: ''
+    currentShipImage: 'basicAircraftHorizon.png'
   },
   getters: {},
   mutations: {
@@ -38,6 +38,7 @@ export default new Vuex.Store({
           console.log('gear 에러', error)
         })
     },
+
     async gear2({ commit, payload }) {
       console.log('gear2', localStorage.getItem('token'))
       commit('changeShip', payload)

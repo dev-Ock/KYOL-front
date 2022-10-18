@@ -2,6 +2,7 @@
   <div>
     <NavBar></NavBar>
     game
+    {{ currentShipImage }}
     <div id="app" class="status">
       <div>Game Screen</div>
       <div>Score</div>
@@ -25,6 +26,7 @@ export default {
   },
   computed: {
     ...mapState({
+      data: 'data',
       currentShipImage: 'currentShipImage'
     })
   },
