@@ -85,7 +85,6 @@ export default {
       // console.log('값이 ?', this.gear2(this.currentship))
 
       localStorage.setItem('currentShipData', `${this.currentship}`)
-
     }
     // arr() {
     //   const ship = this.data.Spaceships

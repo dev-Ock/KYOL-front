@@ -28,9 +28,9 @@
           <li class="nav-item" @click="shopcheck">
             <a class="nav-link" :href="href2">Shop</a>
           </li>
-          <li class="nav-item" @click="gamecheck">
+          <!-- <li class="nav-item" @click="gamecheck">
             <a class="nav-link" :href="href3">Game</a>
-          </li>
+          </li> -->
         </ul>
       </div>
       <div v-show="!loading">
