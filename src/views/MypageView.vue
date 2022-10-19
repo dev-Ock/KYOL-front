@@ -1,8 +1,9 @@
 <template>
   <div>
     <NavBar></NavBar>
+
     <div class="mypagehome">
-      <div class="row">
+      <div class="row center">
         <div class="col-md-3 border-right">
           <div class="d-flex flex-column align-items-center text-center p-3 py-5">
             <img class="mt-5" width="150px" :src="rocket" /><span class="font-weight-bold fontwhite"
@@ -29,24 +30,32 @@
               <div>
                 <form>
                   <label class="labels fontwhite">password</label
-                  ><input type="password" class="form-control" placeholder="password" value="" autocomplete="on" />
+                  ><input
+                    v-model="password"
+                    type="password"
+                    class="form-control"
+                    placeholder="password"
+                    value=""
+                    autocomplete="on"
+                  />
                 </form>
               </div>
             </div>
 
             <div class="mt-5 text-center">
-              <button class="btn btn-outline-dark profile-button" type="button" @click="update">회원수정</button>
+              <button class="btn btn-primary profile-button" type="button" @click="update">회원수정</button>
 
               <button class="btn btn-primary profile-button mg" type="button" @click="delete2">회원탈퇴</button>
             </div>
           </div>
         </div>
-        <div>
-          <div class="fontwhite">&lt;{{ nick }}님의 보유우주선&gt;</div>
-          <div v-for="(a, i) in rocket2" :key="i" class="bb">
-            <img class="mt-5 bb" width="150px" :src="rocket2[i]" />
-            <!-- class="rounded-circle mt-5 bb" -->
-          </div>
+      </div>
+
+      <div>
+        <div class="fontwhite">&lt;{{ nick }}님의 보유우주선&gt;</div>
+        <div v-for="(a, i) in rocket2" :key="i" class="bb">
+          <img class="mt-5 bb" width="150px" :src="rocket2[i]" />
+          <!-- class="rounded-circle mt-5 bb" -->
         </div>
       </div>
     </div>
@@ -64,6 +73,7 @@ export default {
   data: () => ({
     email: '',
     nick: '',
+    password: '',
     rocket: '',
     ssdata: [],
     spaceships: [],
@@ -136,6 +146,7 @@ export default {
         .then(response => {
           console.log('update:', response)
           localStorage.setItem('userNick', response.data.data.nick)
+
           if (response.data.message == 'update-success') {
             alert('회원정보수정완료')
           }
@@ -234,5 +245,9 @@ body {
 }
 .fontwhite {
   color: white;
+}
+.center {
+  text-align: center;
+  margin: 0 auto;
 }
 </style>
