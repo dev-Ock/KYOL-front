@@ -71,6 +71,7 @@ export default {
   background: black;
   height: 100%;
   width: 100%;
+  font-family: 'Hahmlet', serif;
   /* position: fixed; */
 }
 .video {

@@ -228,9 +228,12 @@ body {
 }
 .mypagehome {
   background: url('~@/assets/images/space2.gif') 100% 100% / cover no-repeat;
-  height: 100vh;
-  width: 100vw;
-  position: fixed;
+
+  height: 100%;
+  width: 100%;
+  /* position: fixed; */
+  font-family: 'Hahmlet', serif;
+
 }
 
 .fontwhite {
@@ -240,4 +243,5 @@ body {
   text-align: center;
   margin: 0 auto;
 } */
+
 </style>

@@ -19,9 +19,13 @@
         </div>
       </div>
 
-      <router-link to="/game">
-        <button type="button" class="btn btn-secondary btn-lg btnmargin">Game Start</button>
-      </router-link>
+
+      <router-link to="/game"
+        ><button type="button" class="btn btn-secondary btn-lg btnmargin" style="color=black">
+          Game Start
+        </button></router-link
+      >
+
     </div>
   </div>
 </template>
@@ -112,6 +116,7 @@ export default {
   background: url('~@/assets/images/space3.gif') 100% 100% / cover no-repeat;
   height: 100vh;
   width: 100vw;
+  font-family: 'Hahmlet', serif;
   /* position: fixed; */
 }
 

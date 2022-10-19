@@ -386,9 +386,6 @@ export default {
   padding: 20px;
   position: fixed;
 }
-.shophome {
-  background-image: url('~@/assets/images/move.gif');
-}
 .container {
   height: -10vh;
   width: 70vw;
@@ -411,5 +408,12 @@ body {
   position: fixed;
   overflow: scroll;
   display: fixed;
+}
+.shophome {
+  background: url('~@/assets/images/space2.gif') 100% 100% / cover no-repeat;
+  height: 100%;
+  width: 100%;
+  font-family: 'Hahmlet', serif;
+  font-weight: 500;
 }
 </style>
