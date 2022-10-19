@@ -8,7 +8,8 @@
     <div>
       방향 조작법 : w, a, s, d // 미사일발사 : space
       <figure>
-        <audio autoplay loop src="../../assets/videos/videoplayback.mp3"></audio>
+        <audio v-if="gameOver == false" autoplay loop src="../../assets/videos/videoplayback2.mp3"></audio>
+        <!-- <audio src="../../assets/videos/Laser3.mp3" @keyup.space="playingSound"></audio -->
       </figure>
     </div>
   </div>
@@ -52,7 +53,9 @@ class Bullet {
           all.score += 100
           this.alive = false
           enemyList.splice(i, 1)
-        } else if (this.x >= all.ctx.canvas.clientWidth) this.alive = false
+        } else if (this.x >= all.ctx.canvas.clientWidth) {
+          this.alive = false
+        }
       }
       for (let i = 0; i < enemyList2.length; i++) {
         if (
@@ -138,13 +141,16 @@ class Meteor {
     }
     this.checkHit2 = function (i) {
       if (
-        this.x >= all.spaceshipX &&
-        this.x <= all.spaceshipX + 25 &&
-        this.y >= all.spaceshipY - 25 &&
-        this.y <= all.spaceshipY + 20
+        ((all.spaceshipX <= this.x + 10 && this.x + 10 <= all.spaceshipX + 30) ||
+          (this.x + 10 <= all.spaceshipX && all.spaceshipX + 30 <= this.x + 60) ||
+          (this.x + 70 > all.spaceshipX && this.x + 70 <= all.spaceX + 30)) &&
+        // this.x >= all.spaceshipX &&
+        // this.x <= all.spaceshipX + 22
+        this.y >= all.spaceshipY - 60 &&
+        this.y <= all.spaceshipY + 35
       ) {
         all.gameOver = true
-        all.sendGameOver()
+        all.sendGameOver(all)
       } else if (this.x <= -70) meteorList.splice(i, 1)
     }
   }
@@ -180,7 +186,7 @@ class Enemy {
       this.x -= 3
       if (this.x <= 0) {
         all.gameOver = true
-        all.sendGameOver()
+        all.sendGameOver(all)
         console.log('game Over')
       }
     }
@@ -188,7 +194,7 @@ class Enemy {
       this.x -= 6
       if (this.x <= 0) {
         all.gameOver = true
-        all.sendGameOver()
+        all.sendGameOver(all)
         console.log('game Over')
       }
     }
@@ -244,11 +250,14 @@ export default {
 
     checkStartInformation() {
       console.log('로컬 스토리지 쉽정보 : ', localStorage.getItem('currentShipData'))
+      console.log('게임 오버 정보 : ', this.gameOver)
       if (this.currentShipImage) {
         this.inGameShip = this.currentShipImage
       } else {
         this.inGameShip = localStorage.getItem('currentShipData')
       }
+
+      this.gameOver = false
     },
 
     loadImage() {
@@ -290,6 +299,7 @@ export default {
             this.inGameShip == 'rocket4.png')
         ) {
           this.createBullet(this)
+          this.playingSound(event)
         }
       })
       document.addEventListener('keyup', event => {
@@ -297,6 +307,7 @@ export default {
 
         if (event.code == 'Space') {
           this.createBullet(this)
+          this.playingSound(event)
         }
       })
     },
@@ -528,6 +539,41 @@ export default {
       }
     },
 
+    playingSound(event) {
+      if (event.key == ' ' && this.gameOver == false) {
+        var spaceAudio = new Audio(require('../../assets/videos/Laser5.mp3'))
+        setTimeout(function () {
+          spaceAudio.play()
+          setTimeout(function () {
+            spaceAudio.pause()
+            spaceAudio.currentTime = 0
+          }, 600)
+        }, 10)
+      }
+      if (event.gameOver == true) {
+        console.log('game over sound :', event.gameOver)
+        var endingAudio = new Audio(require('../../assets/videos/gameOver.mp3'))
+        setTimeout(function () {
+          endingAudio.play()
+          setTimeout(function () {
+            endingAudio.pause()
+            endingAudio.currentTime = 0
+          }, 10000)
+        }, 10)
+      }
+    },
+
+    checkingKeyEvent(event) {
+      switch (event.key) {
+        case 'space':
+          this.playSound()
+          break // 'a' key
+
+        // case 66:
+        //   this.playSound(sound2)
+        //   break // 'b' key
+      }
+    },
     render() {
       this.ctx.drawImage(this.backgroundImage, 0, 0, this.ctx.canvas.clientWidth, this.ctx.canvas.clientHeight)
       this.ctx.drawImage(this.spaceshipImage, this.spaceshipX, this.spaceshipY)
@@ -603,7 +649,8 @@ export default {
       }
     },
 
-    sendGameOver() {
+    sendGameOver(all) {
+      this.playingSound(all)
       this.$emit('GettingGameScore', this.score)
       this.$emit('GettingGetGold', this.score / 10)
       console.log('GettingGameScore', this.score)
