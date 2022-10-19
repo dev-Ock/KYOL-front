@@ -19,13 +19,11 @@
         </div>
       </div>
 
-
       <router-link to="/game"
         ><button type="button" class="btn btn-secondary btn-lg btnmargin" style="color=black">
           Game Start
         </button></router-link
       >
-
     </div>
   </div>
 </template>
