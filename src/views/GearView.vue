@@ -19,9 +19,9 @@
         </div>
       </div>
 
-      <router-link to="/game"
-        ><button type="button" class="btn btn-secondary btn-lg btnmargin">Game Start</button></router-link
-      >
+      <router-link to="/game">
+        <button type="button" class="btn btn-secondary btn-lg btnmargin">Game Start</button>
+      </router-link>
     </div>
   </div>
 </template>
