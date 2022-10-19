@@ -148,10 +148,18 @@
                     <div class="text-center">
                       <!-- Product name-->
                       <h5 class="fw-bolder">{{ rocket3.name }}</h5>
+                      <div class="d-flex justify-content-center small text-warning mb-2">
+                        <div class="bi-star-fill"></div>
+                        <div class="bi-star-fill"></div>
+                        <div class="bi-star-fill"></div>
+                        <div class="bi-star-fill"></div>
+                        <div class="bi-star-fill"></div>
+                      </div>
                       <!-- Product price-->
                       <span class="text-muted text-decoration-line-through">￦50,000</span>
                       ￦{{ rocket3.price }}
                     </div>
+                    <span>Speed +2</span>
                   </div>
                   <!-- Product actions-->
                   <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
@@ -194,6 +202,7 @@
                       <!-- Product price-->
                       ￦{{ rocket4.price }}
                     </div>
+                    <span>Speed +2, bullet +1</span>
                   </div>
                   <!-- Product actions-->
                   <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">

@@ -6,7 +6,7 @@
         <div class="col-md-3 border-right">
           <div class="d-flex flex-column align-items-center text-center p-3 py-5">
             <img class="rounded-circle mt-5" width="150px" :src="rocket" /><span class="font-weight-bold"
-              >{{ nick }}님의 우주선</span
+              >{{ nick }}님의 현재 우주선</span
             >
           </div>
         </div>

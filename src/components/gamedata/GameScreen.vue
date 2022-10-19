@@ -234,7 +234,10 @@ export default {
 
         if (
           event.code == 'Space' &&
-          (this.inGameShip == 'rocket5.png' || this.inGameShip == 'rocket6.png' || this.inGameShip == 'rocket7.png')
+          (this.inGameShip == 'rocket5.png' ||
+            this.inGameShip == 'rocket6.png' ||
+            this.inGameShip == 'rocket7.png' ||
+            this.inGameShip == 'rocket4.png')
         ) {
           this.createBullet(this)
         }
