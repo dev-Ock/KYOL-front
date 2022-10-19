@@ -35,15 +35,15 @@
       </div>
       <div v-show="!loading">
         <router-link to="/signin">
-          <button type="button" class="btn btn-outline-success button">로그인</button>
+          <button type="button" class="btn btn-outline-dark button">로그인</button>
         </router-link>
         <router-link to="/signup">
-          <button type="button" class="btn btn-outline-success button">회원가입</button>
+          <button type="button" class="btn btn-outline-dark button">회원가입</button>
         </router-link>
       </div>
       <div v-show="loading">
         <router-link to="/">
-          <button type="button" class="btn btn-outline-success button" @click="logout">로그아웃</button>
+          <button type="button" class="btn btn-outline-dark button" @click="logout">로그아웃</button>
         </router-link>
       </div>
     </div>
