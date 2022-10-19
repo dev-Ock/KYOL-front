@@ -53,7 +53,7 @@ const routes = [
   {
     path: '*',
     name: 'gohome',
-    component: () => import('@/views/HomeView.vue')
+    component: () => import('@/components/NotFound.vue')
   }
 ]
 
