@@ -41,7 +41,7 @@
       <div>
         <header>
           <div class="profilebox">
-            {{ nick }}님의 자산 KYOR : {{ gold }} SPACESHIPS : {{ spaceshipsimg }}
+            {{ nick }}님의 보유 자산 : {{ gold.toLocaleString() }} KYOL
             <div></div>
             <!-- <div class="badge bg-white text-white position-absolute">
               <img class="myprofile" src="~@/assets/item/rocket1.png" />
@@ -67,7 +67,7 @@
                       <!-- Product name-->
                       <h5 class="fw-bolder">{{ rocket1.name }}</h5>
                       <!-- Product price-->
-                      ￦{{ rocket1.price }}
+                      ￦{{ rocket1.price.toLocaleString() }}
                     </div>
                   </div>
                   <!-- Product actions-->
@@ -112,7 +112,7 @@
                       </div>
                       <!-- Product price-->
                       <span class="text-muted text-decoration-line-through">￦50,000</span>
-                      ￦{{ rocket2.price }}
+                      ￦{{ rocket2.price.toLocaleString() }}
                     </div>
                   </div>
                   <!-- Product actions-->
@@ -150,7 +150,7 @@
                       <h5 class="fw-bolder">{{ rocket3.name }}</h5>
                       <!-- Product price-->
                       <span class="text-muted text-decoration-line-through">￦50,000</span>
-                      ￦{{ rocket3.price }}
+                      ￦{{ rocket3.price.toLocaleString() }}
                     </div>
                   </div>
                   <!-- Product actions-->
@@ -192,7 +192,7 @@
                         <div class="bi-star-fill"></div>
                       </div>
                       <!-- Product price-->
-                      ￦{{ rocket4.price }}
+                      ￦{{ rocket4.price.toLocaleString() }}
                     </div>
                   </div>
                   <!-- Product actions-->
@@ -210,7 +210,7 @@
                         </a>
                       </div>
                       <div v-else>
-                        <a class="btn btn-secondary btn mt-auto disabled" href="#">보유중</a>
+                        <a class="btn btn-secondary mt-auto disabled" href="#">보유중</a>
                       </div>
                     </div>
                   </div>
@@ -387,10 +387,13 @@ export default {
 }
 .profilebox {
   width: 100%;
-  background: rgba(200, 200, 200, 0.5);
+  /* background: rgba(200, 200, 200, 0.5); */
   /* border-radius: 10px; */
   padding: 20px;
   /* position: fixed; */
+  color: white;
+  text-align: center;
+  font-size: 30px;
 }
 body {
   position: fixed;
