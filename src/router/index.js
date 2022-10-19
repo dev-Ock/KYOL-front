@@ -46,6 +46,11 @@ const routes = [
     component: () => import('@/views/GearView.vue')
   },
   {
+    path: '/password',
+    name: 'password',
+    component: () => import('@/views/PwView.vue')
+  },
+  {
     path: '*',
     name: 'gohome',
     component: () => import('@/views/HomeView.vue')
