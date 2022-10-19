@@ -1,29 +1,31 @@
 <template>
   <div>
     <NavBar></NavBar>
-    <div class="container rounded bg-white mt-5 mb-5">
+    <div class="mypagehome">
       <div class="row">
         <div class="col-md-3 border-right">
           <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-            <img class="mt-5" width="150px" :src="rocket" /><span class="font-weight-bold">{{ nick }}님의 우주선</span>
+            <img class="mt-5" width="150px" :src="rocket" /><span class="font-weight-bold"
+              >{{ nick }}님이 타고있는 우주선</span
+            >
           </div>
         </div>
         <div class="col-md-5 border-right">
           <div class="p-3 py-5">
             <div class="d-flex justify-content-between align-items-center mb-3">
-              <h4 class="text-right">카이오르 일원 프로필</h4>
+              <h4 class="text-right">카이오르 {{ nick }}님의 프로필</h4>
             </div>
 
             <div class="row mt-3">
-              <div class="col-md-12">
+              <div>
                 <label class="labels">email</label
                 ><input v-model="email" type="text" class="form-control" disabled value="" />
               </div>
-              <div class="col-md-12">
+              <div>
                 <label class="labels">nick</label><input v-model="nick" type="text" class="form-control" value="" />
               </div>
 
-              <div class="col-md-12">
+              <div>
                 <form>
                   <label class="labels">password</label
                   ><input type="password" class="form-control" placeholder="password" value="" autocomplete="on" />
@@ -222,5 +224,11 @@ body {
 }
 .mg {
   margin: 5px;
+}
+.mypagehome {
+  background: url('~@/assets/images/space2.gif') 100% 100% / cover no-repeat;
+  height: 100vh;
+  width: 100vw;
+  /* position: fixed; */
 }
 </style>
