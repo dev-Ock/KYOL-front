@@ -138,6 +138,7 @@ export default {
   background: url('~@/assets/images/space.gif') 50% 50% / cover no-repeat;
   height: 100vh;
   width: 100vw;
+  font-family: 'Hahmlet', serif;
 }
 
 #radius-shape-1 {

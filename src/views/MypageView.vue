@@ -243,6 +243,7 @@ body {
   height: 100%;
   width: 100%;
   /* position: fixed; */
+  font-family: 'Hahmlet', serif;
 }
 
 .fontwhite {
@@ -252,5 +253,4 @@ body {
   text-align: center;
   margin: 0 auto;
 }
-
 </style>

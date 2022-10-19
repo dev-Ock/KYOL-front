@@ -181,5 +181,6 @@ tbody {
   background: url('~@/assets/images/space2.gif') 50% 50% / cover no-repeat;
   height: 100%;
   width: 100%;
+  font-family: 'Hahmlet', serif;
 }
 </style>
