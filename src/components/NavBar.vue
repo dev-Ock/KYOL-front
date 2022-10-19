@@ -91,7 +91,9 @@ export default {
     mypagecheck() {
       if (localStorage.getItem('token') == null) {
         alert('로그인하시라우')
-        this.href = '/signin'
+        this.href = '/sign'
+      } else {
+        this.href = '/password'
       }
     },
     shopcheck() {
