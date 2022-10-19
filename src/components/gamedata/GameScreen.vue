@@ -19,6 +19,7 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 
 const bulletList = []
 const enemyList = []
+const enemyList2 = []
 const meteorList = []
 const meteor2List = []
 
@@ -52,6 +53,18 @@ class Bullet {
           enemyList.splice(i, 1)
         } else if (this.x >= all.ctx.canvas.clientWidth) this.alive = false
       }
+      for (let i = 0; i < enemyList2.length; i++) {
+        if (
+          all.spaceshipX < enemyList2[i].x &&
+          this.x + 10 >= enemyList2[i].x &&
+          this.y >= enemyList2[i].y - 20 &&
+          this.y <= enemyList2[i].y + 35
+        ) {
+          all.score += 300
+          this.alive = false
+          enemyList2.splice(i, 1)
+        } else if (this.x >= all.ctx.canvas.clientWidth) this.alive = false
+      }
     }
 
     this.checkHit2 = function () {
@@ -65,6 +78,18 @@ class Bullet {
           all.score += 100
           this.alive = false
           enemyList.splice(i, 1)
+        } else if (this.x >= all.ctx.canvas.clientWidth) this.alive = false
+      }
+      for (let i = 0; i < enemyList2.length; i++) {
+        if (
+          all.spaceshipX < enemyList2[i].x &&
+          this.x + 40 >= enemyList2[i].x &&
+          this.y >= enemyList2[i].y - 20 &&
+          this.y <= enemyList2[i].y + 35
+        ) {
+          all.score += 300
+          this.alive = false
+          enemyList2.splice(i, 1)
         } else if (this.x >= all.ctx.canvas.clientWidth) this.alive = false
       }
     }
@@ -138,8 +163,28 @@ class Enemy {
       this.y = generateRandomValue(0, all.ctx.canvas.clientHeight - 60)
       enemyList.push(this)
     }
-    this.update = function () {
+    this.init2 = function () {
+      let generateRandomValue = function (min, max) {
+        let randomNum = Math.floor(Math.random() * (max - min + 1)) + min
+        return randomNum
+      }
+
+      if (all.score > 20000) {
+        this.x = all.ctx.canvas.clientWidth
+        this.y = generateRandomValue(0, all.ctx.canvas.clientHeight - 60)
+        enemyList2.push(this)
+      }
+    }
+    this.EnemyLocationUpdate = function () {
       this.x -= 3
+      if (this.x <= 0) {
+        all.gameOver = true
+        all.sendGameOver()
+        console.log('game Over')
+      }
+    }
+    this.EnemyLocationUpdate2 = function () {
+      this.x -= 6
       if (this.x <= 0) {
         all.gameOver = true
         all.sendGameOver()
@@ -190,6 +235,7 @@ export default {
     this.setupKeyboardListener()
     this.main()
     this.createEnemy(this)
+    this.createEnemy2(this)
     this.createMeteor(this)
   },
   methods: {
@@ -210,6 +256,7 @@ export default {
       this.bulletImage = new Image()
       this.bulletImage2 = new Image()
       this.enemyImage = new Image()
+      this.enemyImage2 = new Image()
       this.gameOverImage = new Image()
       this.collisionImage = new Image()
       this.meteor1Image = new Image()
@@ -220,6 +267,7 @@ export default {
       // this.spaceshipImage.src = require('../../assets/images/rocket1ingame.png')
       this.spaceshipImage.src = require(`../../assets/item/ingame${this.inGameShip}`)
       this.enemyImage.src = require('../../assets/images/enemy4.png')
+      this.enemyImage2.src = require('../../assets/images/enemy2.png')
       this.bulletImage.src = require('../../assets/images/bulletHorizon.png')
       this.bulletImage2.src = require('../../assets/images/specialBullet.png')
       this.gameOverImage.src = require('../../assets/images/gameOver3.png')
@@ -255,9 +303,17 @@ export default {
       const interval = setInterval(function () {
         let e = new Enemy(all)
         e.init()
-        // console.log('적군생성 인터벌', interval)
         if (all.gameOver) {
-          // console.log('이걸 왜타지?', all.gameOver)
+          clearInterval(interval)
+        }
+      }, 400)
+    },
+
+    createEnemy2(all) {
+      const interval = setInterval(function () {
+        let e = new Enemy(all)
+        e.init2()
+        if (all.gameOver) {
           clearInterval(interval)
         }
       }, 400)
@@ -327,7 +383,10 @@ export default {
         }
       }
       for (let i = 0; i < enemyList.length; i++) {
-        enemyList[i].update()
+        enemyList[i].EnemyLocationUpdate()
+      }
+      for (let i = 0; i < enemyList2.length; i++) {
+        enemyList2[i].EnemyLocationUpdate2()
       }
     },
 
@@ -379,8 +438,10 @@ export default {
         }
       }
       for (let i = 0; i < enemyList.length; i++) {
-        enemyList[i].update()
-        // console.log('적 숫자 체크', enemyList)
+        enemyList[i].EnemyLocationUpdate()
+      }
+      for (let i = 0; i < enemyList2.length; i++) {
+        enemyList2[i].EnemyLocationUpdate2()
       }
     },
 
@@ -432,8 +493,10 @@ export default {
         }
       }
       for (let i = 0; i < enemyList.length; i++) {
-        enemyList[i].update()
-        // console.log('적 숫자 체크', enemyList)
+        enemyList[i].EnemyLocationUpdate()
+      }
+      for (let i = 0; i < enemyList2.length; i++) {
+        enemyList2[i].EnemyLocationUpdate2()
       }
     },
     main() {
@@ -494,6 +557,10 @@ export default {
       for (let i = 0; i < enemyList.length; i++) {
         this.ctx.drawImage(this.enemyImage, enemyList[i].x, enemyList[i].y)
       }
+
+      for (let i = 0; i < enemyList2.length; i++) {
+        this.ctx.drawImage(this.enemyImage2, enemyList2[i].x, enemyList2[i].y)
+      }
     },
 
     render2() {
@@ -526,6 +593,10 @@ export default {
 
       for (let i = 0; i < enemyList.length; i++) {
         this.ctx.drawImage(this.enemyImage, enemyList[i].x, enemyList[i].y)
+      }
+
+      for (let i = 0; i < enemyList2.length; i++) {
+        this.ctx.drawImage(this.enemyImage2, enemyList2[i].x, enemyList2[i].y)
       }
     },
 
