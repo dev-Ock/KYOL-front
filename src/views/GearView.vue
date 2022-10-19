@@ -114,6 +114,7 @@ export default {
   width: 100vw;
   /* position: fixed; */
 }
+
 .block {
   display: block;
   margin: auto;
