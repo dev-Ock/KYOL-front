@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="shophome">
     <NavBar></NavBar>
 
     <!-- Modal -->
@@ -385,6 +385,9 @@ export default {
   border-radius: 8px;
   padding: 20px;
   position: fixed;
+}
+.shophome {
+  background-image: url('~@/assets/images/move.gif');
 }
 .container {
   height: -10vh;

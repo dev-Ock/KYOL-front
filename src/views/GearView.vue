@@ -1,33 +1,29 @@
 <template>
-
   <div class="gearhome">
     <div>
-      <img src="../assets/item/logo2.png" />
+      <div class="block">
+        <img class="block" src="../assets/item/logo4.png" />
+        <img class="block" src="../assets/item/logo5.png" />
 
-  <div>
-    <div class="block">
-      <img class="block" src="../assets/item/logo4.png" />
-      <img class="block" src="../assets/item/logo5.png" />
-
-      <!-- <div>&lt;{{ data.nick }}님의 보유우주선&gt;</div> -->
-      <div>
-        <div v-for="(a, i) in array" id="i" :key="i" class="hh">
-          <img class="mt-5 bb" width="150px" :src="array[i]" :class="ft === i ? 'choose' : ''" />
-          <div></div>
-          <button type="button" class="btn btn-warning" @click="select(i)">선택</button>
-          <!-- <button @click="select(i)">선택</button> -->
-        </div>
-        <!-- <div v-for="(a, i) in array" :key="i" class="bb">
+        <!-- <div>&lt;{{ data.nick }}님의 보유우주선&gt;</div> -->
+        <div>
+          <div v-for="(a, i) in array" id="i" :key="i" class="hh">
+            <img class="mt-5 bb" width="150px" :src="array[i]" :class="ft === i ? 'choose' : ''" />
+            <div></div>
+            <button type="button" class="btn btn-warning" @click="select(i)">선택</button>
+            <!-- <button @click="select(i)">선택</button> -->
+          </div>
+          <!-- <div v-for="(a, i) in array" :key="i" class="bb">
         <h3>{{ a }}</h3> -->
-        <!-- <img class="rounded-circle mt-5 bb" width="150px" :src=`../assets/item/${a.shipName}` /> -->
+          <!-- <img class="rounded-circle mt-5 bb" width="150px" :src=`../assets/item/${a.shipName}` /> -->
+        </div>
       </div>
-    </div>
 
-    <router-link to="/game"
-      ><button type="button" class="btn btn-secondary btn-lg btnmargin">Game Start</button></router-link
-    >
+      <router-link to="/game"
+        ><button type="button" class="btn btn-secondary btn-lg btnmargin">Game Start</button></router-link
+      >
+    </div>
   </div>
-  <!-- </div> -->
 </template>
 
 <script>
@@ -117,11 +113,10 @@ export default {
   height: 100vh;
   width: 100vw;
   /* position: fixed; */
-
+}
 .block {
   display: block;
   margin: auto;
   /* text-align: center; */
-
 }
 </style>
