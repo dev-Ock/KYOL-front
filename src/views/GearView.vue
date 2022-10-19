@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="gearhome">
     <div>
       <img src="../assets/item/logo2.png" />
       <!-- <div>&lt;{{ data.nick }}님의 보유우주선&gt;</div> -->
@@ -103,5 +103,11 @@ export default {
 .choose {
   border: 2px solid yellow;
   /* background-image: url('~@/assets/images/login_border.png'); */
+}
+.gearhome {
+  background: url('~@/assets/images/space3.gif') 100% 100% / cover no-repeat;
+  height: 100vh;
+  width: 100vw;
+  /* position: fixed; */
 }
 </style>
