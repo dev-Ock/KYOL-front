@@ -75,8 +75,8 @@ export default {
 }
 .video {
   background: cover no-repeat;
-  height: 70vh;
-  width: 70vw;
+  height: 70%;
+  width: 70%;
 }
 .btn2 {
   height: 7vh;
