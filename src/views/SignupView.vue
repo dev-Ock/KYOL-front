@@ -3,9 +3,12 @@
     <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
       <div class="row gx-lg-5 align-items-center mb-5">
         <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
-          <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
-            Welcome to 회원가입 <br />
-            <span style="color: hsl(218, 81%, 75%)">for your money</span>
+          <a class="navbar-brand" href="/"><img src="../assets/item/logo3.png" /></a>
+          <h1 class="display-5 fw-bold ls-tight margin1" style="color: hsl(218, 81%, 95%)">
+            <!-- <a class="navbar-brand" href="/"><img src="../assets/item/logo3.png" /></a> -->
+            <!-- class="my-5 display-5 fw-bold ls-tight" -->
+            Joining<br />
+            <span style="color: hsl(218, 81%, 75%)">save our space</span>
           </h1>
         </div>
 
@@ -147,13 +150,7 @@ export default {
         return (this.cfpwInspection = true)
       }
     },
-    // checkNick(str) {
-    //   if (!reg_email.test(str)) {
-    //     return (this.emailInspection = true)
-    //   } else {
-    //     return (this.emailInspection = false)
-    //   }
-    // },
+
     async signUp(e) {
       e.preventDefault()
       if (
@@ -262,6 +259,12 @@ export default {
 <!-- Section: Design Block -->
 
 <style>
+.margin1 {
+  margin: 0;
+  margin-block-end: 0;
+  margin-block-start: 0;
+  margin-bottom: 0;
+}
 .background {
   background: url('~@/assets/images/space.gif') 50% 50% / cover no-repeat;
   height: 100vh;
