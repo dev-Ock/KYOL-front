@@ -1,5 +1,50 @@
 <template>
   <div>
+    <!-- 비밀번호 확인 -->
+    <div id="exampleModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 id="exampleModalLabel" class="modal-title fs-5">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-outline mb-4">
+              <input
+                id="form3Example4"
+                v-model="password"
+                type="password"
+                class="form-control"
+                :class="{ 'is-invalid': pwInspection }"
+                placeholder="영문, 숫자, 특수문자 조합 8-16자"
+                autocomplete="on"
+                required
+              />
+              <div class="invalid-feedback">좀 더 길게 입력해보는 건 어떨까요</div>
+            </div>
+
+            <!-- Confirm Password input -->
+            <div class="form-outline mb-4">
+              <input
+                id="form3Example"
+                v-model="confirmPassword"
+                type="password"
+                class="form-control"
+                :class="{ 'is-invalid': cfpwInspection }"
+                placeholder="Confirm Password"
+                autocomplete="on"
+                required
+              />
+              <div class="invalid-feedback">비밀번호가 틀립니다.</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" @click="pwupdate">수정</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <NavBar></NavBar>
     <div class="mypagehome">
       <div class="row center">
@@ -31,7 +76,9 @@
             </div>
 
             <div class="mt-5 text-center">
-              <button class="btnluxury btn-primary profile-button" type="button">비밀번호수정</button>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                비밀번호수정
+              </button>
 
               <button class="btnluxury btn-primary profile-button mg" type="button" @click="delete2">회원탈퇴</button>
             </div>
@@ -62,12 +109,23 @@ export default {
     email: '',
     nick: '',
     password: '',
+    confirmPassword: '',
     rocket: '',
     ssdata: [],
     spaceships: [],
     rocket2: [],
-    loading: false
+    loading: false,
+    pwInspection: false,
+    cfpwInspection: false
   }),
+  watch: {
+    password(a) {
+      this.checkPassword(a)
+    },
+    confirmPassword(a) {
+      this.checkPassword2(a)
+    }
+  },
   mounted() {
     this.mypage()
   },
@@ -121,7 +179,7 @@ export default {
     async update() {
       await axios
         .put(
-          process.env.VUE_APP_API + '/mypage/auth-update',
+          process.env.VUE_APP_API + '/mypage/nick-update',
           { nick: this.nick },
           {
             headers: {
@@ -135,12 +193,13 @@ export default {
           console.log('update:', response)
           localStorage.setItem('userNick', response.data.data.nick)
 
-          if (response.data.message == 'update-success') {
+          if (response.data.message == 'nick-update-success') {
             alert('회원정보수정완료')
           }
         })
         .catch(error => {
           console.log(error)
+          alert('중복된 닉네임입니다.')
         })
     },
     async delete2() {
@@ -169,6 +228,54 @@ export default {
         .catch(error => {
           console.log(error)
         })
+    },
+    async pwupdate(e) {
+      e.preventDefault()
+      if (this.pwInspection == true || this.cfpwInspection == true) {
+        alert('값을 제대로 입력하지 않았습니다.')
+        throw new Error('에러 발생!')
+      }
+
+      await axios
+        .put(
+          process.env.VUE_APP_API + '/mypage/pw-update',
+          { password: this.password },
+          {
+            headers: {
+              Authorization: `${localStorage.getItem('token')}`
+              // userid: `${localStorage.getItem('userId')}`,
+              // usernick: `${localStorage.getItem('userNick')}`
+            }
+          }
+        )
+        .then(response => {
+          console.log('pwupdate:', response)
+          // if (this.pwInspection == false || this.cfpwInspection == false) {
+          //   this.$router.push({ name: 'mypage' })
+          // }
+
+          // if (response.data.message == 'update-success') {
+          //   alert('회원정보수정완료')
+          // }
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    checkPassword(str) {
+      var reg_password = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/
+      if (!reg_password.test(str)) {
+        return (this.pwInspection = true)
+      } else {
+        return (this.pwInspection = false)
+      }
+    },
+    checkPassword2() {
+      if (this.password == this.confirmPassword) {
+        return (this.cfpwInspection = false)
+      } else {
+        return (this.cfpwInspection = true)
+      }
     }
   }
 }
