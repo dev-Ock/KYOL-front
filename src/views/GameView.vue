@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="gameviehome">
     <NavBar></NavBar>
     {{ currentShipImage }}
     <div id="app" class="status">
@@ -59,4 +59,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.gameviehome {
+  font-family: 'Hahmlet', serif;
+}
+</style>
