@@ -75,7 +75,7 @@ export default {
   /* position: fixed; */
 }
 .video {
-  background: cover no-repeat;
+  /* background: cover no-repeat; */
   height: 70%;
   width: 60%;
 }
