@@ -1,7 +1,8 @@
 <template>
   <div>
-    <div>
-      <img src="../assets/item/logo2.png" />
+    <div class="block">
+      <img class="block" src="../assets/item/logo4.png" />
+      <img class="block" src="../assets/item/logo5.png" />
       <!-- <div>&lt;{{ data.nick }}님의 보유우주선&gt;</div> -->
       <div>
         <div v-for="(a, i) in array" id="i" :key="i" class="hh">
@@ -103,5 +104,10 @@ export default {
 .choose {
   border: 2px solid yellow;
   /* background-image: url('~@/assets/images/login_border.png'); */
+}
+.block {
+  display: block;
+  margin: auto;
+  /* text-align: center; */
 }
 </style>
