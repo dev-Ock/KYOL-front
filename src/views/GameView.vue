@@ -1,7 +1,7 @@
 <template>
   <div class="gameviehome">
     <NavBar></NavBar>
-    {{ currentShipImage }}
+    <!-- {{ currentShipImage }} -->
     <div id="app" class="status">
       <GameScreen style="width: 100%; height: 600px"> </GameScreen>
     </div>

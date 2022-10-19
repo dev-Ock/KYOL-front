@@ -6,7 +6,12 @@
       <img src="../../assets/images/space.jpg" />
     </canvas>
     <div>
-      방향 조작법 : w, a, s, d // 미사일발사 : space
+      <div class="gamebtn">
+        <button>게임 방법</button>
+        <button>게임 다시하기</button>
+      </div>
+
+      <!-- 방향 조작법 : w, a, s, d // 미사일발사 : space -->
       <figure>
         <audio v-if="gameOver == false" autoplay loop src="../../assets/videos/videoplayback2.mp3"></audio>
         <!-- <audio src="../../assets/videos/Laser3.mp3" @keyup.space="playingSound"></audio -->
@@ -691,5 +696,20 @@ export default {
   /* width: 100%;
   height: 100%; */
   border: 1px solid rgb(199, 198, 198);
+}
+.my-canvas-wrapper {
+  font-family: 'Hahmlet', serif;
+  /* background: url('~@/assets/images/.gif') 100% 100% / cover no-repeat; */
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+}
+.gamebtn {
+  display: block;
+  margin: auto;
+  width: 15vw;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
 }
 </style>

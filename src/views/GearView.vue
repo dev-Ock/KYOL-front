@@ -18,12 +18,9 @@
           <!-- <img class="rounded-circle mt-5 bb" width="150px" :src=`../assets/item/${a.shipName}` /> -->
         </div>
       </div>
-
-      <router-link to="/game"
-        ><button type="button" class="btn btn-secondary btn-lg btnmargin" style="color=black">
-          Game Start
-        </button></router-link
-      >
+      <div class="page">
+        <router-link to="/game"><button type="button" class="fun-btn">Game Start</button></router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -122,5 +119,87 @@ export default {
   display: block;
   margin: auto;
   /* text-align: center; */
+}
+@keyframes pulse-grow {
+  to {
+    transform: scale(1.1);
+  }
+}
+.page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+/* add default color for animation start  */
+
+/* toggle this class */
+
+.color-bg-start {
+  background-color: salmon;
+}
+
+/* toggle class bg-animate-color */
+
+.bg-animate-color {
+  animation: random-bg 0.2s linear infinite;
+}
+
+/* add animation to bg color  */
+
+@keyframes random-bg {
+  from {
+    filter: hue-rotate(0);
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.fun-btn {
+  /* change bg color to get different hues    */
+  background-color: salmon;
+  color: white;
+  padding: 2em 3em;
+  border: none;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  outline: none;
+  align-self: center;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.fun-btn:hover {
+  animation: random-bg 0.3s linear infinite, grow 1300ms ease infinite;
+}
+
+.start-fun {
+  background-color: #fff !important;
+  /* change color of button text when fun is started   */
+  color: salmon !important;
+}
+
+/* pulsating effect on button */
+@keyframes grow {
+  0% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.3);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.3);
+  }
+  70% {
+    transform: scale(1);
+  }
 }
 </style>
