@@ -3,9 +3,9 @@
     <NavBar></NavBar>
     <div v-show="purchasemodal" class="black-bg">
       <div class="white-bg">
-        <h4>구매하시겠습니까?</h4>
-        <button class="btn btn-outline-dark mt-auto" @click="purchaserocket">구매하기</button>
-        <button class="btn btn-outline-dark mt-auto" @click="purchasemodal = false">닫기</button>
+        <h4>{{ 이지윤 }}</h4>
+        <button v-show="closebtn" class="btn btn-outline-dark mt-auto" @click="purchaserocket">구매하기</button>
+        <button class="btn btn-outline-dark mt-auto" @click="close">닫기</button>
       </div>
     </div>
 
@@ -182,20 +182,26 @@ export default {
     data: [],
     spaceships: [],
     rocket1: { imgname: 'rocket1.png', price: 150, name: 'rocket1' },
-    rocket2: { imgname: 'rocket2.png', price: 45000, name: 'rocket2' },
+    rocket2: { imgname: 'rocket2.png', price: 450000, name: 'rocket2' },
     rocket3: { imgname: 'rocket3.png', price: 10000, name: 'rocket3' },
     rocket4: { imgname: 'rocket4.png', price: 50000, name: 'rocket4' },
     nick: '',
     spaceshipsimg: '',
     spaceShipsList: [],
     rocketbox: '',
-    rocketprice: 0
+    rocketprice: 0,
+    이지윤: '구매하시겠습니까?',
+    closebtn: true
   }),
 
   mounted() {
     this.shop()
   },
   methods: {
+    close() {
+      this.purchasemodal = false
+      this.$router.go()
+    },
     async shop() {
       console.log('token', localStorage.getItem('token'))
       await axios
@@ -260,11 +266,18 @@ export default {
         .then(response => {
           console.log('purchase - response : ', response)
           console.log(this.rocketbox)
-          // this.$router.go()
+          if (this.gold > this.rocketprice) {
+            this.이지윤 = '구입완료'
+            this.closebtn = false
+          }
         })
         .catch(error => {
           console.log('에러다 : ', error)
           console.log(error.response.data.message)
+          if (this.gold < this.rocketprice) {
+            this.이지윤 = '돈부족'
+            this.closebtn = false
+          }
         })
     },
     purchaseOpen1() {
@@ -273,7 +286,7 @@ export default {
     },
     purchaseOpen2() {
       this.purchasemodal = true
-      ;(this.rocketbox = 'rocket2.png'), (this.rocketprice = 45000)
+      ;(this.rocketbox = 'rocket2.png'), (this.rocketprice = 450000)
     },
     purchaseOpen3() {
       this.purchasemodal = true
@@ -290,10 +303,10 @@ export default {
 
 <style scoped>
 .black-bg {
-  /* width: 100%; */
-  /* height: 100%; */
+  /* width: 100%;
+  height: 100%; */
   background: rgba(0, 0, 0, 0.5);
-  /* position: fixed; */
+  position: fixed;
   /* padding: 20px; */
 }
 .white-bg {
@@ -306,19 +319,6 @@ export default {
 .container {
   height: -10vh;
   width: 70vw;
-}
-.balck-bg {
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  padding: 20px;
-}
-.white-bg {
-  width: 100%;
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
 }
 .myprofile {
   width: 100px;

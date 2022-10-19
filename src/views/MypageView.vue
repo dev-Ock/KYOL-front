@@ -43,7 +43,7 @@
         <div>
           <div>&lt;{{ nick }}님의 보유우주선&gt;</div>
           <div v-for="(a, i) in rocket2" :key="i" class="bb">
-            <img class="rounded-circle mt-5 bb" width="150px" :src="rocket2[i]" />
+            <img class="mt-5 bb" width="150px" :src="rocket2[i]" />
           </div>
         </div>
       </div>
