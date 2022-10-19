@@ -1,13 +1,41 @@
 <template>
   <div>
     <NavBar></NavBar>
-    <div v-show="purchasemodal" class="black-bg">
-      <div class="white-bg">
-        <h4>구매하시겠습니까?</h4>
-        <button class="btn btn-outline-dark mt-auto" @click="purchaserocket">구매하기</button>
-        <button class="btn btn-outline-dark mt-auto" @click="purchasemodal = false">닫기</button>
+
+    <!-- Modal -->
+    <div
+      id="staticBackdrop"
+      class="modal fade"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="staticBackdropLabel" class="modal-title">모달제목</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">{{ 이지윤 }}</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="close">닫기</button>
+            <button v-show="closebtn" type="button" class="btn btn-primary" @click="purchaserocket">구매하기</button>
+          </div>
+        </div>
       </div>
     </div>
+
+    <!-- 기존 -->
+
+    <!-- <div v-show="purchasemodal" class="black-bg">
+      <div class="white-bg">
+        <h4>{{ 이지윤 }}</h4>
+        <button v-show="closebtn" class="btn btn-outline-dark mt-auto" @click="purchaserocket">구매하기</button>
+        <button class="btn btn-outline-dark mt-auto" @click="close">닫기</button>
+      </div>
+    </div> -->
 
     <div class="home">
       <div>
@@ -46,7 +74,15 @@
                   <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                     <div class="text-center">
                       <div v-if="showbtn == true">
-                        <a class="btn btn-outline-dark mt-auto" href="#" @click="purchaseOpen1">구매 가능</a>
+                        <a
+                          type="button"
+                          class="btn btn-outline-dark mt-auto"
+                          data-bs-toggle="modal"
+                          data-bs-target="#staticBackdrop"
+                          @click="purchaseOpen1"
+                        >
+                          구매 가능
+                        </a>
                       </div>
                       <div v-else>
                         <a class="btn btn-secondary btn mt-auto disabled" href="#">보유중</a>
@@ -83,7 +119,16 @@
                   <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                     <div class="text-center">
                       <div v-if="showbtn2 == true">
-                        <a class="btn btn-outline-dark mt-auto" href="#" @click="purchaseOpen2">구매 가능</a>
+                        <a
+                          type="button"
+                          class="btn btn-outline-dark mt-auto"
+                          data-bs-toggle="modal"
+                          data-bs-target="#staticBackdrop"
+                          @click="purchaseOpen2"
+                        >
+                          구매 가능
+                        </a>
+                        <!-- <a class="btn btn-outline-dark mt-auto" href="#" @click="purchaseOpen2">구매 가능</a> -->
                       </div>
                       <div v-else>
                         <a class="btn btn-secondary btn mt-auto disabled" href="#">보유중</a>
@@ -112,7 +157,15 @@
                   <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                     <div class="text-center">
                       <div v-if="showbtn3 == true">
-                        <a class="btn btn-outline-dark mt-auto" href="#" @click="purchaseOpen3">구매 가능</a>
+                        <a
+                          type="button"
+                          class="btn btn-outline-dark mt-auto"
+                          data-bs-toggle="modal"
+                          data-bs-target="#staticBackdrop"
+                          @click="purchaseOpen3"
+                        >
+                          구매 가능
+                        </a>
                       </div>
                       <div v-else>
                         <a class="btn btn-secondary btn mt-auto disabled" href="#">보유중</a>
@@ -146,7 +199,15 @@
                   <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                     <div class="text-center">
                       <div v-if="showbtn4 == true">
-                        <a class="btn btn-outline-dark mt-auto" href="#" @click="purchaseOpen4">구매 가능</a>
+                        <a
+                          type="button"
+                          class="btn btn-outline-dark mt-auto"
+                          data-bs-toggle="modal"
+                          data-bs-target="#staticBackdrop"
+                          @click="purchaseOpen4"
+                        >
+                          구매 가능
+                        </a>
                       </div>
                       <div v-else>
                         <a class="btn btn-secondary btn mt-auto disabled" href="#">보유중</a>
@@ -182,20 +243,26 @@ export default {
     data: [],
     spaceships: [],
     rocket1: { imgname: 'rocket1.png', price: 150, name: 'rocket1' },
-    rocket2: { imgname: 'rocket2.png', price: 45000, name: 'rocket2' },
+    rocket2: { imgname: 'rocket2.png', price: 100000, name: 'rocket2' },
     rocket3: { imgname: 'rocket3.png', price: 10000, name: 'rocket3' },
     rocket4: { imgname: 'rocket4.png', price: 50000, name: 'rocket4' },
     nick: '',
     spaceshipsimg: '',
     spaceShipsList: [],
     rocketbox: '',
-    rocketprice: 0
+    rocketprice: 0,
+    이지윤: '구매하시겠습니까?',
+    closebtn: true
   }),
 
   mounted() {
     this.shop()
   },
   methods: {
+    close() {
+      this.purchasemodal = false
+      this.$router.go()
+    },
     async shop() {
       console.log('token', localStorage.getItem('token'))
       await axios
@@ -260,11 +327,18 @@ export default {
         .then(response => {
           console.log('purchase - response : ', response)
           console.log(this.rocketbox)
-          // this.$router.go()
+          if (this.gold > this.rocketprice) {
+            this.이지윤 = '구입완료'
+            this.closebtn = false
+          }
         })
         .catch(error => {
           console.log('에러다 : ', error)
           console.log(error.response.data.message)
+          if (this.gold < this.rocketprice) {
+            this.이지윤 = '돈부족'
+            this.closebtn = false
+          }
         })
     },
     purchaseOpen1() {
@@ -273,7 +347,7 @@ export default {
     },
     purchaseOpen2() {
       this.purchasemodal = true
-      ;(this.rocketbox = 'rocket2.png'), (this.rocketprice = 45000)
+      ;(this.rocketbox = 'rocket2.png'), (this.rocketprice = 100000)
     },
     purchaseOpen3() {
       this.purchasemodal = true
@@ -290,10 +364,10 @@ export default {
 
 <style scoped>
 .black-bg {
-  /* width: 100%; */
-  /* height: 100%; */
+  /* width: 100%;
+  height: 100%; */
   background: rgba(0, 0, 0, 0.5);
-  /* position: fixed; */
+  position: fixed;
   /* padding: 20px; */
 }
 .white-bg {
@@ -307,19 +381,6 @@ export default {
   height: -10vh;
   width: 70vw;
 }
-.balck-bg {
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  padding: 20px;
-}
-.white-bg {
-  width: 100%;
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
-}
 .myprofile {
   width: 100px;
   height: 100px;
@@ -330,5 +391,10 @@ export default {
   /* border-radius: 10px; */
   padding: 20px;
   /* position: fixed; */
+}
+body {
+  position: fixed;
+  overflow: scroll;
+  display: fixed;
 }
 </style>
