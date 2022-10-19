@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col-md-3 border-right">
           <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-            <img class="mt-5" width="150px" :src="rocket" /><span class="font-weight-bold"
+            <img class="mt-5" width="150px" :src="rocket" /><span class="font-weight-bold fontwhite"
               >{{ nick }}님이 타고있는 우주선</span
             >
           </div>
@@ -13,35 +13,36 @@
         <div class="col-md-5 border-right">
           <div class="p-3 py-5">
             <div class="d-flex justify-content-between align-items-center mb-3">
-              <h4 class="text-right">카이오르 {{ nick }}님의 프로필</h4>
+              <h4 class="text-right fontwhite">카이오르 {{ nick }}님의 프로필</h4>
             </div>
 
             <div class="row mt-3">
               <div>
-                <label class="labels">email</label
+                <label class="labels fontwhite">email</label
                 ><input v-model="email" type="text" class="form-control" disabled value="" />
               </div>
               <div>
-                <label class="labels">nick</label><input v-model="nick" type="text" class="form-control" value="" />
+                <label class="labels fontwhite">nick</label
+                ><input v-model="nick" type="text" class="form-control" value="" />
               </div>
 
               <div>
                 <form>
-                  <label class="labels">password</label
+                  <label class="labels fontwhite">password</label
                   ><input type="password" class="form-control" placeholder="password" value="" autocomplete="on" />
                 </form>
               </div>
             </div>
 
             <div class="mt-5 text-center">
-              <button class="btn btn-primary profile-button" type="button" @click="update">회원수정</button>
+              <button class="btn btn-outline-dark profile-button" type="button" @click="update">회원수정</button>
 
               <button class="btn btn-primary profile-button mg" type="button" @click="delete2">회원탈퇴</button>
             </div>
           </div>
         </div>
         <div>
-          <div>&lt;{{ nick }}님의 보유우주선&gt;</div>
+          <div class="fontwhite">&lt;{{ nick }}님의 보유우주선&gt;</div>
           <div v-for="(a, i) in rocket2" :key="i" class="bb">
             <img class="mt-5 bb" width="150px" :src="rocket2[i]" />
             <!-- class="rounded-circle mt-5 bb" -->
@@ -230,5 +231,8 @@ body {
   height: 100vh;
   width: 100vw;
   /* position: fixed; */
+}
+.fontwhite {
+  color: white;
 }
 </style>
