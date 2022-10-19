@@ -1,67 +1,69 @@
 <template>
   <div>
     <NavBar></NavBar>
-    <div class="score">
-      <table class="table table-dark table-hover">
-        <thead>
-          <tr>
-            <td colspan="4">&lt; Top Ranking &gt;</td>
-          </tr>
-          <tr>
-            <th scope="col">순위</th>
-            <th scope="col">우주선</th>
-            <th scope="col">닉네임</th>
-            <th scope="col">Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(user, i) in data" :key="i">
-            <th scope="row">
-              <div v-if="i == 0">
-                <img width="35px" src="~@/assets/item/Top1st.png" alt="..." />
-              </div>
-              <div v-else-if="i == 1">
-                <img width="27px" src="~@/assets/item/Top2nd.png" alt="..." />
-              </div>
-              <div v-else-if="i == 2">
-                <img width="20px" src="~@/assets/item/Top3rd.png" alt="..." />
-              </div>
-              <div v-else>{{ i + 1 }}</div>
-            </th>
-            <td>
-              <img width="35px" :src="ship[i]" />
-            </td>
-            <td>{{ nick[i] }}</td>
-            <td>{{ score[i] }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="home">
+      <div class="score">
+        <table class="table table-dark table-hover">
+          <thead>
+            <tr>
+              <td colspan="4">&lt; Top Ranking &gt;</td>
+            </tr>
+            <tr>
+              <th scope="col">순위</th>
+              <th scope="col">우주선</th>
+              <th scope="col">닉네임</th>
+              <th scope="col">Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(user, i) in data" :key="i">
+              <th scope="row">
+                <div v-if="i == 0">
+                  <img width="35px" src="~@/assets/item/Top1st.png" alt="..." />
+                </div>
+                <div v-else-if="i == 1">
+                  <img width="27px" src="~@/assets/item/Top2nd.png" alt="..." />
+                </div>
+                <div v-else-if="i == 2">
+                  <img width="20px" src="~@/assets/item/Top3rd.png" alt="..." />
+                </div>
+                <div v-else>{{ i + 1 }}</div>
+              </th>
+              <td>
+                <img width="35px" :src="ship[i]" />
+              </td>
+              <td>{{ nick[i] }}</td>
+              <td>{{ score[i] }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-    <div class="score">
-      <table class="table table-dark table-hover">
-        <thead>
-          <tr>
-            <td colspan="4">&lt; Weekly Ranking &gt;</td>
-          </tr>
-          <tr>
-            <th scope="col">순위</th>
-            <th scope="col">우주선</th>
-            <th scope="col">닉네임</th>
-            <th scope="col">Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(user, i) in data2" :key="i">
-            <th scope="row">{{ i + 1 }}</th>
-            <td>
-              <img width="35px" :src="ship2[i]" />
-            </td>
-            <td>{{ nick2[i] }}</td>
-            <td>{{ score2[i] }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="score">
+        <table class="table table-dark table-hover">
+          <thead>
+            <tr>
+              <td colspan="4">&lt; Weekly Ranking &gt;</td>
+            </tr>
+            <tr>
+              <th scope="col">순위</th>
+              <th scope="col">우주선</th>
+              <th scope="col">닉네임</th>
+              <th scope="col">Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(user, i) in data2" :key="i">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>
+                <img width="35px" :src="ship2[i]" />
+              </td>
+              <td>{{ nick2[i] }}</td>
+              <td>{{ score2[i] }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
@@ -162,8 +164,8 @@ export default {
 
 <style scoped>
 .score {
-  width: 700px;
-  height: 700px;
+  width: 70vh;
+  height: 70vw;
   display: inline-block;
   margin: 30px;
 }
