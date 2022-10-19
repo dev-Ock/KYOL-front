@@ -43,9 +43,9 @@
             </div>
 
             <div class="mt-5 text-center">
-              <button class="btn btn-primary profile-button" type="button" @click="update">회원수정</button>
+              <button class="btnluxury btn-primary profile-button" type="button" @click="update">회원수정</button>
 
-              <button class="btn btn-primary profile-button mg" type="button" @click="delete2">회원탈퇴</button>
+              <button class="btnluxury btn-primary profile-button mg" type="button" @click="delete2">회원탈퇴</button>
             </div>
           </div>
         </div>
@@ -197,22 +197,23 @@ body {
 }
 
 .profile-button {
-  background: rgb(99, 39, 120);
+  background-image: url('~@/assets/images/button.PNG');
   box-shadow: none;
   border: none;
+  color: black;
 }
 
 .profile-button:hover {
-  background: #682773;
+  background: rgb(251, 240, 240);
 }
 
 .profile-button:focus {
-  background: #682773;
+  background: rgb(251, 240, 240);
   box-shadow: none;
 }
 
 .profile-button:active {
-  background: #682773;
+  background: rgb(251, 240, 240);
   box-shadow: none;
 }
 
@@ -239,10 +240,11 @@ body {
 }
 .mypagehome {
   background: url('~@/assets/images/space2.gif') 100% 100% / cover no-repeat;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   /* position: fixed; */
 }
+
 .fontwhite {
   color: white;
 }
@@ -250,4 +252,5 @@ body {
   text-align: center;
   margin: 0 auto;
 }
+
 </style>

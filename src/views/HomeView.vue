@@ -68,7 +68,7 @@ export default {
 
 <style>
 .home {
-  background: url('~@/assets/images/space2.gif') 100% 100% / cover no-repeat;
+  background: black;
   height: 100%;
   width: 100%;
   /* position: fixed; */
@@ -84,8 +84,5 @@ export default {
   color: #fff;
   background: grey;
   border-radius: 50px;
-}
-.gamestart {
-  background-image: url('~@/assets/images/space2.gif');
 }
 </style>

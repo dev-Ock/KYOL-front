@@ -1,7 +1,7 @@
 <template>
   <div>
     <NavBar></NavBar>
-    <div class="home">
+    <div class="rankinghome">
       <div class="score">
         <table class="table table-dark table-hover">
           <thead>
@@ -177,10 +177,9 @@ tbody {
   text-align: center;
   vertical-align: middle;
 }
-.home {
+.rankinghome {
   background: url('~@/assets/images/space2.gif') 50% 50% / cover no-repeat;
-  height: 100vh;
-  width: 100vw;
-  position: fixed;
+  height: 100%;
+  width: 100%;
 }
 </style>
