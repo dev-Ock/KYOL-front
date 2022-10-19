@@ -1,6 +1,7 @@
 <template>
   <div class="my-canvas-wrapper">
     <!-- ref="my-canvas" -->
+    <!-- <video class="video" src="~@/assets/videos/spaceBackGround15.mp4" autoplay muted loop></video> -->
     <canvas ref="myClass" class="my-canvas" width="1200" height="500">
       <img src="../../assets/images/space.jpg" />
     </canvas>
@@ -263,6 +264,7 @@ export default {
       this.meteor2Image = new Image()
 
       this.backgroundImage.src = require('../../assets/images/space.jpg')
+      // this.backgroundImage.src = require('../../assets/videos/spaceBackGround15.mp4')
       this.collisionImage.src = require('../../assets/images/collision16.png')
       // this.spaceshipImage.src = require('../../assets/images/rocket1ingame.png')
       this.spaceshipImage.src = require(`../../assets/item/ingame${this.inGameShip}`)
@@ -565,6 +567,7 @@ export default {
 
     render2() {
       this.ctx.drawImage(this.backgroundImage, 0, 0, this.ctx.canvas.clientWidth, this.ctx.canvas.clientHeight)
+      // this.ctx.drawImage(this.backgroundImage, 0, 0, this.ctx.canvas.clientWidth, this.ctx.canvas.clientHeight)
       this.ctx.drawImage(this.spaceshipImage, this.spaceshipX, this.spaceshipY)
       this.ctx.fillText(`Score: ${this.score}`, 850, 30)
       this.ctx.fillStyle = 'Yellow'

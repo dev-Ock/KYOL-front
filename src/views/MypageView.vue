@@ -1,7 +1,6 @@
 <template>
   <div>
     <NavBar></NavBar>
-
     <div class="mypagehome">
       <div class="row center">
         <div class="col-md-3 border-right">
@@ -25,25 +24,14 @@
               <div>
                 <label class="labels fontwhite">nick</label
                 ><input v-model="nick" type="text" class="form-control" value="" />
+                <button class="bb" @click="update">수정</button>
               </div>
 
-              <div>
-                <form>
-                  <label class="labels fontwhite">password</label
-                  ><input
-                    v-model="password"
-                    type="password"
-                    class="form-control"
-                    placeholder="password"
-                    value=""
-                    autocomplete="on"
-                  />
-                </form>
-              </div>
+              <div></div>
             </div>
 
             <div class="mt-5 text-center">
-              <button class="btnluxury btn-primary profile-button" type="button" @click="update">회원수정</button>
+              <button class="btnluxury btn-primary profile-button" type="button">비밀번호수정</button>
 
               <button class="btnluxury btn-primary profile-button mg" type="button" @click="delete2">회원탈퇴</button>
             </div>
@@ -134,7 +122,7 @@ export default {
       await axios
         .put(
           process.env.VUE_APP_API + '/mypage/auth-update',
-          { nick: this.nick, password: this.password },
+          { nick: this.nick },
           {
             headers: {
               Authorization: `${localStorage.getItem('token')}`
@@ -240,17 +228,20 @@ body {
 }
 .mypagehome {
   background: url('~@/assets/images/space2.gif') 100% 100% / cover no-repeat;
+
   height: 100%;
   width: 100%;
   /* position: fixed; */
   font-family: 'Hahmlet', serif;
+
 }
 
 .fontwhite {
   color: white;
 }
-.center {
+/* .center {
   text-align: center;
   margin: 0 auto;
-}
+} */
+
 </style>
