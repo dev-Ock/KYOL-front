@@ -16,7 +16,18 @@
         </thead>
         <tbody>
           <tr v-for="(user, i) in data" :key="i">
-            <th scope="row">{{ i + 1 }}</th>
+            <th scope="row">
+              <div v-if="i == 0">
+                <img width="35px" src="~@/assets/item/Top1st.png" alt="..." />
+              </div>
+              <div v-else-if="i == 1">
+                <img width="27px" src="~@/assets/item/Top2nd.png" alt="..." />
+              </div>
+              <div v-else-if="i == 2">
+                <img width="20px" src="~@/assets/item/Top3rd.png" alt="..." />
+              </div>
+              <div v-else>{{ i + 1 }}</div>
+            </th>
             <td>
               <img width="35px" :src="ship[i]" />
             </td>
@@ -72,6 +83,7 @@ export default {
     score2: [],
     ship2: [],
     nick2: [],
+    rankingCrown: [],
     loading: false
   }),
   mounted() {

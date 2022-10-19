@@ -35,11 +35,30 @@ class Bullet {
     this.updateBullet = function () {
       this.x += 7
     }
+    this.updateBullet2 = function () {
+      this.x += 15
+    }
+
     this.checkHit = function () {
       for (let i = 0; i < enemyList.length; i++) {
         if (
           all.spaceshipX < enemyList[i].x &&
           this.x + 10 >= enemyList[i].x &&
+          this.y >= enemyList[i].y - 20 &&
+          this.y <= enemyList[i].y + 35
+        ) {
+          all.score += 100
+          this.alive = false
+          enemyList.splice(i, 1)
+        } else if (this.x >= all.ctx.canvas.clientWidth) this.alive = false
+      }
+    }
+
+    this.checkHit2 = function () {
+      for (let i = 0; i < enemyList.length; i++) {
+        if (
+          all.spaceshipX < enemyList[i].x &&
+          this.x + 40 >= enemyList[i].x &&
           this.y >= enemyList[i].y - 20 &&
           this.y <= enemyList[i].y + 35
         ) {
@@ -62,30 +81,32 @@ class Meteor {
         let randomNum = Math.floor(Math.random() * (max - min + 1)) + min
         return randomNum
       }
-      if (all.score < 1000) {
+      if (all.score < 8000) {
         this.x = all.ctx.canvas.clientWidth
         this.y = generateRandomValue(0, all.ctx.canvas.clientHeight - 60)
         meteorList.push(this)
-      } else if (all.score > 1000) {
-        console.log('설마???')
+      } else if (all.score >= 8000) {
         this.x = all.ctx.canvas.clientWidth
         this.y = generateRandomValue(0, all.ctx.canvas.clientHeight - 60)
         meteor2List.push(this)
       }
     }
     this.updateMove = function () {
-      if (all.score < 1000) {
+      if (all.score < 3000) {
         this.x -= 6
-      } else if (all.score >= 1000 && all.score <= 5000) {
-        this.x -= 12
+      } else if (all.score >= 3000 && all.score < 8000) {
+        this.x -= 9
+      } else if (all.score >= 8000) {
+        this.x -= 9
       }
     }
+
     this.updateMove2 = function () {
-      if (all.score >= 1000 && all.score <= 5000) {
+      if (all.score >= 8000 && all.score <= 12000) {
         this.x -= 15
-      } else if (all.score >= 5000 && all.score <= 10000) {
+      } else if (all.score >= 12000 && all.score <= 20000) {
         this.x -= 18
-      } else if (all.score > 10000) {
+      } else if (all.score > 20000) {
         this.x -= 22
       }
     }
@@ -187,6 +208,7 @@ export default {
       this.backgroundImage = new Image()
       this.spaceshipImage = new Image()
       this.bulletImage = new Image()
+      this.bulletImage2 = new Image()
       this.enemyImage = new Image()
       this.gameOverImage = new Image()
       this.collisionImage = new Image()
@@ -199,6 +221,7 @@ export default {
       this.spaceshipImage.src = require(`../../assets/item/ingame${this.inGameShip}`)
       this.enemyImage.src = require('../../assets/images/enemy4.png')
       this.bulletImage.src = require('../../assets/images/bulletHorizon.png')
+      this.bulletImage2.src = require('../../assets/images/specialBullet.png')
       this.gameOverImage.src = require('../../assets/images/gameOver3.png')
       this.meteor1Image.src = require('../../assets/images/meteor/meteor1.png')
       this.meteor2Image.src = require('../../assets/images/meteor/meteor2.png')
@@ -208,6 +231,13 @@ export default {
       // function 도 스코핑영역을 가지기 때문에 function (event) 로 사용불가
       document.addEventListener('keydown', event => {
         this.keysDown[event.key] = true
+
+        if (
+          event.code == 'Space' &&
+          (this.inGameShip == 'rocket5.png' || this.inGameShip == 'rocket6.png' || this.inGameShip == 'rocket7.png')
+        ) {
+          this.createBullet(this)
+        }
       })
       document.addEventListener('keyup', event => {
         delete this.keysDown[event.key]
@@ -246,7 +276,7 @@ export default {
       b.init(all)
     },
 
-    update(ship) {
+    update() {
       if ('s' in this.keysDown) {
         this.spaceshipY += 4
       } // move to right side
@@ -295,7 +325,6 @@ export default {
       }
       for (let i = 0; i < enemyList.length; i++) {
         enemyList[i].update()
-        // console.log('적 숫자 체크', enemyList)
       }
     },
 
@@ -351,8 +380,60 @@ export default {
         // console.log('적 숫자 체크', enemyList)
       }
     },
+
+    update3() {
+      if ('s' in this.keysDown) {
+        this.spaceshipY += 8
+      } // move to right side
+      if ('w' in this.keysDown) {
+        this.spaceshipY -= 8
+      } // move to left side
+      if ('a' in this.keysDown) {
+        this.spaceshipX -= 8
+      } // move to left side
+      if ('d' in this.keysDown) {
+        this.spaceshipX += 8
+      } // move to left side
+
+      if (this.spaceshipY <= 0) {
+        this.spaceshipY = 0
+      }
+      if (this.spaceshipY >= this.ctx.canvas.clientHeight - 48) {
+        this.spaceshipY = this.ctx.canvas.clientHeight - 48
+      }
+      if (this.spaceshipX <= 0) {
+        this.spaceshipX = 0
+      }
+      if (this.spaceshipX >= this.ctx.canvas.clientWidth - 48) {
+        this.spaceshipX = this.ctx.canvas.clientWidth - 48
+      }
+
+      for (let i = 0; i < bulletList.length; i++) {
+        if (bulletList[i].alive) {
+          bulletList[i].updateBullet2()
+          bulletList[i].checkHit2(i)
+        }
+      }
+
+      for (let i = 0; i < meteorList.length; i++) {
+        if (meteorList[i].alive) {
+          meteorList[i].updateMove()
+          meteorList[i].checkHit2(i)
+        }
+      }
+
+      for (let i = 0; i < meteor2List.length; i++) {
+        if (meteor2List[i].alive) {
+          meteor2List[i].updateMove2()
+          meteor2List[i].checkHit2(i)
+        }
+      }
+      for (let i = 0; i < enemyList.length; i++) {
+        enemyList[i].update()
+        // console.log('적 숫자 체크', enemyList)
+      }
+    },
     main() {
-      console.log('ingame ship : ', this, this.inGameShip)
       if (!this.gameOver && (this.inGameShip == 'rocket1.png' || this.inGameShip == 'rocket2.png')) {
         this.update()
         this.render()
@@ -360,6 +441,13 @@ export default {
       } else if (!this.gameOver && (this.inGameShip == 'rocket3.png' || this.inGameShip == 'rocket4.png')) {
         this.update2()
         this.render()
+        requestAnimationFrame(this.main)
+      } else if (
+        !this.gameOver &&
+        (this.inGameShip == 'rocket5.png' || this.inGameShip == 'rocket6.png' || this.inGameShip == 'rocket7.png')
+      ) {
+        this.update3()
+        this.render2()
         requestAnimationFrame(this.main)
       } else {
         this.ctx.drawImage(
@@ -404,6 +492,40 @@ export default {
         this.ctx.drawImage(this.enemyImage, enemyList[i].x, enemyList[i].y)
       }
     },
+
+    render2() {
+      this.ctx.drawImage(this.backgroundImage, 0, 0, this.ctx.canvas.clientWidth, this.ctx.canvas.clientHeight)
+      this.ctx.drawImage(this.spaceshipImage, this.spaceshipX, this.spaceshipY)
+      this.ctx.fillText(`Score: ${this.score}`, 850, 30)
+      this.ctx.fillStyle = 'Yellow'
+      this.ctx.font = '25px gothic'
+      this.ctx.fillText(`Gold: ${this.score / 10}`, 1050, 30)
+      this.ctx.fillStyle = 'White'
+      this.ctx.font = '25px gothic'
+
+      for (let i = 0; i < bulletList.length; i++) {
+        if (bulletList[i].alive) {
+          this.ctx.drawImage(this.bulletImage2, bulletList[i].x + 48, bulletList[i].y + 12)
+        }
+      }
+
+      for (let i = 0; i < meteorList.length; i++) {
+        if (meteorList[i].alive) {
+          this.ctx.drawImage(this.meteor1Image, meteorList[i].x, meteorList[i].y)
+        }
+      }
+
+      for (let i = 0; i < meteor2List.length; i++) {
+        if (meteor2List[i].alive) {
+          this.ctx.drawImage(this.meteor2Image, meteor2List[i].x, meteor2List[i].y)
+        }
+      }
+
+      for (let i = 0; i < enemyList.length; i++) {
+        this.ctx.drawImage(this.enemyImage, enemyList[i].x, enemyList[i].y)
+      }
+    },
+
     sendGameOver() {
       this.$emit('GettingGameScore', this.score)
       this.$emit('GettingGetGold', this.score / 10)
@@ -411,6 +533,7 @@ export default {
       console.log('GettingGetGold', this.score / 10)
       this.sendingResultData()
     },
+
     async sendingResultData() {
       const getScore = this.score
       const getGold = this.score / 10
