@@ -11,7 +11,7 @@
         <!-- <button v-else class="btn2" type="button">게스트님 게임 시작하실라우?</button> -->
       </router-link>
       <router-link v-else to="/signin">
-        <img src="../assets/item/gologinto.png" />
+        <img src="../assets/item/gologin2.png" />
       </router-link>
     </div>
   </div>
