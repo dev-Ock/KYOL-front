@@ -18,9 +18,15 @@
           <!-- <img class="rounded-circle mt-5 bb" width="150px" :src=`../assets/item/${a.shipName}` /> -->
         </div>
       </div>
-      <div class="page">
-        <router-link to="/game"><button type="button" class="fun-btn">Game Start</button></router-link>
+      <div class="box effect1">
+        <router-link to="/game">
+          <button class="pushable">
+            <button class="front"></button>
+          </button>
+        </router-link>
       </div>
+      <img class="block2" src="../assets/item/logo6.png" />
+      <div></div>
     </div>
   </div>
 </template>
@@ -118,88 +124,42 @@ export default {
 .block {
   display: block;
   margin: auto;
-  /* text-align: center; */
+  text-align: center;
 }
-@keyframes pulse-grow {
-  to {
-    transform: scale(1.1);
-  }
+.block2 {
+  display: block;
+  margin: auto;
+  text-align: center;
+  height: 100px;
+  width: 200px;
 }
-.page {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-}
-
-/* add default color for animation start  */
-
-/* toggle this class */
-
-.color-bg-start {
-  background-color: salmon;
-}
-
-/* toggle class bg-animate-color */
-
-.bg-animate-color {
-  animation: random-bg 0.2s linear infinite;
-}
-
-/* add animation to bg color  */
-
-@keyframes random-bg {
-  from {
-    filter: hue-rotate(0);
-  }
-  to {
-    filter: hue-rotate(360deg);
-  }
-}
-
-.fun-btn {
-  /* change bg color to get different hues    */
-  background-color: salmon;
-  color: white;
-  padding: 2em 3em;
+.pushable {
+  background: hsl(0, 0%, 90%);
+  border-radius: 50% / 25%;
   border: none;
-  transition: all 0.3s ease;
-  border-radius: 5px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  outline: none;
-  align-self: center;
+  padding: 0;
   cursor: pointer;
-  font-weight: bold;
-  margin-top: 20px;
+  outline-offset: 1px;
+  margin-top: 50px;
+  height: 30px;
+  width: 100px;
+  text-align: center;
+}
+.front {
+  display: block;
+  padding: 14px 12px;
+  border-radius: 50% / 25%;
+  font-size: 1rem;
+  background: hsl(345deg 100% 47%);
+  color: black;
+  transform: translateY(-8px);
+  height: 15px;
+  width: 100px;
+  vertical-align: 20%;
+  justify-content: flex-start;
 }
 
-.fun-btn:hover {
-  animation: random-bg 0.3s linear infinite, grow 1300ms ease infinite;
-}
-
-.start-fun {
-  background-color: #fff !important;
-  /* change color of button text when fun is started   */
-  color: salmon !important;
-}
-
-/* pulsating effect on button */
-@keyframes grow {
-  0% {
-    transform: scale(1);
-  }
-  14% {
-    transform: scale(1.3);
-  }
-  28% {
-    transform: scale(1);
-  }
-  42% {
-    transform: scale(1.3);
-  }
-  70% {
-    transform: scale(1);
-  }
+.pushable:active .front {
+  transform: translateY(-2px);
 }
 </style>
