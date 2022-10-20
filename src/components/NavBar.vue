@@ -147,6 +147,7 @@ export default {
 .button {
   margin-right: 5px;
 }
+
 .statusDiv {
   display: flex;
   align-items: center;
@@ -155,5 +156,9 @@ export default {
   height: 30px;
   width: 30px;
   margin-right: 10px;
+}
+.navbar-toggler {
+  position: fixed;
+
 }
 </style>

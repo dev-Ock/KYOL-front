@@ -19,7 +19,7 @@
             <div class="card-body px-4 py-5 px-md-5">
               <form>
                 <!-- Email input -->
-
+                <h6 class="mb-3 title">이메일</h6>
                 <div class="mb-3">
                   <input
                     id="validationTextarea"
@@ -28,12 +28,18 @@
                     :class="{ 'is-invalid': emailInspection }"
                     placeholder="예) kyor@kyor.com"
                     required
-                  /><button class="cf" @click="duplication">중복확인</button>
+                  />
+                  <div>
+                    <button type="button" class="btn btn-primary" style="margin-top: 10px" @click="duplication">
+                      중복확인
+                    </button>
+                  </div>
                   <div class="invalid-feedback">이메일 주소를 정확히 입력해주세요.</div>
                 </div>
 
                 <!-- Nickname input -->
                 <div class="form-outline mb-4">
+                  <h6 class="mb-3 title">닉네임</h6>
                   <input
                     id="form3Example3"
                     v-model="nickname"
@@ -49,6 +55,7 @@
                 </div>
 
                 <!-- Password input -->
+                <h6 class="mb-3 title">비밀번호</h6>
                 <div class="form-outline mb-4">
                   <input
                     id="form3Example4"
@@ -289,6 +296,11 @@ export default {
 .cf {
   display: inline-block;
 }
+.title {
+  text-align: left;
+  margin-bottom: 0;
+}
+
 /* .btn-btn-link1 {
   background: url('~@/assets/images/google.png') 50% 50% / cover no-repeat;
   height: 50px;

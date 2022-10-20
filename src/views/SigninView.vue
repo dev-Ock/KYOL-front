@@ -3,9 +3,13 @@
     <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
       <div class="row gx-lg-5 align-items-center mb-5">
         <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
-          <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
-            Welcome to KYOL <br />
-            <span style="color: hsl(218, 81%, 75%)">for your money</span>
+          <h1 class="my-5 display-5 fw-bold ls-tight fsize" style="color: hsl(218, 81%, 95%)">
+            &nbsp;반갑습니다. <br />
+            <span style="color: hsl(218, 81%, 95%)"
+              ><a class="navbar-brand" href="/"><img src="../assets/item/logo3.png" /></a> x
+              <a href="https://uvc.co.kr/index.html" target="_blank"
+                ><img class="imgmargin" src="../assets/item/UVClogo2.png" /></a
+            ></span>
           </h1>
           <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
             <!-- Game game game game shootinh shootihg shooting shooting game
@@ -24,6 +28,7 @@
               <form>
                 <!-- Email input -->
                 <div class="form-outline mb-4">
+                  <h6 class="mb-3 title">이메일</h6>
                   <input
                     id="form3Example3"
                     v-model="email"
@@ -38,6 +43,7 @@
 
                 <!-- Password input -->
                 <div class="form-outline mb-4">
+                  <h6 class="mb-3 title">비밀번호</h6>
                   <input
                     id="form3Example4"
                     v-model="password"
@@ -148,7 +154,7 @@ export default {
   top: -60px;
   left: -130px;
   /* background: radial-gradient(#44006b, #ad1fff); */
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .butter {
   margin-left: 5px;
@@ -171,6 +177,17 @@ export default {
 .loginbtn2 {
   text-align: center;
   height: 40px;
+}
+.title {
+  text-align: left;
+  margin-bottom: 0;
+}
+.imgmargin {
+  margin-left: 5px;
+  margin-bottom: 17px;
+}
+.fsize {
+  font-size: 30px;
 }
 </style>
 
