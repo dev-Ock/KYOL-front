@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-light">
+  <nav class="navbar navhome navbar-expand-lg">
     <div class="container-fluid">
       <a class="navbar-brand" href="/"><img src="../assets/item/logo3.png" /></a>
       <button
@@ -18,15 +18,15 @@
           <li class="nav-item">
             <!-- <span @click="goRanking"> ranking1</span> -->
 
-            <a class="nav-link" href="/ranking">Ranking</a>
+            <a class="nav-link" style="color: white" href="/ranking">Ranking</a>
           </li>
 
           <li class="nav-item" @click="mypagecheck">
-            <a class="nav-link" :href="href">My Page</a>
+            <a class="nav-link" style="color: white" :href="href">My Page</a>
           </li>
 
           <li class="nav-item" @click="shopcheck">
-            <a class="nav-link" :href="href2">Shop</a>
+            <a class="nav-link" style="color: white" :href="href2">Shop</a>
           </li>
           <!-- <li class="nav-item" @click="gamecheck">
             <a class="nav-link" :href="href3">Game</a>
@@ -43,7 +43,7 @@
       </div>
       <div v-show="loading">
         <div class="statusDiv">
-          <img class="gold" src="../assets/item/coin.png" />
+          <img class="gold" style="color: white" src="../assets/item/coin.png" />
           {{ gold.toLocaleString() }} KYOL
 
           <router-link to="/">
@@ -146,6 +146,7 @@ export default {
 <style scoped>
 .button {
   margin-right: 5px;
+  color: white;
 }
 
 .statusDiv {
@@ -159,5 +160,12 @@ export default {
 }
 .navbar-toggler {
   position: fixed;
+}
+.navhome {
+  background: url('~@/assets/item/1.png') 100% 100% / cover no-repeat;
+  /* height: 100vh;
+  width: 100vw; */
+  font-family: 'Hahmlet', serif;
+  /* position: fixed; */
 }
 </style>

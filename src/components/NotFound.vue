@@ -34,7 +34,7 @@ export default {}
   vertical-align: middle;
   display: table-cell;
   /* background-color: azure; */
-  color: blanchedalmond;
+  color: #fff;
 }
 .contextDiv {
   margin: 30px;

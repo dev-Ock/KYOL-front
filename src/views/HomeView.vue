@@ -69,7 +69,7 @@ export default {
 
 <style>
 .home {
-  background: black;
+  background: url('~@/assets/item/1.png') 100% 100% / cover no-repeat;
   height: 100%;
   width: 100%;
   font-family: 'Hahmlet', serif;
