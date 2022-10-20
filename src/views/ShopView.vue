@@ -15,7 +15,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 id="staticBackdropLabel" class="modal-title">모달제목</h5>
+            <!-- <h5 id="staticBackdropLabel" class="modal-title">모달제목</h5> -->
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">{{ 이지윤 }}</div>
@@ -345,7 +345,7 @@ export default {
           console.log('에러다 : ', error)
           console.log(error.response.data.message)
           if (this.gold < this.rocketprice) {
-            this.이지윤 = '돈부족'
+            this.이지윤 = '보유하신 KYOL가 부족합니다.'
             this.closebtn = false
           }
         })
@@ -415,7 +415,7 @@ export default {
   width: 100vw;
   font-family: 'Hahmlet', serif;
   font-weight: 500;
-  position: fixed;
+  /* position: fixed; */
   overflow: scroll;
 }
 </style>
