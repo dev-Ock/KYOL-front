@@ -183,7 +183,7 @@
                 </div>
               </div>
               <div class="col mb-5">
-                <div class="card h-100 {black-bg : isActive}">
+                <div class="card h-100">
                   <!-- Product image-->
                   <img class="card-img-top" src="~@/assets/item/rocket4.png" alt="..." />
                   <!-- Product details-->
@@ -375,7 +375,7 @@ export default {
 .black-bg {
   /* width: 100%;
   height: 100%; */
-  background: rgba(0, 0, 0, 0.5);
+  /* background: rgba(0, 0, 0, 0.5); */
   position: fixed;
   /* padding: 20px; */
 }
@@ -404,11 +404,11 @@ export default {
   text-align: center;
   font-size: 30px;
 }
-body {
+/* body {
   position: fixed;
   overflow: scroll;
   display: fixed;
-}
+} */
 .shophome {
   background: url('~@/assets/images/space2.gif') 100% 100% / cover no-repeat;
   height: 100%;

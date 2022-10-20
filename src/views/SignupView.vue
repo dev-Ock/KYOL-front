@@ -24,6 +24,7 @@
                   <input
                     id="validationTextarea"
                     v-model="email"
+                    type="email"
                     class="form-control cf"
                     :class="{ 'is-invalid': emailInspection }"
                     placeholder="예) kyor@kyor.com"
@@ -244,9 +245,9 @@ export default {
   margin-bottom: 0;
 }
 .background {
-  background: url('~@/assets/images/space.gif') 50% 50% / cover no-repeat;
+  background: url('~@/assets/images/space.gif') 100% 100% / cover no-repeat;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   font-family: 'Hahmlet', serif;
 }
 

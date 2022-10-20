@@ -67,18 +67,18 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .home {
   background: url('~@/assets/item/1.png') 100% 100% / cover no-repeat;
   height: 100%;
   width: 100%;
   font-family: 'Hahmlet', serif;
-  /* position: fixed; */
+  position: fixed;
 }
 .video {
   /* background: cover no-repeat; */
-  height: 70%;
-  width: 60%;
+  height: -10vh;
+  width: 70vw;
 }
 .btn2 {
   height: 7vh;
