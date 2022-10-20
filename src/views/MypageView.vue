@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mypagehome">
     <!-- 비밀번호 확인 -->
     <div id="exampleModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -46,20 +46,21 @@
       </div>
     </div>
     <NavBar></NavBar>
-    <div class="mypagehome">
-      <div class="row center">
-        <div class="bb">
-          <div class="col-md-3 border-right">
+    <div>
+      <div>
+        <div class="row imgcenter">
+          <div></div>
+          <div class="col-md-4 border-right imgcenter">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
               <img class="mt-5" width="150px" :src="rocket" /><span class="font-weight-bold fontwhite"
-                >{{ nick }}님이 타고있는 우주선</span
+                >{{ originnick }}님이 타고있는 우주선</span
               >
             </div>
           </div>
-          <div class="col-md-5 border-right">
+          <div class="col-md-6 border-right imgcenter">
             <div class="p-3 py-5">
               <div class="d-flex justify-content-between align-items-center mb-3">
-                <h4 class="text-right fontwhite">카이오르 {{ nick }}님의 프로필</h4>
+                <h4 class="text-right fontwhite">카이오르 {{ originnick }}님의 프로필</h4>
               </div>
 
               <div class="row mt-3">
@@ -72,8 +73,6 @@
                   ><input v-model="nick" type="text" class="form-control" value="" />
                   <button class="bb" @click="update">수정</button>
                 </div>
-
-                <div></div>
               </div>
 
               <div class="mt-5 text-center">
@@ -88,7 +87,7 @@
         </div>
 
         <div>
-          <div class="fontwhite">&lt;{{ nick }}님의 보유우주선&gt;</div>
+          <div class="fontwhite">&lt;{{ originnick }}님의 보유우주선&gt;</div>
           <div v-for="(a, i) in rocket2" :key="i" class="bb">
             <img class="mt-5 bb" width="150px" :src="rocket2[i]" />
             <!-- class="rounded-circle mt-5 bb" -->
@@ -100,7 +99,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import NavBar from '@/components/NavBar.vue'
 export default {
   name: 'MyPageView',
@@ -118,7 +117,8 @@ export default {
     rocket2: [],
     loading: false,
     pwInspection: false,
-    cfpwInspection: false
+    cfpwInspection: false,
+    originnick: ''
   }),
   watch: {
     password(a) {
@@ -151,6 +151,7 @@ export default {
 
           this.email = response.data.user.email
           this.nick = response.data.user.nick
+          this.originnick = response.data.user.nick
           this.rocket = require(`../assets/item/${response.data.user.currentShipImage}`)
 
           this.ssdata = response.data.user.Spaceships
@@ -197,11 +198,16 @@ export default {
 
           if (response.data.message == 'nick-update-success') {
             alert('회원정보수정완료')
+            this.$router.go()
           }
         })
         .catch(error => {
-          console.log(error)
-          alert('중복된 닉네임입니다.')
+          console.log('에러표시', error)
+          if (error.response.data.message == 'unavailable nick') {
+            alert('중복된 닉네임입니다.')
+          } else {
+            alert('다시 시도해보세요')
+          }
         })
     },
     async delete2() {
@@ -252,6 +258,7 @@ export default {
         )
         .then(response => {
           console.log('pwupdate:', response)
+
           // if (this.pwInspection == false || this.cfpwInspection == false) {
           //   this.$router.push({ name: 'mypage' })
           // }
@@ -346,8 +353,10 @@ body {
 .fontwhite {
   color: white;
 }
-.center {
+.imgcenter {
   text-align: center;
   margin: 0 auto;
+  margin-right: 0;
+  margin-left: 0;
 }
 </style>
