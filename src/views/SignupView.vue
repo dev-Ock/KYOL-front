@@ -28,7 +28,12 @@
                     :class="{ 'is-invalid': emailInspection }"
                     placeholder="예) kyor@kyor.com"
                     required
-                  /><button class="cf" @click="duplication">중복확인</button>
+                  />
+                  <div>
+                    <button type="button" class="btn btn-primary" style="margin-top: 10px" @click="duplication">
+                      중복확인
+                    </button>
+                  </div>
                   <div class="invalid-feedback">이메일 주소를 정확히 입력해주세요.</div>
                 </div>
 
@@ -295,6 +300,7 @@ export default {
   text-align: left;
   margin-bottom: 0;
 }
+
 /* .btn-btn-link1 {
   background: url('~@/assets/images/google.png') 50% 50% / cover no-repeat;
   height: 50px;
