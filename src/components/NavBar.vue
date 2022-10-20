@@ -159,6 +159,5 @@ export default {
 }
 .navbar-toggler {
   position: fixed;
-
 }
 </style>

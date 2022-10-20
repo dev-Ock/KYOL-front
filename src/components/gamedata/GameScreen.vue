@@ -597,7 +597,7 @@ export default {
       this.ctx.fillText(`Score: ${this.score}`, 850, 30)
       this.ctx.fillStyle = 'Yellow'
       this.ctx.font = '25px gothic'
-      this.ctx.fillText(`Gold: ${this.score / 10}`, 1050, 30)
+      this.ctx.fillText(`KYOL: ${this.score / 10}`, 1050, 30)
       this.ctx.fillStyle = 'White'
       this.ctx.font = '25px gothic'
 
@@ -635,7 +635,7 @@ export default {
       this.ctx.fillText(`Score: ${this.score}`, 850, 30)
       this.ctx.fillStyle = 'Yellow'
       this.ctx.font = '25px gothic'
-      this.ctx.fillText(`Gold: ${this.score / 10}`, 1050, 30)
+      this.ctx.fillText(`KYOL: ${this.score / 10}`, 1050, 30)
       this.ctx.fillStyle = 'White'
       this.ctx.font = '25px gothic'
 
