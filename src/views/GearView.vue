@@ -155,7 +155,7 @@ export default {
   transform: translateY(-8px);
   height: 15px;
   width: 100px;
-  vertical-align: 20%;
+  /* vertical-align: 20%; */
   justify-content: flex-start;
 }
 
