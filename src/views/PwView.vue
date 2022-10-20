@@ -1,20 +1,19 @@
 <template>
   <div class="center">
     <div class="centerinput">
-      <form class="row g-3">
-        <div class="col-auto">
-          <!-- <div class="white">비밀번호를 입력해주세요.</div> -->
-          <div>
+      <a class="navbar-brand" href="/"><img src="../assets/item/logo3.png" /></a>
+      <h1>Please input your password to enter</h1>
+      <div class="innerDiv">
+        <form class="row g-3">
+          <div class="innerDiv">
             <label for="inputPassword2" class="visually-hidden">Password</label>
             <input id="inputPassword2" v-model="password" type="password" class="form-control" placeholder="Password" />
           </div>
-        </div>
-        <div class="col-auto">
-          <!-- <router-link to="/mypage"></router-link
-          > -->
-          <button type="submit" class="btn btn-primary mb-3" @click="pwCheck">확인</button>
-        </div>
-      </form>
+          <div class="innerDiv">
+            <button type="submit" class="btn btn-warning" @click="pwCheck">확인</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -74,11 +73,20 @@ export default {
 }
 
 .centerinput {
-  width: 300px;
-  height: 300px;
+  width: 500px;
+  height: 500px;
   /* margin: 0 auto; */
 }
 .white {
   color: white;
+}
+.innerDiv {
+  align-items: center;
+}
+h1 {
+  margin: 10px 0px 30px 0px;
+  padding: 10px 0px 10px 0px;
+  font-size: 20px;
+  color: gold;
 }
 </style>
