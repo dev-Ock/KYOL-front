@@ -13,6 +13,7 @@
       <router-link v-else to="/signin">
         <img src="../assets/item/gologin2.png" />
       </router-link>
+      <div class="imgmargin"></div>
     </div>
   </div>
 </template>
@@ -70,10 +71,11 @@ export default {
 <style scoped>
 .home {
   background: url('~@/assets/item/1.png') 100% 100% / cover no-repeat;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   font-family: 'Hahmlet', serif;
   position: fixed;
+  overflow: scroll;
 }
 .video {
   /* background: cover no-repeat; */
@@ -86,5 +88,8 @@ export default {
   color: #fff;
   background: grey;
   border-radius: 50px;
+}
+.imgmargin {
+  padding: 20px;
 }
 </style>

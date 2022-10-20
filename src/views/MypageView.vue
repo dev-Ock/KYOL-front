@@ -345,8 +345,9 @@ body {
 .mypagehome {
   background: url('~@/assets/images/space2.gif') 100% 100% / cover no-repeat;
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   position: fixed;
+  overflow: scroll;
   font-family: 'Hahmlet', serif;
 }
 

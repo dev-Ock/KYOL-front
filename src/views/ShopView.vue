@@ -81,7 +81,7 @@
                           data-bs-target="#staticBackdrop"
                           @click="purchaseOpen1"
                         >
-                          구매 가능
+                          구매가능
                         </a>
                       </div>
                       <div v-else>
@@ -126,7 +126,7 @@
                           data-bs-target="#staticBackdrop"
                           @click="purchaseOpen2"
                         >
-                          구매 가능
+                          구매가능
                         </a>
                         <!-- <a class="btn btn-outline-dark mt-auto" href="#" @click="purchaseOpen2">구매 가능</a> -->
                       </div>
@@ -172,7 +172,7 @@
                           data-bs-target="#staticBackdrop"
                           @click="purchaseOpen3"
                         >
-                          구매 가능
+                          구매가능
                         </a>
                       </div>
                       <div v-else>
@@ -215,7 +215,7 @@
                           data-bs-target="#staticBackdrop"
                           @click="purchaseOpen4"
                         >
-                          구매 가능
+                          구매가능
                         </a>
                       </div>
                       <div v-else>
@@ -411,9 +411,11 @@ export default {
 } */
 .shophome {
   background: url('~@/assets/images/space2.gif') 100% 100% / cover no-repeat;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   font-family: 'Hahmlet', serif;
   font-weight: 500;
+  position: fixed;
+  overflow: scroll;
 }
 </style>

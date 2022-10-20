@@ -172,8 +172,10 @@ tbody {
 }
 .rankinghome {
   background: url('~@/assets/images/space2.gif') 50% 50% / cover no-repeat;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   font-family: 'Hahmlet', serif;
+  position: fixed;
+  overflow: scroll;
 }
 </style>
