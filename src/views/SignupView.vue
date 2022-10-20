@@ -169,11 +169,7 @@ export default {
         alert('값을 제대로 입력하지 않았습니다.')
         throw new Error('에러 발생!')
       }
-      // if (this.nickname == null || this.email == null || this.password == null || this.confirmPassword == null) {
-      //   alert('빈칸을 입력해주세요')
-      //   console.log('확인용', this.nickname)
-      //   throw new Error('에러 발생!')
-      // }
+
       if (this.check == false) {
         alert('이메일 중복확인을 해주세요.')
         throw new Error('에러 발생!')
@@ -181,19 +177,11 @@ export default {
 
       await axios
 
-        .post(
-          process.env.VUE_APP_API + '/auth/join',
-          {
-            email: this.email,
-            nick: this.nickname,
-            password: this.password
-          }
-          // {
-          //   headers: {
-          //     Authorization: `Bearer ${localStorage.getItem('token')}`
-          //   }
-          // }
-        )
+        .post(process.env.VUE_APP_API + '/auth/join', {
+          email: this.email,
+          nick: this.nickname,
+          password: this.password
+        })
         .then(response => {
           console.log('editcategories - response : ', response, response.data)
           this.$router.push({ name: 'signin' }) // router/index.js 에서 설정한 name
@@ -209,17 +197,9 @@ export default {
       console.log('duplicationemail:', this.email)
 
       await axios
-        .post(
-          process.env.VUE_APP_API + '/auth/join/email-check',
-          {
-            email: this.email
-          }
-          // {
-          //   headers: {
-          //     Authorization: `Bearer ${localStorage.getItem('token')}`
-          //   }
-          // }
-        )
+        .post(process.env.VUE_APP_API + '/auth/join/email-check', {
+          email: this.email
+        })
         .then(response => {
           console.log('duplication - response : ', response, response.data)
           alert('사용 가능한 아이디입니다.')
@@ -234,17 +214,9 @@ export default {
       console.log('duplicationNick:', this.nickname)
 
       await axios
-        .post(
-          process.env.VUE_APP_API + '/auth/join/nick-check',
-          {
-            nick: this.nickname
-          }
-          // {
-          //   headers: {
-          //     Authorization: `Bearer ${localStorage.getItem('token')}`
-          //   }
-          // }
-        )
+        .post(process.env.VUE_APP_API + '/auth/join/nick-check', {
+          nick: this.nickname
+        })
         .then(response => {
           console.log('duplicationNick - response : ', response, response.data)
           this.nickInspection = false
@@ -263,7 +235,6 @@ export default {
   }
 }
 </script>
-<!-- Section: Design Block -->
 
 <style>
 .margin1 {
@@ -300,21 +271,4 @@ export default {
   text-align: left;
   margin-bottom: 0;
 }
-
-/* .btn-btn-link1 {
-  background: url('~@/assets/images/google.png') 50% 50% / cover no-repeat;
-  height: 50px;
-  width: 50px;
-  border: 0;
-  outline: 0;
-}
-.btn-btn-link2 {
-  background: url('~@/assets/images/kakao.png') 50% 50% / cover no-repeat;
-  height: 50px;
-  width: 50px;
-  border: 0;
-  outline: 0;
-} */
 </style>
-
-<!-- Section: Design Block -->
