@@ -141,9 +141,9 @@ export default {
 
 <style>
 .background {
-  background: url('~@/assets/images/space.gif') 50% 50% / cover no-repeat;
+  background: url('~@/assets/images/space.gif') 100% 100% / cover no-repeat;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   font-family: 'Hahmlet', serif;
 }
 
@@ -154,7 +154,7 @@ export default {
   top: -60px;
   left: -130px;
   /* background: radial-gradient(#44006b, #ad1fff); */
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 .butter {
   margin-left: 5px;

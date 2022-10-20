@@ -53,7 +53,7 @@
           <div class="col-md-4 border-right imgcenter">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
               <img class="mt-5" width="150px" :src="rocket" /><span class="font-weight-bold fontwhite"
-                >{{ originnick }}님이 타고있는 우주선</span
+                >{{ originnick }}님이 타고 있는 우주선</span
               >
             </div>
           </div>
@@ -71,23 +71,23 @@
                 <div>
                   <label class="labels fontwhite">nick</label
                   ><input v-model="nick" type="text" class="form-control" value="" />
-                  <button class="bb" @click="update">수정</button>
+                  <button class="btn btn-warning mg" @click="update">닉네임 수정</button>
                 </div>
               </div>
 
               <div class="mt-5 text-center">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  비밀번호수정
+                <button type="button" class="btn btn-warning mg" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  비밀번호 수정
                 </button>
 
-                <button class="btnluxury btn-primary profile-button mg" type="button" @click="delete2">회원탈퇴</button>
+                <button class="btn btn-warning mg" type="button" @click="delete2">회원탈퇴</button>
               </div>
             </div>
           </div>
         </div>
 
         <div>
-          <div class="fontwhite">&lt;{{ originnick }}님의 보유우주선&gt;</div>
+          <div class="fontwhite">&lt;{{ originnick }}님의 보유 우주선&gt;</div>
           <div v-for="(a, i) in rocket2" :key="i" class="bb">
             <img class="mt-5 bb" width="150px" :src="rocket2[i]" />
             <!-- class="rounded-circle mt-5 bb" -->
@@ -344,9 +344,9 @@ body {
 }
 .mypagehome {
   background: url('~@/assets/images/space2.gif') 100% 100% / cover no-repeat;
-  height: 100%;
+  height: 100vh;
   width: 100%;
-  /* position: fixed; */
+  position: fixed;
   font-family: 'Hahmlet', serif;
 }
 

@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="rankinghome">
     <NavBar></NavBar>
-    <div class="rankinghome">
+    <div>
       <div class="score">
         <table class="table table-dark table-hover">
           <thead>
@@ -165,7 +165,7 @@ export default {
 <style scoped>
 .score {
   width: 70vh;
-  height: 70vw;
+  /* height: 70vw; */
   display: inline-block;
   margin: 30px;
 }
