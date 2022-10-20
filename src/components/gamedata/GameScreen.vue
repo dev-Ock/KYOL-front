@@ -5,16 +5,27 @@
     <canvas ref="myClass" class="my-canvas" width="1200" height="500">
       <img src="../../assets/images/space.jpg" />
     </canvas>
-    <div>
-      <!-- 방향 조작법 : w, a, s, d // 미사일발사 : space -->
-      <div class="gamebtn">
+    <div v-if="gameOver == true">
+      죽음 ? 1 코인 더?
+      <a href="/gear">
+        <button class="pushable">
+          <button class="front"></button>
+        </button>
+      </a>
+      <!-- <router-link to="/gear">
+        <button class="pushable">
+          <button class="front"></button>
+        </button>
+      </router-link> -->
+
+      <!-- <div class="gamebtn">
         <button>게임 다시하기</button>
-      </div>
-      <figure>
-        <audio v-if="gameOver == false" autoplay loop src="../../assets/videos/videoplayback2.mp3"></audio>
-        <!-- <audio src="../../assets/videos/Laser3.mp3" @keyup.space="playingSound"></audio -->
-      </figure>
+      </div> -->
     </div>
+    <figure>
+      <audio v-if="gameOver == false" autoplay loop src="../../assets/videos/videoplayback2.mp3"></audio>
+      <!-- <audio src="../../assets/videos/Laser3.mp3" @keyup.space="playingSound"></audio -->
+    </figure>
   </div>
 </template>
 
@@ -149,8 +160,8 @@ class Meteor {
           (this.x + 70 > all.spaceshipX && this.x + 70 <= all.spaceX + 30)) &&
         // this.x >= all.spaceshipX &&
         // this.x <= all.spaceshipX + 22
-        this.y >= all.spaceshipY - 60 &&
-        this.y <= all.spaceshipY + 35
+        this.y >= all.spaceshipY - 48 &&
+        this.y <= all.spaceshipY + 33
       ) {
         all.gameOver = true
         all.sendGameOver(all)
@@ -516,7 +527,10 @@ export default {
       }
     },
     main() {
-      if (!this.gameOver && (this.inGameShip == 'rocket1.png' || this.inGameShip == 'rocket2.png')) {
+      if (
+        !this.gameOver &&
+        (this.inGameShip == 'rocket0.png' || this.inGameShip == 'rocket1.png' || this.inGameShip == 'rocket2.png')
+      ) {
         this.update()
         this.render()
         requestAnimationFrame(this.main)

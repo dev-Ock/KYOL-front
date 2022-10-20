@@ -42,31 +42,61 @@
         </router-link>
       </div>
       <div v-show="loading">
-        <router-link to="/">
-          <button type="button" class="btn btn-outline-dark button" @click="logout">로그아웃</button>
-        </router-link>
+        <div class="statusDiv">
+          <img class="gold" src="../assets/item/coin.png" />
+          {{ gold.toLocaleString() }} KYOL
+
+          <router-link to="/">
+            <button style="margin-left: 25px" type="button" class="btn btn-outline-dark button" @click="logout">
+              로그아웃
+            </button>
+          </router-link>
+        </div>
       </div>
     </div>
   </nav>
 </template>
 
 <script>
-// import axios from 'axios'
+import axios from 'axios'
 export default {
   name: 'NavBar',
   data: () => ({
     loading: false,
     href: '/mypage',
     href2: '/shop',
-    href3: '/game'
+    href3: '/game',
+    gold: 0
   }),
   mounted() {
     this.checkLocalstorage()
+
+    this.checkgold()
   },
   methods: {
     goRanking() {
       this.$router.push('/ranking')
     },
+
+    checkgold() {
+      if (localStorage.getItem('token')) {
+        axios
+          .get(process.env.VUE_APP_API + '/main/navbar', {
+            headers: {
+              Authorization: `${localStorage.getItem('token')}`,
+              userid: `${localStorage.getItem('userId')}`
+            }
+          })
+          .then(response => {
+            console.log('checkgold - response : ', response)
+            this.gold = response.data.data.gold
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      }
+    },
+
     logincheck() {
       if (localStorage.getItem('userNick') == !null) {
         this.loading = true
@@ -116,5 +146,14 @@ export default {
 <style scoped>
 .button {
   margin-right: 5px;
+}
+.statusDiv {
+  display: flex;
+  align-items: center;
+}
+.gold {
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
 }
 </style>

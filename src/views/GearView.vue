@@ -11,22 +11,19 @@
             <img class="mt-5 bb" width="150px" :src="array[i]" :class="ft === i ? 'choose' : ''" />
             <div></div>
             <button type="button" class="btn btn-warning" @click="select(i)">선택</button>
-            <!-- <button @click="select(i)">선택</button> -->
           </div>
-          <!-- <div v-for="(a, i) in array" :key="i" class="bb">
-        <h3>{{ a }}</h3> -->
-          <!-- <img class="rounded-circle mt-5 bb" width="150px" :src=`../assets/item/${a.shipName}` /> -->
         </div>
       </div>
-      <div class="box effect1">
-        <router-link to="/game">
-          <button class="pushable">
-            <button class="front"></button>
-          </button>
-        </router-link>
+      <div v-if="selected == true">
+        <div class="box effect1">
+          <router-link to="/game">
+            <button class="pushable">
+              <button class="front"></button>
+            </button>
+          </router-link>
+        </div>
+        <img class="block2" src="../assets/item/logo6.png" />
       </div>
-      <img class="block2" src="../assets/item/logo6.png" />
-      <div></div>
     </div>
   </div>
 </template>
@@ -44,7 +41,8 @@ export default {
       array: [],
       ship: [],
       currentship: '',
-      ft: null
+      ft: null,
+      selected: false
     }
   },
   computed: {
@@ -85,6 +83,7 @@ export default {
     // },
 
     select(spaceship) {
+      this.selected = true
       this.currentship = this.ship[spaceship].shipName
       this.gear2(this.currentship)
 
