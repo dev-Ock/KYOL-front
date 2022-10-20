@@ -117,4 +117,7 @@ export default {
 .button {
   margin-right: 5px;
 }
+.navbar-toggler {
+  position: fixed;
+}
 </style>

@@ -154,7 +154,7 @@ export default {
   top: -60px;
   left: -130px;
   /* background: radial-gradient(#44006b, #ad1fff); */
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .butter {
   margin-left: 5px;
