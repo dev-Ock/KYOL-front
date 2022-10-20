@@ -4,13 +4,14 @@
     <div>
       <video class="video" src="~@/assets/videos/HomebackgroundVideo.mp4" autoplay muted loop></video>
       <div></div>
-      <router-link to="/gear">
+      <router-link v-if="logined == true" to="/gear">
         <!-- <button v-if="logined" class="btn2" type="button">{{ nick }}님 게임 시작하실라우?</button> -->
         <!-- <div v-if="logined"><img class="block" src="../assets/item/gamestart.png" /></div> -->
-
         <img src="../assets/item/gamestart.png" />
-
         <!-- <button v-else class="btn2" type="button">게스트님 게임 시작하실라우?</button> -->
+      </router-link>
+      <router-link v-else to="/signin">
+        <img src="../assets/item/gologinto.png" />
       </router-link>
     </div>
   </div>
