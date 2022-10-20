@@ -279,6 +279,7 @@ export default {
       this.spaceshipImage = new Image()
       this.bulletImage = new Image()
       this.bulletImage2 = new Image()
+      this.bulletImage3 = new Image()
       this.enemyImage = new Image()
       this.enemyImage2 = new Image()
       this.gameOverImage = new Image()
@@ -295,6 +296,7 @@ export default {
       this.enemyImage2.src = require('../../assets/images/enemy2.png')
       this.bulletImage.src = require('../../assets/images/bulletHorizon.png')
       this.bulletImage2.src = require('../../assets/images/specialBullet.png')
+      this.bulletImage3.src = require('../../assets/images/specialBullet3.png')
       this.gameOverImage.src = require('../../assets/images/gameOver3.png')
       this.meteor1Image.src = require('../../assets/images/meteor/meteor1.png')
       this.meteor2Image.src = require('../../assets/images/meteor/meteor2.png')
@@ -310,7 +312,8 @@ export default {
           (this.inGameShip == 'rocket5.png' ||
             this.inGameShip == 'rocket6.png' ||
             this.inGameShip == 'rocket7.png' ||
-            this.inGameShip == 'rocket4.png')
+            this.inGameShip == 'rocket4.png' ||
+            this.inGameShip == 'rocket8.png')
         ) {
           this.createBullet(this)
           this.playingSound(event)
@@ -545,6 +548,10 @@ export default {
         this.update3()
         this.render2()
         requestAnimationFrame(this.main)
+      } else if (!this.gameOver && this.inGameShip == 'rocket8.png') {
+        this.update3()
+        this.render3chicken()
+        requestAnimationFrame(this.main)
       } else {
         this.ctx.drawImage(
           this.gameOverImage,
@@ -642,6 +649,44 @@ export default {
       for (let i = 0; i < bulletList.length; i++) {
         if (bulletList[i].alive) {
           this.ctx.drawImage(this.bulletImage2, bulletList[i].x + 48, bulletList[i].y + 12)
+        }
+      }
+
+      for (let i = 0; i < meteorList.length; i++) {
+        if (meteorList[i].alive) {
+          this.ctx.drawImage(this.meteor1Image, meteorList[i].x, meteorList[i].y)
+        }
+      }
+
+      for (let i = 0; i < meteor2List.length; i++) {
+        if (meteor2List[i].alive) {
+          this.ctx.drawImage(this.meteor2Image, meteor2List[i].x, meteor2List[i].y)
+        }
+      }
+
+      for (let i = 0; i < enemyList.length; i++) {
+        this.ctx.drawImage(this.enemyImage, enemyList[i].x, enemyList[i].y)
+      }
+
+      for (let i = 0; i < enemyList2.length; i++) {
+        this.ctx.drawImage(this.enemyImage2, enemyList2[i].x, enemyList2[i].y)
+      }
+    },
+
+    render3chicken() {
+      this.ctx.drawImage(this.backgroundImage, 0, 0, this.ctx.canvas.clientWidth, this.ctx.canvas.clientHeight)
+      // this.ctx.drawImage(this.backgroundImage, 0, 0, this.ctx.canvas.clientWidth, this.ctx.canvas.clientHeight)
+      this.ctx.drawImage(this.spaceshipImage, this.spaceshipX, this.spaceshipY)
+      this.ctx.fillText(`Score: ${this.score}`, 850, 30)
+      this.ctx.fillStyle = 'Yellow'
+      this.ctx.font = '25px gothic'
+      this.ctx.fillText(`KYOL: ${this.score / 10}`, 1050, 30)
+      this.ctx.fillStyle = 'White'
+      this.ctx.font = '25px gothic'
+
+      for (let i = 0; i < bulletList.length; i++) {
+        if (bulletList[i].alive) {
+          this.ctx.drawImage(this.bulletImage3, bulletList[i].x + 48, bulletList[i].y + 12)
         }
       }
 

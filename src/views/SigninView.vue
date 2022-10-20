@@ -1,90 +1,89 @@
 <template>
-  <section class="background overflow-hidden">
-    <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
-      <div class="row gx-lg-5 align-items-center mb-5">
-        <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
-          <h1 class="my-5 display-5 fw-bold ls-tight fsize" style="color: hsl(218, 81%, 95%)">
-            &nbsp;반갑습니다. <br />
-            <span style="color: hsl(218, 81%, 95%)"
-              ><a class="navbar-brand" href="/"><img src="../assets/item/logo3.png" /></a> x
-              <a href="https://uvc.co.kr/index.html" target="_blank"
-                ><img class="imgmargin" src="../assets/item/UVClogo2.png" /></a
-            ></span>
-          </h1>
-          <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
-            <!-- Game game game game shootinh shootihg shooting shooting game
+  <!-- <section class="background overflow-hidden"> -->
+  <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+    <div class="row gx-lg-5 align-items-center mb-5">
+      <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+        <h1 class="my-5 display-5 fw-bold ls-tight fsize" style="color: hsl(218, 81%, 95%)">
+          &nbsp;반갑습니다. <br />
+          <span style="color: hsl(218, 81%, 95%)"
+            ><a class="navbar-brand" href="/"><img src="../assets/item/logo3.png" /></a> x
+            <a href="https://uvc.co.kr/index.html" target="_blank"
+              ><img class="imgmargin" src="../assets/item/UVClogo2.png" /></a
+          ></span>
+        </h1>
+        <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
+          <!-- Game game game game shootinh shootihg shooting shooting game
           give me the money money money I'm so tired. I bought an iPhone.
           2 million won, It's too expensive.  // Dj.Jiyoon-->
-          </p>
-        </div>
+        </p>
+      </div>
 
-        <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
-          <div id="radius-shape-1" class="position-absolute shadow-5-strong"></div>
-          <!-- <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div> -->
+      <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+        <div id="radius-shape-1" class="position-absolute shadow-5-strong"></div>
+        <!-- <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div> -->
 
-          <!-- <div class="card bg-glass"> -->
-          <div class="card">
-            <div class="card-body px-4 py-5 px-md-5">
-              <form>
-                <!-- Email input -->
-                <div class="form-outline mb-4">
-                  <h6 class="mb-3 title">이메일</h6>
-                  <input
-                    id="form3Example3"
-                    v-model="email"
-                    type="email"
-                    class="form-control"
-                    placeholder="Email address"
-                    autocomplete="on"
-                  />
+        <!-- <div class="card bg-glass"> -->
+        <div class="card">
+          <div class="card-body px-4 py-5 px-md-5">
+            <form>
+              <!-- Email input -->
+              <div class="form-outline mb-4">
+                <h6 class="mb-3 title">이메일</h6>
+                <input
+                  id="form3Example3"
+                  v-model="email"
+                  type="email"
+                  class="form-control"
+                  placeholder="Email address"
+                  autocomplete="on"
+                />
 
-                  <!-- <label class="form-label" for="form3Example3">Email address</label> -->
-                </div>
+                <!-- <label class="form-label" for="form3Example3">Email address</label> -->
+              </div>
 
-                <!-- Password input -->
-                <div class="form-outline mb-4">
-                  <h6 class="mb-3 title">비밀번호</h6>
-                  <input
-                    id="form3Example4"
-                    v-model="password"
-                    type="password"
-                    class="form-control"
-                    placeholder="Password"
-                    autocomplete="on"
-                  />
-                  <!-- <label class="form-label" for="form3Example4">Password</label> -->
-                </div>
+              <!-- Password input -->
+              <div class="form-outline mb-4">
+                <h6 class="mb-3 title">비밀번호</h6>
+                <input
+                  id="form3Example4"
+                  v-model="password"
+                  type="password"
+                  class="form-control"
+                  placeholder="Password"
+                  autocomplete="on"
+                />
+                <!-- <label class="form-label" for="form3Example4">Password</label> -->
+              </div>
 
+              <!-- Submit button -->
+              <div class="loginbtn">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-block mb-4"
+                  :loading="loading"
+                  style="width: 300px"
+                  @click="signin"
+                >
+                  Sign in
+                </button>
+              </div>
+              <div class="loginbtn2">
                 <!-- Submit button -->
-                <div class="loginbtn">
-                  <button
-                    type="submit"
-                    class="btn btn-primary btn-block mb-4"
-                    :loading="loading"
-                    style="width: 300px"
-                    @click="signin"
-                  >
-                    Sign in
-                  </button>
-                </div>
-                <div class="loginbtn2">
-                  <!-- Submit button -->
-                  <router-link to="/signup"
-                    ><button type="submit" class="btn btn-primary btn-block mb-4" style="width: 300px">
-                      Sign up
-                    </button></router-link
-                  >
-                </div>
-              </form>
-            </div>
+                <router-link to="/signup"
+                  ><button type="submit" class="btn btn-primary btn-block mb-4" style="width: 300px">
+                    Sign up
+                  </button></router-link
+                >
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+  <!-- </section> -->
 </template>
 
-<!-- Section: Design Block -->
 <script>
 import axios from 'axios'
 
@@ -190,5 +189,3 @@ export default {
   font-size: 30px;
 }
 </style>
-
-<!-- Section: Design Block -->

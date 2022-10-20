@@ -6,19 +6,20 @@
         <table class="table table-dark table-hover">
           <thead>
             <tr>
-              <td colspan="4">&lt; Top Ranking &gt;</td>
+              <td colspan="5">&lt; Top Ranking &gt;</td>
             </tr>
             <tr>
-              <th scope="col">순위</th>
-              <th scope="col">우주선</th>
+              <th width="60px" scope="col">순위</th>
+              <th width="70px" scope="col">우주선</th>
               <th scope="col">닉네임</th>
               <th scope="col">Score</th>
+              <th scope="col">Date</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(user, i) in data" :key="i">
               <th scope="row">
-                <div v-if="i == 0">
+                <div v-if="i == 0" width="35px">
                   <img width="35px" src="~@/assets/item/Top1st.png" alt="..." />
                 </div>
                 <div v-else-if="i == 1">
@@ -34,6 +35,7 @@
               </td>
               <td>{{ nick[i] }}</td>
               <td>{{ score[i] }}</td>
+              <td>{{ date[i] }}</td>
             </tr>
           </tbody>
         </table>
@@ -43,23 +45,25 @@
         <table class="table table-dark table-hover">
           <thead>
             <tr>
-              <td colspan="4">&lt; Recent Ranking Past 7days &gt;</td>
+              <td colspan="5">&lt; Recent Ranking Past 7days &gt;</td>
             </tr>
             <tr>
-              <th scope="col">순위</th>
-              <th scope="col">우주선</th>
+              <th width="60px" scope="col">순위</th>
+              <th width="70px" scope="col">우주선</th>
               <th scope="col">닉네임</th>
               <th scope="col">Score</th>
+              <th scope="col">Date</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(user, i) in data2" :key="i">
+            <tr v-for="(user, i) in data2" :key="i" width="35px">
               <th scope="row">{{ i + 1 }}</th>
               <td>
                 <img width="35px" :src="ship2[i]" />
               </td>
               <td>{{ nick2[i] }}</td>
               <td>{{ score2[i] }}</td>
+              <td>{{ date2[i] }}</td>
             </tr>
           </tbody>
         </table>
@@ -71,6 +75,7 @@
 <script>
 import NavBar from '@/components/NavBar.vue'
 import axios from 'axios'
+
 export default {
   name: 'RankingView',
   components: {
@@ -85,6 +90,8 @@ export default {
     score2: [],
     ship2: [],
     nick2: [],
+    date: [],
+    date2: [],
     rankingCrown: [],
     loading: false
   }),
@@ -116,11 +123,14 @@ export default {
             let b = require(`../assets/item/${a}`)
             this.ship.push(b)
           }
+          for (let i in this.data) {
+            let a = response.data.data.topRanking[i].createdAt
+            this.date.push(a.substr(0, 10))
+          }
 
           this.data2 = response.data.data.weeklyRanking[0]
           for (let i in this.data2) {
             let a = response.data.data.weeklyRanking[0][i].score
-
             this.score2.push(a)
           }
           for (let i in this.data2) {
@@ -128,9 +138,13 @@ export default {
             this.nick2.push(a)
           }
           for (let i in this.data2) {
-            let a = response.data.data.topRanking[i].usedShip
+            let a = response.data.data.weeklyRanking[0][i].usedShip
             let b = require(`../assets/item/${a}`)
             this.ship2.push(b)
+          }
+          for (let i in this.data2) {
+            let a = response.data.data.weeklyRanking[0][i].createdAt
+            this.date2.push(a.substr(0, 10))
           }
         })
         .catch(error => {
