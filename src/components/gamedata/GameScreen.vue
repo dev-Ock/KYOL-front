@@ -23,7 +23,7 @@
       </div> -->
     </div>
     <figure>
-      <audio v-if="gameOver == false" autoplay loop src="../../assets/videos/videoplayback2.mp3"></audio>
+      <audio v-if="gameOver == false" autoplay loop src="../../assets/videos/videoplayback5.mp3"></audio>
       <!-- <audio src="../../assets/videos/Laser3.mp3" @keyup.space="playingSound"></audio -->
     </figure>
   </div>
@@ -565,7 +565,7 @@ export default {
 
     playingSound(event) {
       if (event.key == ' ' && this.gameOver == false) {
-        var spaceAudio = new Audio(require('../../assets/videos/Laser5.mp3'))
+        var spaceAudio = new Audio(require('../../assets/videos/Laser7.mp3'))
         setTimeout(function () {
           spaceAudio.play()
           setTimeout(function () {

@@ -2,6 +2,7 @@
   <div class="gearhome">
     <div>
       <div class="block">
+        <audio autoplay loop src="../assets/videos/videoplaybackGearView.mp3"></audio>
         <img class="block" src="../assets/item/logo4.png" />
         <img class="block" src="../assets/item/logo5.png" />
 
@@ -57,7 +58,7 @@ export default {
   created() {
     this.open()
   },
-
+  mounted() {},
   methods: {
     ...mapActions(['gear', 'gear2']),
     open() {
@@ -72,6 +73,7 @@ export default {
         }
       })
     },
+
     choose() {
       this.ft = true
     },
