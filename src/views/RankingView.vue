@@ -43,7 +43,7 @@
         <table class="table table-dark table-hover">
           <thead>
             <tr>
-              <td colspan="4">&lt; Weekly Ranking &gt;</td>
+              <td colspan="4">&lt; Recent Ranking Past 7days &gt;</td>
             </tr>
             <tr>
               <th scope="col">순위</th>
@@ -98,8 +98,6 @@ export default {
         .get(process.env.VUE_APP_API + '/ranking', {
           headers: {
             Authorization: `${localStorage.getItem('token')}`
-            // userid: `${localStorage.getItem('userId')}`,
-            // usernick: `${localStorage.getItem('userNick')}`
           }
         })
         .then(response => {
@@ -122,9 +120,6 @@ export default {
           this.data2 = response.data.data.weeklyRanking[0]
           for (let i in this.data2) {
             let a = response.data.data.weeklyRanking[0][i].score
-            // console.log('실험 : ', response.data.data.weeklyRanking[0])
-            // console.log('실험2 : ', response.data.data.weeklyRanking[0][2])
-            // console.log('실험3 : ', response.data.data.weeklyRanking[0][2].nick)
 
             this.score2.push(a)
           }
@@ -137,25 +132,9 @@ export default {
             let b = require(`../assets/item/${a}`)
             this.ship2.push(b)
           }
-          // if (localStorage.getItem('token') == null) {
-          //   alert('로그인하세요')
-          // }
-
-          // if (this.showFriendListStatus === true) {
-          //   this.showFriendListStatus = false
-          //   console.log(this.showFriendListStatus)
-          // } else {
-          //   console.log(response)
-          //   this.friendInfoList = response.data.friendInfoList
-          //   console.log('loadFriendList - response : ', this.friendInfoList)
-          //   this.showFriendListStatus = true
-          //   console.log(this.showFriendListStatus)
-          // }
         })
         .catch(error => {
           console.log(error)
-
-          // alert('로그인 하세요')
         })
     }
   }

@@ -42,7 +42,7 @@
         </router-link>
       </div>
       <div v-show="loading">
-        <div class="statusDiv">
+        <div class="statusDiv" style="color: white">
           <img class="gold" style="color: white" src="../assets/item/coin.png" />
           {{ gold.toLocaleString() }} KYOL
 
