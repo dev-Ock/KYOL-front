@@ -5,7 +5,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 id="exampleModalLabel" class="modal-title fs-5">Modal title</h1>
+            <!-- <h1 id="exampleModalLabel" class="modal-title fs-5">Modal title</h1> -->
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -346,7 +346,7 @@ body {
   background: url('~@/assets/images/space2.gif') 100% 100% / cover no-repeat;
   height: 100vh;
   width: 100vw;
-  position: fixed;
+  /* position: fixed; */
   overflow: scroll;
   font-family: 'Hahmlet', serif;
 }
