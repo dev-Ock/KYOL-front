@@ -107,6 +107,7 @@ export default {
 
 .gearhome {
   background: url('~@/assets/images/space3.gif') 100% 100% / cover no-repeat;
+  background-size: cover;
   height: 100vh;
   width: 100vw;
   font-family: 'Hahmlet', serif;

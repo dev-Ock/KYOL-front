@@ -184,8 +184,8 @@
 - SigninView.vue
 - SignupView.vue
 
-## (22.10.19)
-- 
+## 각 페이지 기능 개선 및 에러수정2  (22.10.21)
+- Gameview.vue, GameScreen.vue
 
 ## (22.10.20)
 -
