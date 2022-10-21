@@ -257,7 +257,7 @@ export default {
     gameOverImage: '',
     collisionImage: '',
     gameOver: false,
-    score: 5000,
+    score: 0,
     spaceshipX: 0,
     spaceshipY: 0,
     keysDown: {},
