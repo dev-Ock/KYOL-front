@@ -81,7 +81,7 @@
                           data-bs-target="#staticBackdrop"
                           @click="purchaseOpen1"
                         >
-                          구매가능
+                          구매
                         </a>
                       </div>
                       <div v-else>
@@ -126,7 +126,7 @@
                           data-bs-target="#staticBackdrop"
                           @click="purchaseOpen2"
                         >
-                          구매가능
+                          구매
                         </a>
                         <!-- <a class="btn btn-outline-dark mt-auto" href="#" @click="purchaseOpen2">구매 가능</a> -->
                       </div>
@@ -172,7 +172,7 @@
                           data-bs-target="#staticBackdrop"
                           @click="purchaseOpen3"
                         >
-                          구매가능
+                          구매
                         </a>
                       </div>
                       <div v-else>
@@ -215,7 +215,7 @@
                           data-bs-target="#staticBackdrop"
                           @click="purchaseOpen4"
                         >
-                          구매가능
+                          구매
                         </a>
                       </div>
                       <div v-else>
