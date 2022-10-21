@@ -77,12 +77,6 @@ export default {
     choose() {
       this.ft = true
     },
-    // open2() {
-    //   this.gear2(this.image2)
-    //   this.gear2().then(() => {
-    //     console.log('여기서 선택하나? : ', this.currentShipImage)
-    //   })
-    // },
 
     select(spaceship) {
       this.selected = true
@@ -90,9 +84,6 @@ export default {
       this.gear2(this.currentship)
 
       this.ft = spaceship
-
-      // console.log('클릭한 아이템 표시', this.currentship)
-      // console.log('값이 ?', this.gear2(this.currentship))
 
       localStorage.setItem('currentShipData', `${this.currentship}`)
     }
