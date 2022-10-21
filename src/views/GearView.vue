@@ -110,7 +110,7 @@ export default {
   height: 100vh;
   width: 100vw;
   font-family: 'Hahmlet', serif;
-  /* position: fixed; */
+  position: fixed;
 }
 
 .block {

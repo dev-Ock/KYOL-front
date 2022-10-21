@@ -1,7 +1,7 @@
 <template>
-  <div class="home">
+  <div>
     <NavBar></NavBar>
-    <div>
+    <div class="home">
       <div class="videoBody">
         <div class="playButton">
           <router-link v-if="logined == true" class="imgBtn" to="/gear">
@@ -20,7 +20,7 @@
       </div>
 
       <div></div>
-      <div class="imgmargin"></div>
+      <!-- <div class="imgmargin"></div> -->
     </div>
   </div>
 </template>
@@ -77,12 +77,13 @@ export default {
 
 <style scoped>
 .home {
-  background: url('~@/assets/item/1.png') 100% 100% / cover no-repeat;
+  background: url('~@/assets/item/1.png');
   height: 100vh;
   width: 100vw;
+  display: fixed;
   font-family: 'Hahmlet', serif;
   position: fixed;
-  overflow: scroll;
+  /* overflow: scroll; */
 }
 .video {
   height: 100vh;
@@ -106,8 +107,7 @@ export default {
   margin: 0px auto;
   position: relative;
 }
-.container {
-}
+
 .playButton {
   z-index: 1000;
   position: absolute;
