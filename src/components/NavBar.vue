@@ -46,11 +46,12 @@
           <img class="gold" style="color: white" src="../assets/item/coin.png" />
           {{ gold.toLocaleString() }} KYOL
 
-          <router-link to="/">
+          <a href="/">
             <button style="margin-left: 25px" type="button" class="btn btn-outline-dark button" @click="logout">
               로그아웃
             </button>
-          </router-link>
+          </a>
+          <!-- <router-link to="/"> </router-link> -->
         </div>
       </div>
     </div>

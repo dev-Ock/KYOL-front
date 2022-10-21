@@ -2,24 +2,30 @@
   <div class="home">
     <NavBar></NavBar>
     <div>
-      <video class="video" src="~@/assets/videos/HomebackgroundVideo.mp4" autoplay muted loop></video>
+      <div class="videoBody">
+        <div class="playButton">
+          <router-link v-if="logined == true" class="imgBtn" to="/gear">
+            <img src="../assets/item/gamestart.png" />
+          </router-link>
+          <router-link v-else class="imgBtn" to="/signin">
+            <img src="../assets/item/gologin2.png" />
+          </router-link>
+          <p style="color: white">Click here to play</p>
+        </div>
+        <div class="container">
+          <video width="100%" class="video" autoplay muted loop height="auto">
+            <source src="~@/assets/videos/HomebackgroundVideo.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+
       <div></div>
-      <router-link v-if="logined == true" to="/gear">
-        <!-- <button v-if="logined" class="btn2" type="button">{{ nick }}님 게임 시작하실라우?</button> -->
-        <!-- <div v-if="logined"><img class="block" src="../assets/item/gamestart.png" /></div> -->
-        <img src="../assets/item/gamestart.png" />
-        <!-- <button v-else class="btn2" type="button">게스트님 게임 시작하실라우?</button> -->
-      </router-link>
-      <router-link v-else to="/signin">
-        <img src="../assets/item/gologin2.png" />
-      </router-link>
       <div class="imgmargin"></div>
     </div>
   </div>
 </template>
 
 <script>
-// import { component } from 'vue/types/umd'
 import axios from 'axios'
 import NavBar from '@/components/NavBar.vue'
 export default {
@@ -61,6 +67,7 @@ export default {
     },
     checkLogined() {
       if (localStorage.getItem('userNick')) {
+        console.log('하..')
         this.logined = true
       }
     }
@@ -78,9 +85,9 @@ export default {
   overflow: scroll;
 }
 .video {
-  /* background: cover no-repeat; */
-  height: -10vh;
-  width: 70vw;
+  height: 100vh;
+  width: 100%;
+  object-fit: cover;
 }
 .btn2 {
   height: 7vh;
@@ -91,5 +98,34 @@ export default {
 }
 .imgmargin {
   padding: 20px;
+}
+.videoBody {
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  margin: 0px auto;
+  position: relative;
+}
+.container {
+}
+.playButton {
+  z-index: 1000;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+}
+body {
+  padding: 0px;
+  margin: 0px;
+}
+.imgBtn {
+  margin-top: -24px;
+  align-items: center;
+  font-size: 48px;
+  color: #ffffff;
+}
+p {
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
 }
 </style>
