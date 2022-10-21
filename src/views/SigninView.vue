@@ -4,7 +4,7 @@
       <div class="row gx-lg-5 align-items-center mb-5">
         <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
           <h1 class="my-5 display-5 fw-bold ls-tight fsize" style="color: hsl(218, 81%, 95%)">
-            &nbsp;반갑습니다. <br />
+            &nbsp;Welcom to <br />
             <span style="color: hsl(218, 81%, 95%)"
               ><a class="navbar-brand" href="/"><img src="../assets/item/logo3.png" /></a> x
               <a href="https://uvc.co.kr/index.html" target="_blank"
