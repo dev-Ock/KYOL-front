@@ -157,7 +157,7 @@ class Meteor {
         this.x -= 22
       }
     }
-    this.checkHit2 = function (i) {
+    this.checkHitMeteor = function (i) {
       if (
         ((all.spaceshipX <= this.x + 10 && this.x + 10 <= all.spaceshipX + 30) ||
           (this.x + 10 <= all.spaceshipX && all.spaceshipX + 30 <= this.x + 60) ||
@@ -169,7 +169,25 @@ class Meteor {
       ) {
         all.gameOver = true
         all.sendGameOver(all)
-      } else if (this.x <= -70) meteorList.splice(i, 1)
+      } else if (this.x <= -500 && all.score < 8000) {
+        meteorList.splice(i, 1)
+        console.log('메테오 1 삭제 : ', meteorList)
+      }
+    }
+
+    this.checkHitMeteor2 = function (i) {
+      if (
+        ((all.spaceshipX <= this.x + 10 && this.x + 10 <= all.spaceshipX + 30) ||
+          (this.x + 10 <= all.spaceshipX && all.spaceshipX + 30 <= this.x + 60) ||
+          (this.x + 70 > all.spaceshipX && this.x + 70 <= all.spaceX + 30)) &&
+        this.y >= all.spaceshipY - 48 &&
+        this.y <= all.spaceshipY + 33
+      ) {
+        all.gameOver = true
+        all.sendGameOver(all)
+      } else if (this.x <= -500) {
+        meteor2List.splice(i, 1)
+      }
     }
   }
 }
@@ -239,7 +257,7 @@ export default {
     gameOverImage: '',
     collisionImage: '',
     gameOver: false,
-    score: 0,
+    score: 5000,
     spaceshipX: 0,
     spaceshipY: 0,
     keysDown: {},
@@ -406,14 +424,14 @@ export default {
       for (let i = 0; i < meteorList.length; i++) {
         if (meteorList[i].alive) {
           meteorList[i].updateMove()
-          meteorList[i].checkHit2(i)
+          meteorList[i].checkHitMeteor(i)
         }
       }
 
       for (let i = 0; i < meteor2List.length; i++) {
         if (meteor2List[i].alive) {
           meteor2List[i].updateMove2()
-          meteor2List[i].checkHit2(i)
+          meteor2List[i].checkHitMeteor2(i)
         }
       }
       for (let i = 0; i < enemyList.length; i++) {
@@ -461,14 +479,14 @@ export default {
       for (let i = 0; i < meteorList.length; i++) {
         if (meteorList[i].alive) {
           meteorList[i].updateMove()
-          meteorList[i].checkHit2(i)
+          meteorList[i].checkHitMeteor(i)
         }
       }
 
       for (let i = 0; i < meteor2List.length; i++) {
         if (meteor2List[i].alive) {
           meteor2List[i].updateMove2()
-          meteor2List[i].checkHit2(i)
+          meteor2List[i].checkHitMeteor2(i)
         }
       }
       for (let i = 0; i < enemyList.length; i++) {
@@ -516,14 +534,14 @@ export default {
       for (let i = 0; i < meteorList.length; i++) {
         if (meteorList[i].alive) {
           meteorList[i].updateMove()
-          meteorList[i].checkHit2(i)
+          meteorList[i].checkHitMeteor(i)
         }
       }
 
       for (let i = 0; i < meteor2List.length; i++) {
         if (meteor2List[i].alive) {
           meteor2List[i].updateMove2()
-          meteor2List[i].checkHit2(i)
+          meteor2List[i].checkHitMeteor2(i)
         }
       }
       for (let i = 0; i < enemyList.length; i++) {

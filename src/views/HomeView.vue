@@ -10,7 +10,7 @@
           <router-link v-else class="imgBtn" to="/signin">
             <img src="../assets/item/gologin2.png" />
           </router-link>
-          <p style="color: white">Click here to play</p>
+          <p style="color: yellow">Click here to play</p>
         </div>
         <div class="container">
           <video width="100%" class="video" autoplay muted loop height="auto">
