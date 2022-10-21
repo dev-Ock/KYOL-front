@@ -769,7 +769,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .my-canvas {
   position: left;
   /* width: 100%;
@@ -780,9 +780,11 @@ export default {
   font-family: 'Hahmlet', serif;
   /* background: url('~@/assets/images/.gif') 100% 100% / cover no-repeat; */
   width: 100vw;
-  height: 88.5vh;
-  display: fixed;
-  background: #010101;
+  height: 100vh;
+  /* display: fixed; */
+  position: fixed;
+  background: url('~@/assets/item/1.png');
+  /* #010101; */
 }
 .gamehome {
   height: 100vh;
@@ -791,5 +793,6 @@ export default {
   /* overflow: scroll; */
   font-family: 'Hahmlet', serif;
   /* display: flex; */
+  background: url('~@/assets/item/1.png');
 }
 </style>
