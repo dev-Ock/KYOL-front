@@ -5,12 +5,12 @@
       <div class="videoBody">
         <div class="playButton">
           <router-link v-if="logined == true" class="imgBtn" to="/gear">
-            <img src="../assets/item/gamestart.png" />
+            <img src="../assets/item/gamestart2.png" />
           </router-link>
           <router-link v-else class="imgBtn" to="/signin">
             <img src="../assets/item/gologin2.png" />
           </router-link>
-          <p style="color: yellow">Click here to play</p>
+          <p style="color: white">Click here to play</p>
         </div>
         <div class="container">
           <video width="100%" class="video" autoplay muted loop height="auto">
