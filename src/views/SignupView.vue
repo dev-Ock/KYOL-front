@@ -6,7 +6,7 @@
           <h1 class="display-5 fw-bold ls-tight margin1" style="color: hsl(218, 81%, 95%)">
             <!-- <a class="navbar-brand" href="/"><img src="../assets/item/logo3.png" /></a> -->
             <!-- class="my-5 display-5 fw-bold ls-tight" -->
-            Create an Account<br />
+            Create KYOL Account<br />
             <!-- <span style="color: hsl(218, 81%, 75%)">save our space</span> -->
           </h1>
           <a class="navbar-brand" href="/"><img src="../assets/item/kyollogo2.png" /></a>
