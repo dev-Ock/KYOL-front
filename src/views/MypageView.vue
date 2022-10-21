@@ -258,18 +258,11 @@ export default {
         )
         .then(response => {
           console.log('pwupdate:', response)
-
-          // if (this.pwInspection == false || this.cfpwInspection == false) {
-          //   this.$router.push({ name: 'mypage' })
-          // }
-
-          // if (response.data.message == 'update-success') {
-          //   alert('회원정보수정완료')
-          // }
         })
         .catch(error => {
           console.log(error)
         })
+        .finally(this.$router.go(0))
     },
     checkPassword(str) {
       var reg_password = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/
