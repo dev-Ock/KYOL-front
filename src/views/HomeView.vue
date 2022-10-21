@@ -106,8 +106,7 @@ export default {
   margin: 0px auto;
   position: relative;
 }
-.container {
-}
+
 .playButton {
   z-index: 1000;
   position: absolute;
