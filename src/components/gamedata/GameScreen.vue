@@ -1,31 +1,35 @@
 <template>
-  <div class="my-canvas-wrapper">
-    <!-- ref="my-canvas" -->
-    <!-- <video class="video" src="~@/assets/videos/spaceBackGround15.mp4" autoplay muted loop></video> -->
-    <canvas ref="myClass" class="my-canvas" width="1200" height="500">
-      <img src="../../assets/images/space.jpg" />
-    </canvas>
-    <div v-if="gameOver == true">
-      죽음 ? 1 코인 더?
-      <a href="/gear">
-        <button class="pushable">
-          <button class="front"></button>
-        </button>
-      </a>
-      <!-- <router-link to="/gear">
+  <div class="gamehome">
+    <div class="my-canvas-wrapper">
+      <!-- ref="my-canvas" -->
+      <!-- <video class="video" src="~@/assets/videos/spaceBackGround15.mp4" autoplay muted loop></video> -->
+      <canvas ref="myClass" class="my-canvas" width="1200" height="500">
+        <img src="../../assets/images/space.jpg" />
+      </canvas>
+      <div v-if="gameOver == true">
+        <div style="color: white">
+          죽음 ? 한 판 더 ?
+          <a href="/gear">
+            <button class="pushable">
+              <button class="front"></button>
+            </button>
+          </a>
+        </div>
+        <!-- <router-link to="/gear">
         <button class="pushable">
           <button class="front"></button>
         </button>
       </router-link> -->
 
-      <!-- <div class="gamebtn">
+        <!-- <div class="gamebtn">
         <button>게임 다시하기</button>
       </div> -->
+      </div>
+      <figure>
+        <audio v-if="gameOver == false" autoplay loop src="../../assets/videos/videoplayback5.mp3"></audio>
+        <!-- <audio src="../../assets/videos/Laser3.mp3" @keyup.space="playingSound"></audio -->
+      </figure>
     </div>
-    <figure>
-      <audio v-if="gameOver == false" autoplay loop src="../../assets/videos/videoplayback5.mp3"></audio>
-      <!-- <audio src="../../assets/videos/Laser3.mp3" @keyup.space="playingSound"></audio -->
-    </figure>
   </div>
 </template>
 
@@ -752,13 +756,22 @@ export default {
   position: left;
   /* width: 100%;
   height: 100%; */
-  border: 1px solid rgb(199, 198, 198);
+  /* border: 1px solid rgb(199, 198, 198); */
 }
 .my-canvas-wrapper {
   font-family: 'Hahmlet', serif;
   /* background: url('~@/assets/images/.gif') 100% 100% / cover no-repeat; */
+  width: 100vw;
+  height: 88.5vh;
+  display: fixed;
+  background: #010101;
+}
+.gamehome {
   height: 100vh;
   width: 100vw;
-  position: fixed;
+  /* position: fixed; */
+  /* overflow: scroll; */
+  font-family: 'Hahmlet', serif;
+  /* display: flex; */
 }
 </style>
