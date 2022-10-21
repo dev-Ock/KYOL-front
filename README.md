@@ -164,25 +164,25 @@
 
 ## 각 페이지 기능 개선 및 에러수정 + store 기능 개선 + NotFound 페이지생성 (22.10.19)
 
-- Gameview.vue, GameScreen.vue
-- ShopView.vue
-- HomeView.vue 
-- RankingView.vue
-- MypageView.vue
-- SigninView.vue
-- SignupView.vue
-- store/index.js
-- NotFound.vue
+- Gameview.vue, GameScreen.vue (게임 디자인 보완)
+- ShopView.vue (모달창 수정)
+- HomeView.vue (배경화면 조절)
+- RankingView.vue (표 위치 수정)
+- MypageView.vue (디자인 수정)
+- SigninView.vue (위치 수정)
+- SignupView.vue (위치 수정)
+- store/index.js (store기능 수정)
+- NotFound.vue (404페이지 생성)
 
 ## 각 페이지 기능 개선 및 에러수정  (22.10.20)
 
-- Gameview.vue, GameScreen.vue
-- ShopView.vue
-- HomeView.vue 
-- RankingView.vue
-- MypageView.vue
-- SigninView.vue
-- SignupView.vue
+- Gameview.vue, GameScreen.vue (게임 디자인 보완)
+- ShopView.vue (배경 디자인 수정)
+- HomeView.vue (위치 및 배경 수정)
+- RankingView.vue (디자인 수정)
+- MypageView.vue (닉네임, 비밀번호 수정버튼 보완)
+- SigninView.vue (디자인 수정)
+- SignupView.vue (디자인 수정)
 
 ## 각 페이지 기능 개선 및 에러수정2  (22.10.21)
 - Gameview.vue, GameScreen.vue
