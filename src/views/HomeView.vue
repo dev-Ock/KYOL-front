@@ -20,7 +20,6 @@
       </div>
 
       <div></div>
-      <!-- <div class="imgmargin"></div> -->
     </div>
   </div>
 </template>

@@ -128,7 +128,6 @@
                         >
                           구매
                         </a>
-                        <!-- <a class="btn btn-outline-dark mt-auto" href="#" @click="purchaseOpen2">구매 가능</a> -->
                       </div>
                       <div v-else>
                         <a class="btn btn-secondary btn mt-auto disabled" href="#">보유중</a>
@@ -278,13 +277,10 @@ export default {
         .get(process.env.VUE_APP_API + '/shop', {
           headers: {
             Authorization: `${localStorage.getItem('token')}`
-            // userid: `${localStorage.getItem('userId')}`,
-            // usernick: `${localStorage.getItem('userNick')}`
           }
         })
         .then(response => {
           console.log('shop - response : ', response)
-          // localStorage.setItem('token', response.data.token)
           this.nick = response.data.data.user.nick
           this.gold = response.data.data.user.gold
           this.spaceShips = response.data.data.user.Spaceships // 보유중인 우주선

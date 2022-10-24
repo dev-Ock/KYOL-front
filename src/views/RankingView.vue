@@ -158,7 +158,6 @@ export default {
 <style scoped>
 .score {
   width: 70vh;
-  /* height: 70vw; */
   display: inline-block;
   margin: 30px;
 }
