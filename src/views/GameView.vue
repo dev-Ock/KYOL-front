@@ -1,7 +1,6 @@
 <template>
   <div class="gameviehome">
     <NavBar></NavBar>
-    <!-- {{ currentShipImage }} -->
     <div id="app" class="status">
       <GameScreen style="width: 100%; height: 600px"> </GameScreen>
     </div>
@@ -23,7 +22,6 @@ export default {
   computed: {
     ...mapState({
       data: 'data'
-      // currentShipImage: 'currentShipImage'
     }),
     ...mapGetters({
       currentShipImage: 'example'
@@ -40,8 +38,6 @@ export default {
         .get(process.env.VUE_APP_API + '/game', {
           headers: {
             Authorization: `${localStorage.getItem('token')}`
-            // userid: `${localStorage.getItem('userId')}`,
-            // usernick: `${localStorage.getItem('userNick')}`
           }
         })
         .then(response => {
