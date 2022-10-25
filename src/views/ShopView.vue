@@ -27,31 +27,12 @@
       </div>
     </div>
 
-    <!-- 기존 -->
-
-    <!-- <div v-show="purchasemodal" class="black-bg">
-      <div class="white-bg">
-        <h4>{{ 이지윤 }}</h4>
-        <button v-show="closebtn" class="btn btn-outline-dark mt-auto" @click="purchaserocket">구매하기</button>
-        <button class="btn btn-outline-dark mt-auto" @click="close">닫기</button>
-      </div>
-    </div> -->
-
     <div class="home">
       <div>
         <header>
           <div class="profilebox">
             {{ nick }}님의 보유 자산 : {{ gold.toLocaleString() }} KYOL
             <div></div>
-            <!-- <div class="badge bg-white text-white position-absolute">
-              <img class="myprofile" src="~@/assets/item/rocket1.png" />
-              <img class="myprofile" src="~@/assets/item/empty.png" />
-              <img class="myprofile" src="~@/assets/item/empty.png" />
-              <img class="myprofile" src="~@/assets/item/empty.png" />
-            </div>
-            <div>
-              <img class="myprofile" src="~@/assets/item/coin.png" />
-            </div> -->
           </div>
         </header>
         <section class="py-5">
@@ -247,7 +228,6 @@ export default {
     showbtn3: true,
     showbtn4: true,
     gold: '',
-    isActive: true,
     data: [],
     spaceships: [],
     rocket1: { imgname: 'rocket1.png', price: 150, name: 'rocket1' },
@@ -255,7 +235,6 @@ export default {
     rocket3: { imgname: 'rocket3.png', price: 10000, name: 'rocket3' },
     rocket4: { imgname: 'rocket4.png', price: 50000, name: 'rocket4' },
     nick: '',
-    spaceshipsimg: '',
     spaceShipsList: [],
     rocketbox: '',
     rocketprice: 0,
@@ -284,7 +263,6 @@ export default {
           this.nick = response.data.data.user.nick
           this.gold = response.data.data.user.gold
           this.spaceShips = response.data.data.user.Spaceships // 보유중인 우주선
-          // this.spaceshipsimg = response.data.data.user.currentShipImage // 장착하고있는 우주선
           this.availableShip = response.data.data.availableShip
           this.availableResult = response.data.data.availableResult
           console.log('spaceShips: ', this.spaceShips)
@@ -297,19 +275,15 @@ export default {
           for (let i in this.spaceShipsList) {
             if (this.spaceShipsList[i] == this.rocket1.imgname) {
               this.showbtn = false
-              // this.showbtn2 = false
             }
             if (this.spaceShipsList[i] == this.rocket2.imgname) {
               this.showbtn2 = false
-              // this.showbtn2 = false
             }
             if (this.spaceShipsList[i] == this.rocket3.imgname) {
               this.showbtn3 = false
-              // this.showbtn2 = false
             }
             if (this.spaceShipsList[i] == this.rocket4.imgname) {
               this.showbtn4 = false
-              // this.showbtn2 = false
             }
           }
         })
@@ -368,50 +342,23 @@ export default {
 </script>
 
 <style scoped>
-.black-bg {
-  /* width: 100%;
-  height: 100%; */
-  /* background: rgba(0, 0, 0, 0.5); */
-  position: fixed;
-  /* padding: 20px; */
-}
-.white-bg {
-  width: 100%;
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
-  position: fixed;
-}
 .container {
   height: -10vh;
   width: 70vw;
 }
-.myprofile {
-  width: 100px;
-  height: 100px;
-}
 .profilebox {
   width: 100%;
-  /* background: rgba(200, 200, 200, 0.5); */
-  /* border-radius: 10px; */
   padding: 20px;
-  /* position: fixed; */
   color: white;
   text-align: center;
   font-size: 30px;
 }
-/* body {
-  position: fixed;
-  overflow: scroll;
-  display: fixed;
-} */
 .shophome {
   background: url('~@/assets/images/space2.gif') 100% 100% / cover no-repeat;
   height: 100vh;
   width: 100vw;
   font-family: 'Hahmlet', serif;
   font-weight: 500;
-  /* position: fixed; */
   overflow: scroll;
 }
 </style>

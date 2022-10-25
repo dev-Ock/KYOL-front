@@ -82,7 +82,6 @@ export default {
   display: fixed;
   font-family: 'Hahmlet', serif;
   position: fixed;
-  /* overflow: scroll; */
 }
 .video {
   height: 100vh;

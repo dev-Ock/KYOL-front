@@ -5,8 +5,6 @@
         <audio autoplay loop src="../assets/videos/videoplaybackGearView.mp3"></audio>
         <img class="block" src="../assets/item/logo4.png" />
         <img class="block" src="../assets/item/logo5.png" />
-
-        <!-- <div>&lt;{{ data.nick }}님의 보유우주선&gt;</div> -->
         <div>
           <div v-for="(a, i) in array" id="i" :key="i" class="hh">
             <img class="mt-5 bb" width="150px" :src="array[i]" :class="ft === i ? 'choose' : ''" />
@@ -36,9 +34,7 @@ export default {
   name: 'GearView',
   data() {
     return {
-      nick: '',
       spaceships: [],
-      rocket: [],
       array: [],
       ship: [],
       currentship: '',
