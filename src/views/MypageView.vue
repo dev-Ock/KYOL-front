@@ -115,7 +115,6 @@ export default {
     ssdata: [],
     spaceships: [],
     rocket2: [],
-    loading: false,
     pwInspection: false,
     cfpwInspection: false,
     originnick: ''
@@ -141,8 +140,6 @@ export default {
           {
             headers: {
               Authorization: `${localStorage.getItem('token')}`
-              // userid: `${localStorage.getItem('userId')}`,
-              // usernick: `${localStorage.getItem('userNick')}`
             }
           }
         )
@@ -163,17 +160,6 @@ export default {
             let b = require(`../assets/item/${this.spaceships[i]}`)
             this.rocket2.push(b)
           }
-
-          // if (this.showFriendListStatus === true) {
-          //   this.showFriendListStatus = false
-          //   console.log(this.showFriendListStatus)
-          // } else {
-          //   console.log(response)
-          //   this.friendInfoList = response.data.friendInfoList
-          //   console.log('loadFriendList - response : ', this.friendInfoList)
-          //   this.showFriendListStatus = true
-          //   console.log(this.showFriendListStatus)
-          // }
         })
         .catch(error => {
           console.log(error)
@@ -230,7 +216,6 @@ export default {
             localStorage.removeItem('userId')
             console.log('이제 남남입니다.')
             this.$router.push({ name: 'home' })
-            // NavBar.loading = false
           }
         })
         .catch(error => {
@@ -339,7 +324,6 @@ body {
   background: url('~@/assets/images/space2.gif') 100% 100% / cover no-repeat;
   height: 100vh;
   width: 100vw;
-  /* position: fixed; */
   overflow: scroll;
   font-family: 'Hahmlet', serif;
 }

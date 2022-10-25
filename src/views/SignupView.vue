@@ -113,8 +113,6 @@ export default {
     cfpwInspection: false,
     nickInspection: false,
     check: false
-
-    // loading: false
   }),
   watch: {
     email(a) {
