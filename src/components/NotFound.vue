@@ -33,7 +33,6 @@ export default {}
 .insideDiv {
   vertical-align: middle;
   display: table-cell;
-  /* background-color: azure; */
   color: #fff;
 }
 .contextDiv {

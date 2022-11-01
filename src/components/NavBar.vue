@@ -16,8 +16,6 @@
       <div id="navbarTogglerDemo02" class="collapse navbar-collapse">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <!-- <span @click="goRanking"> ranking1</span> -->
-
             <a class="nav-link" style="color: white" href="/ranking">Ranking</a>
           </li>
 
@@ -28,9 +26,6 @@
           <li class="nav-item" @click="shopcheck">
             <a class="nav-link" style="color: white" :href="href2">Shop</a>
           </li>
-          <!-- <li class="nav-item" @click="gamecheck">
-            <a class="nav-link" :href="href3">Game</a>
-          </li> -->
         </ul>
       </div>
       <div v-show="!loading">
@@ -51,7 +46,6 @@
               로그아웃
             </button>
           </a>
-          <!-- <router-link to="/"> </router-link> -->
         </div>
       </div>
     </div>
@@ -164,9 +158,6 @@ export default {
 }
 .navhome {
   background: url('~@/assets/item/1.png') 100% 100% / cover no-repeat;
-  /* height: 100vh;
-  width: 100vw; */
   font-family: 'Hahmlet', serif;
-  /* position: fixed; */
 }
 </style>
