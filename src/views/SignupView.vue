@@ -4,10 +4,7 @@
       <div class="row gx-lg-5 align-items-center mb-5">
         <div class="col-lg-6 mb-5 mb-lg-0 topmargin" style="z-index: 10">
           <h1 class="display-5 fw-bold ls-tight margin1" style="color: hsl(218, 81%, 95%)">
-            <!-- <a class="navbar-brand" href="/"><img src="../assets/item/logo3.png" /></a> -->
-            <!-- class="my-5 display-5 fw-bold ls-tight" -->
             Create KYOL Account<br />
-            <!-- <span style="color: hsl(218, 81%, 75%)">save our space</span> -->
           </h1>
           <a class="navbar-brand" href="/"><img src="../assets/item/kyollogo2.png" /></a>
         </div>
@@ -99,7 +96,7 @@
 
 <script>
 import axios from 'axios'
-// import { flip } from '@popperjs/core'
+
 export default {
   name: 'SignupView',
   data: () => ({
@@ -131,7 +128,6 @@ export default {
   mounted() {
     this.checkLocalStorage()
   },
-  //
   methods: {
     checkEmail(str) {
       var reg_email = /^[A-Za-z0-9_\\.\\-]+@[A-Za-z0-9\\-]+\.[A-Za-z0-9\\-]+/

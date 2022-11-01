@@ -75,7 +75,6 @@ export default {
 .centerinput {
   width: 500px;
   height: 500px;
-  /* margin: 0 auto; */
 }
 .white {
   color: white;

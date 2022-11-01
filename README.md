@@ -186,6 +186,25 @@
 
 ## 각 페이지 기능 개선 및 에러수정2  (22.10.21)
 - Gameview.vue, GameScreen.vue
+- revise buttons
+- revise Modal function
+- Screen CSS update - HomeView, SigninView, GameView
 
-## (22.10.20)
--
+
+## 코드 정리 (22.10.24)
+- HomeView.vue
+- GameScreen.vue, GearView.vue
+- ShopView.vue, MypageView.vue, RankingView.vue
+- SignupView.vue, PwView.vue
+
+## 코드 정리 (22.10.25)
+- NavBar.vue, NotFound.vue
+- GameScreen.vue, GearView.vue
+- ShopView.vue
+- SignupView.vue, PwView.vue
+
+## 코드 정리 (22.10.29)
+- NavBar.vue, NotFound.vue
+- GameScreen.vue
+- ShopView.vue
+- SignupView.vue, PwView.vue

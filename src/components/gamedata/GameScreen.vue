@@ -1,8 +1,6 @@
 <template>
   <div class="gamehome">
     <div class="my-canvas-wrapper">
-      <!-- ref="my-canvas" -->
-      <!-- <video class="video" src="~@/assets/videos/spaceBackGround15.mp4" autoplay muted loop></video> -->
       <canvas ref="myClass" class="my-canvas" width="1200" height="500">
         <img src="../../assets/images/space.jpg" />
       </canvas>
@@ -15,19 +13,9 @@
             </button>
           </a>
         </div>
-        <!-- <router-link to="/gear">
-        <button class="pushable">
-          <button class="front"></button>
-        </button>
-      </router-link> -->
-
-        <!-- <div class="gamebtn">
-        <button>게임 다시하기</button>
-      </div> -->
       </div>
       <figure>
         <audio v-if="gameOver == false" autoplay loop src="../../assets/videos/videoplayback5.mp3"></audio>
-        <!-- <audio src="../../assets/videos/Laser3.mp3" @keyup.space="playingSound"></audio -->
       </figure>
     </div>
   </div>
