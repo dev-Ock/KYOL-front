@@ -45,7 +45,7 @@ export default {
         .then(response => {
           console.log('pwcheck - response : ', response)
           this.response = response.data.message
-          if (this.response == 'compare-result-true') {
+          if (this.response == 'success') {
             console.log('이동하즈아')
             this.$router.push({ name: 'mypage' })
           }

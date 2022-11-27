@@ -6,7 +6,8 @@
           <h1 class="my-5 display-5 fw-bold ls-tight fsize" style="color: hsl(218, 81%, 95%)">
             &nbsp;Welcome to <br />
             <span style="color: hsl(218, 81%, 95%)"
-              ><a class="navbar-brand" href="/"><img src="../assets/item/logo3.png" /></a> x
+              ><a class="navbar-brand" href="/"><img src="../assets/item/logo3.png" /></a>
+              x
               <a href="https://uvc.co.kr/index.html" target="_blank"
                 ><img class="imgmargin" src="../assets/item/UVClogo2.png" /></a
             ></span>
@@ -122,7 +123,7 @@ export default {
         .catch(error => {
           console.log('에러다 : ', error)
           console.log(error.response.data.message)
-          if (error.response.data.message == 'login-failure') {
+          if (error.response.data.message == 'invalide') {
             alert('아이디 또는 비밀번호가 틀렸습니다.')
             this.$router.go() // 로그인 화면 새로고침 (아이디, 비번 입력란 초기화를 위해)
           }

@@ -37,6 +37,17 @@ export default new Vuex.Store({
         .then(response => commit('ai', response.data.data))
         .catch(error => {
           console.log('gear 에러', error)
+          // console.log('gear 에러 메시지', error.response.data.message)
+          // if (error.response.data.message === 'premium limit') {
+          //   return alert(
+          //     '프리미엄 사용자는 1분에 100번까지 페이지 요청이 가능합니다. 1분 후에 확인 버튼을 눌러주시기 바랍니다.'
+          //   )
+          // }
+          // if (error.response.data.message === 'free limit') {
+          //   return alert(
+          //     `무료 사용자는 1분에 5번까지 페이지 요청이 가능합니다. 1분 후에 확인 버튼을 눌러주시기 바랍니다.`
+          //   )
+          // }
         })
     },
 
