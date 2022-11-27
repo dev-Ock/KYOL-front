@@ -182,14 +182,14 @@ export default {
           console.log('update:', response)
           localStorage.setItem('userNick', response.data.data.nick)
 
-          if (response.data.message == 'nick-update-success') {
+          if (response.data.message == 'success') {
             alert('회원정보수정완료')
             this.$router.go()
           }
         })
         .catch(error => {
           console.log('에러표시', error)
-          if (error.response.data.message == 'unavailable nick') {
+          if (error.response.data.message == 'invalidn') {
             alert('중복된 닉네임입니다.')
           } else {
             alert('다시 시도해보세요')
@@ -208,7 +208,7 @@ export default {
         .then(response => {
           console.log('delete:', response)
 
-          if (response.data.message == 'delete-success') {
+          if (response.data.message == 'success') {
             alert('탈퇴완료')
             console.log('탈퇴확인창 확인 눌렀음')
             localStorage.removeItem('userNick')
