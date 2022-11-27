@@ -26,6 +26,11 @@ const routes = [
     component: () => import('@/views/ShopView.vue')
   },
   {
+    path: '/community',
+    name: 'community',
+    component: () => import('@/views/CommunityView.vue')
+  },
+  {
     path: '/mypage',
     name: 'mypage',
     component: () => import('@/views/MypageView.vue')
