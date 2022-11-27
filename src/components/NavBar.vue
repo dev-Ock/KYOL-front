@@ -19,12 +19,15 @@
             <a class="nav-link" style="color: white" href="/ranking">Ranking</a>
           </li>
 
-          <li class="nav-item" @click="mypagecheck">
+          <li class="nav-item" @click="mypageCheck">
             <a class="nav-link" style="color: white" :href="href">My Page</a>
           </li>
 
-          <li class="nav-item" @click="shopcheck">
+          <li class="nav-item" @click="shopCheck">
             <a class="nav-link" style="color: white" :href="href2">Shop</a>
+          </li>
+          <li class="nav-item" @click="communityCheck">
+            <a class="nav-link" style="color: white" :href="href4">Community</a>
           </li>
         </ul>
       </div>
@@ -61,19 +64,20 @@ export default {
     href: '/mypage',
     href2: '/shop',
     href3: '/game',
+    href4: '/community',
     gold: 0
   }),
   mounted() {
-    this.checkLocalstorage()
+    this.checkLocalStorage()
 
-    this.checkgold()
+    this.checkGold()
   },
   methods: {
     goRanking() {
       this.$router.push('/ranking')
     },
 
-    checkgold() {
+    checkGold() {
       if (localStorage.getItem('token')) {
         axios
           .get(process.env.VUE_APP_API + '/main/navbar', {
@@ -83,7 +87,7 @@ export default {
             }
           })
           .then(response => {
-            console.log('checkgold - response : ', response)
+            console.log('checkGold - response : ', response)
             this.gold = response.data.data.gold
           })
           .catch(error => {
@@ -92,7 +96,7 @@ export default {
       }
     },
 
-    logincheck() {
+    loginCheck() {
       if (localStorage.getItem('userNick') == !null) {
         this.loading = true
       }
@@ -105,7 +109,7 @@ export default {
       console.log('로그아웃성공')
       this.loading = false
     },
-    checkLocalstorage() {
+    checkLocalStorage() {
       if (localStorage.getItem('userNick') && localStorage.getItem('token')) {
         this.loading = true
       } else {
@@ -113,7 +117,7 @@ export default {
         // this.$router.go(0)
       }
     },
-    mypagecheck() {
+    mypageCheck() {
       if (localStorage.getItem('token') == null) {
         alert('로그인하시라우')
         this.href = '/signin'
@@ -121,16 +125,22 @@ export default {
         this.href = '/password'
       }
     },
-    shopcheck() {
+    shopCheck() {
       if (localStorage.getItem('token') == null) {
         alert('로그인하시라우')
         this.href2 = '/signin'
       }
     },
-    gamecheck() {
+    gameCheck() {
       if (localStorage.getItem('token') == null) {
         alert('로그인하시라우')
         this.href3 = '/signin'
+      }
+    },
+    communityCheck() {
+      if (localStorage.getItem('token') == null) {
+        alert('로그인하시라우')
+        this.href4 = '/signin'
       }
     }
   }
