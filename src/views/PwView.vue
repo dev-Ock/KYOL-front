@@ -46,7 +46,7 @@ export default {
           console.log('pwcheck - response : ', response)
           this.response = response.data.message
           if (this.response == 'success') {
-            console.log('이동하즈아')
+            console.log('마이페이지 접속')
             this.$router.push({ name: 'mypage' })
           }
 

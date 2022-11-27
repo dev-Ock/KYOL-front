@@ -218,7 +218,7 @@ export default {
         })
         .catch(error => {
           console.log('duplicationNick - error : ', error)
-          if (error.response.data.message == 'nick-is-null') {
+          if (error.response.data.message == 'blank') {
             alert('공백은 사용할 수 없습니다.')
           } else {
             this.nickInspection = true
