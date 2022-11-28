@@ -26,9 +26,12 @@
           <li class="nav-item" @click="shopCheck">
             <a class="nav-link" style="color: white" :href="href2">Shop</a>
           </li>
-          <li class="nav-item" @click="communityCheck">
-            <a class="nav-link" style="color: white" :href="href4">Community</a>
+          <li class="nav-item">
+            <a class="nav-link" style="color: white" href="/community">Community</a>
           </li>
+          <!-- <li class="nav-item" @click="communityCheck">
+            <a class="nav-link" style="color: white" :href="href4">Community</a>
+          </li> -->
         </ul>
       </div>
       <div v-show="!loading">
