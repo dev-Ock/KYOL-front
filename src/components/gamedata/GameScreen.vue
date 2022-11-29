@@ -601,11 +601,7 @@ export default {
       switch (event.key) {
         case 'space':
           this.playSound()
-          break // 'a' key
-
-        // case 66:
-        //   this.playSound(sound2)
-        //   break // 'b' key
+          break
       }
     },
     render() {
@@ -760,27 +756,18 @@ export default {
 <style scoped>
 .my-canvas {
   position: left;
-  /* width: 100%;
-  height: 100%; */
-  /* border: 1px solid rgb(199, 198, 198); */
 }
 .my-canvas-wrapper {
   font-family: 'Hahmlet', serif;
-  /* background: url('~@/assets/images/.gif') 100% 100% / cover no-repeat; */
   width: 100vw;
   height: 100vh;
-  /* display: fixed; */
   position: fixed;
   background: url('~@/assets/item/1.png');
-  /* #010101; */
 }
 .gamehome {
   height: 100vh;
   width: 100vw;
-  /* position: fixed; */
-  /* overflow: scroll; */
   font-family: 'Hahmlet', serif;
-  /* display: flex; */
   background: url('~@/assets/item/1.png');
 }
 </style>
