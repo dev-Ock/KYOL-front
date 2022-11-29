@@ -29,36 +29,8 @@
           </tr>
         </tbody>
       </table>
-      <div v-if="paging.total_list_cnt > 0" class="pagination w3-bar w3-padding-16 w3-small">
-        <span class="pg">
-          <a href="javascript:;" class="first w3-button w3-border" @click="fnPage(1)">&lt;&lt;</a>
-          <a
-            v-if="paging.start_page > 10"
-            href="javascript:;"
-            class="prev w3-button w3-border"
-            @click="fnPage(`${paging.start_page - 1}`)"
-            >&lt;</a
-          >
-          <template v-for="(n, index) in pageNavigation()">
-            <template v-if="paging.page == n">
-              <strong :key="index" class="w3-button w3-border w3-green">{{ n }}</strong>
-            </template>
-            <template v-else>
-              <a :key="index" class="w3-button w3-border" href="javascript:;" @click="fnPage(`${n}`)">{{ n }}</a>
-            </template>
-          </template>
-          <a
-            v-if="paging.total_page_cnt > paging.end_page"
-            href="javascript:;"
-            class="next w3-button w3-border"
-            @click="fnPage(`${paging.end_page + 1}`)"
-            >&gt;</a
-          >
-          <a href="javascript:;" class="last w3-button w3-border" @click="fnPage(`${paging.total_page_cnt}`)"
-            >&gt;&gt;</a
-          >
-        </span>
-      </div>
+      <!-- pagination -->
+      <pagination :page-setting="pageDataSetting(total, limit, block, page)" @paging="pagingMethod" />
     </div>
 
     <!-- <div>로그인/비 로그인 구분</div>
@@ -70,30 +42,24 @@
 
 <script>
 import NavBar from '@/components/NavBar.vue'
+import Pagination from '../components/Pagination.vue'
 import axios from 'axios'
 
 export default {
   name: 'RankingView',
   components: {
-    NavBar
+    NavBar,
+    Pagination
   },
   data: () => ({
     list: [],
+    listData: [],
     requestBody: {},
     no: '',
-    paging: {
-      block: 0,
-      end_page: 0,
-      next_block: 0,
-      page: 0,
-      page_size: 0,
-      prev_block: 0,
-      start_index: 0,
-      start_page: 0,
-      total_block_cnt: 0,
-      total_list_cnt: 0,
-      total_page_cnt: 0
-    },
+    total: this.list.length,
+    page: 1,
+    limit: 5,
+    block: 5,
     // page: this.$router.query.page ? this.$router.query.page : 1,
     // size: this.$router.query.size ? this.$router.query.size : 10,
     // keyword: this.$router.query.keyword,
@@ -108,40 +74,17 @@ export default {
   }),
   mounted() {
     this.fnGetList2()
+    this.pagingMethod(this.page)
   },
   methods: {
     fnWrite() {
       console.log('write a post')
     },
-    // fnGetList() {
-    //   // 예시) back 에서 정보를 받아서 이렇게 담아준다~
-    //   this.list = [
-    //     {
-    //       idx: 1,
-    //       title: '제목1',
-    //       nick: '작성자1',
-    //       createdAt: '작성일시1',
-    //       clickCount: '조회수',
-    //       clickLike: '좋아요'
-    //     },
-    //     {
-    //       idx: 1,
-    //       title: '제목2',
-    //       nick: '작성자2',
-    //       createdAt: '작성일시2',
-    //       clickCount: '조회수',
-    //       clickLike: '좋아요'
-    //     },
-    //     {
-    //       idx: 1,
-    //       title: '제목3',
-    //       nick: '작성자3',
-    //       createdAt: '작성일시3',
-    //       clickCount: '조회수',
-    //       clickLike: '좋아요'
-    //     }
-    //   ]
-    // },
+    pagingMethod(page) {
+      this.listData = this.list.slice((page - 1) * this.limit, page * this.limit)
+      this.page = page
+      this.pageDataSetting(this.total, this.limit, this.block, page)
+    },
     async fnGetList2() {
       console.log('GET / posts when Board is loading')
       console.log('token', localStorage.getItem('token'))
@@ -159,36 +102,24 @@ export default {
             let a = this.data[i]
             this.list.push(a)
           }
-          // for (let i in this.data) {
-          //   let a = this.data[i].title
-          //   this.list.push(a)
-          // }
-          // for (let i in this.data) {
-          //   let a = this.data[i].nick
-          //   this.nick.push(a)
-          // }
-          // for (let i in this.data) {
-          //   let a = this.data[i].createdAt
-          //   this.date.push(a.substr(0, 10))
-          // }
-          // for (let i in this.data) {
-          //   let a = this.data[i].count
-          //   this.date.push(a.substr(0, 10))
-          // }
-          // for (let i in this.data) {
-          //   let a = this.data[i].like
-          //   this.date.push(a.substr(0, 10))
-          // }
-          ////////////////////////////////
-          // for (let i in this.data) {
-          //   let a = response.data.data.topRanking[i].createdAt
-          //   let b = require(`../assets/item/${a}`)
-          //   this.ship.push(b)
-          // }
         })
         .catch(error => {
           console.log(error)
         })
+    },
+    pageDataSetting(total, limit, block, page) {
+      const totalPage = Math.ceil(total / limit)
+      let currentPage = page
+      const first = currentPage > 1 ? parseInt(currentPage, 10) - parseInt(1, 10) : null
+      const end = totalPage !== currentPage ? parseInt(currentPage, 10) + parseInt(1, 10) : null
+
+      let startIndex = (Math.ceil(currentPage / block) - 1) * block + 1
+      let endIndex = startIndex + block > totalPage ? totalPage : startIndex + block - 1
+      let totalList = []
+      for (let index = startIndex; index <= endIndex; index++) {
+        totalList.push(index)
+      }
+      return { first, end, totalList, currentPage }
     }
   }
 }
