@@ -61,9 +61,16 @@ const routes = [
     component: () => import('@/views/PostView.vue')
   },
   {
+
+    path: '/postread',
+    name: 'postread',
+    component: () => import('@/views/PostReadView.vue')
+  },
+  {
     path: '/postupdate',
     name: 'postupdate',
     component: () => import('@/views/PostUpdateView.vue')
+
   },
   {
     path: '*',
