@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="pageSetting.list.length" class="page-list">
+    <!-- <div v-if="pageSetting.list.length" class="page-list">
       <chevrons-left-icon
         v-if="pageSetting.first !== null"
         class="left-icon"
@@ -23,27 +23,27 @@
         color="#dfdfdf"
         @click="pageSetting.end !== null ? sendPage(pageSetting.end) : ''"
       />
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-import { ChevronsLeftIcon, ChevronsRightIcon } from 'vue-feather-icons'
-export default {
-  components: {
-    ChevronsLeftIcon,
-    ChevronsRightIcon
-  },
-  props: {
-    pageSetting: {
-      type: Object,
-      default: null
-    }
-  },
-  methods: {
-    sendPage(page) {
-      this.$emit('paging', page)
-    }
-  }
-}
+// import { ChevronsLeftIcon, ChevronsRightIcon } from 'vue-feather-icons'
+// export default {
+//   components: {
+//     ChevronsLeftIcon,
+//     ChevronsRightIcon
+//   },
+//   props: {
+//     pageSetting: {
+//       type: Object,
+//       default: null
+//     }
+//   },
+//   methods: {
+//     sendPage(page) {
+//       this.$emit('paging', page)
+//     }
+//   }
+// }
 </script>

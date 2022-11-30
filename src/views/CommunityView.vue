@@ -20,7 +20,7 @@
           <tr v-for="(row, i) in list" :key="i">
             <td>{{ row.id }}</td>
             <td>
-              <a @click="fnView(`${row.i}`)">{{ row.title }}</a>
+              <a @click="fnView(`${row.id}`)">{{ row.title }}</a>
             </td>
             <td>{{ row.nick }}</td>
             <td>{{ row.createdAt }}</td>
@@ -48,12 +48,14 @@
 
 <script>
 import NavBar from '@/components/NavBar.vue'
-import Pagination from '../components/Pagination.vue'
+// import Table from 'buefy/dist/components/table'
+// import Pagination from '../components/Pagination.vue'
 import axios from 'axios'
-import Paginate from 'vuejs-paginate'
+// import Paginate from 'vuejs-paginate'
+// Vue.component('BTable', Table)
 
 export default {
-  name: 'RankingView',
+  name: 'CommunityView',
   components: {
     NavBar
     // Pagination
@@ -82,9 +84,9 @@ export default {
   },
   mounted() {
     this.fnGetList2()
-    this.pagingMethod(this.page)
+    // this.pagingMethod(this.page)
     console.log('Community - mounted - rows() : ', this.list.length)
-    this.rows()
+    // this.rows()
   },
   methods: {
     fnWrite() {
@@ -97,12 +99,12 @@ export default {
         this.$router.push('/signin')
       }
     },
-    pagingMethod(page) {
-      console.log('pagingMethod 안에 this.list', this.list)
-      this.listData = this.list.slice((page - 1) * this.limit, page * this.limit)
-      this.page = page
-      this.pageDataSetting(this.total, this.limit, this.block, page)
-    },
+    // pagingMethod(page) {
+    //   console.log('pagingMethod 안에 this.list', this.list)
+    //   this.listData = this.list.slice((page - 1) * this.limit, page * this.limit)
+    //   this.page = page
+    //   this.pageDataSetting(this.total, this.limit, this.block, page)
+    // },
     async fnGetList2() {
       console.log('GET / posts when Board is loading')
       console.log('token', localStorage.getItem('token'))
@@ -119,7 +121,7 @@ export default {
           console.log(this.data)
           for (let i in this.data) {
             let a = this.data[i]
-            // this.list.push(a)
+            this.list.push(a)
           }
         })
         .catch(error => {
