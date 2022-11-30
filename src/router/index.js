@@ -61,6 +61,11 @@ const routes = [
     component: () => import('@/views/PostView.vue')
   },
   {
+    path: '/postread',
+    name: 'postread',
+    component: () => import('@/views/PostReadView.vue')
+  },
+  {
     path: '*',
     name: 'gohome',
     component: () => import('@/components/NotFound.vue')
