@@ -5,7 +5,7 @@
       <div class="common-buttons">
         <button type="button" class="w3-button w3-round w3-blue-gray" @click="fnWrite()">글쓰기</button>
       </div>
-      <table class="w3-table-all">
+      <b-table id="my-table" class="table" :items="list" :per-page="perPage" :current-page="currentPage" small>
         <thead>
           <tr>
             <th>No</th>
@@ -17,10 +17,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(row, idx) in list" :key="idx">
+          <tr v-for="(row, i) in list" :key="i">
             <td>{{ row.id }}</td>
             <td>
-              <a @click="fnView(`${row.idx}`)">{{ row.title }}</a>
+              <a @click="fnView(`${row.i}`)">{{ row.title }}</a>
             </td>
             <td>{{ row.nick }}</td>
             <td>{{ row.createdAt }}</td>
@@ -28,9 +28,15 @@
             <td>{{ row.like }}</td>
           </tr>
         </tbody>
-      </table>
+      </b-table>
       <!-- pagination -->
-      <pagination :page-setting="pageDataSetting(total, limit, block, page)" @paging="pagingMethod" />
+      <b-pagination
+        v-model="currentPage"
+        :total-rows="rows"
+        :per-page="perPage"
+        aria-controls="my-table"
+      ></b-pagination>
+      <!-- <pagination :page-setting="pageDataSetting(total, limit, block, page)" @paging="pagingMethod" /> -->
     </div>
 
     <!-- <div>로그인/비 로그인 구분</div>
@@ -44,44 +50,55 @@
 import NavBar from '@/components/NavBar.vue'
 import Pagination from '../components/Pagination.vue'
 import axios from 'axios'
+import Paginate from 'vuejs-paginate'
 
 export default {
   name: 'RankingView',
   components: {
-    NavBar,
-    Pagination
+    NavBar
+    // Pagination
   },
-  data: () => ({
-    list: [],
-    listData: [],
-    requestBody: {},
-    no: '',
-    total: this.list.length,
-    page: 1,
-    limit: 5,
-    block: 5,
-    // page: this.$router.query.page ? this.$router.query.page : 1,
-    // size: this.$router.query.size ? this.$router.query.size : 10,
-    // keyword: this.$router.query.keyword,
-    pageNavigation: function () {
-      //페이징 처리 for문 커스텀
-      let pageNumber = [] //;
-      let start_page = this.paging.start_page
-      let end_page = this.paging.end_page
-      for (let i = start_page; i <= end_page; i++) pageNumber.push(i)
-      return pageNumber
+  data() {
+    return {
+      list: [],
+      listData: [],
+      requestBody: {},
+      perPage: 3,
+      currentPage: 1
+      // total: this.list.length,
+      // page: 1,
+      // limit: 5,
+      // block: 5
+      // page: this.$router.query.page ? this.$router.query.page : 1,
+      // size: this.$router.query.size ? this.$router.query.size : 10,
+      // keyword: this.$router.query.keyword,
     }
-  }),
+  },
+  computed: {
+    rows() {
+      console.log('Community - computed - rows() : ', this.list.length)
+      return this.list.length
+    }
+  },
   mounted() {
     this.fnGetList2()
     this.pagingMethod(this.page)
+    console.log('Community - mounted - rows() : ', this.list.length)
+    this.rows()
   },
   methods: {
     fnWrite() {
       console.log('write a post')
-      this.$router.push('/post')
+      console.log('표시', localStorage.getItem('userNick') == !null)
+      if (localStorage.getItem('userNick')) {
+        this.$router.push('/post')
+      } else {
+        alert('로그인 후 이용할 수 있습니다.')
+        this.$router.push('/signin')
+      }
     },
     pagingMethod(page) {
+      console.log('pagingMethod 안에 this.list', this.list)
       this.listData = this.list.slice((page - 1) * this.limit, page * this.limit)
       this.page = page
       this.pageDataSetting(this.total, this.limit, this.block, page)
@@ -97,31 +114,33 @@ export default {
         })
         .then(response => {
           console.log('Community - response : ', response)
+          console.log('Community - this.list : ', this.list)
           this.data = response.data.data
           console.log(this.data)
           for (let i in this.data) {
             let a = this.data[i]
-            this.list.push(a)
+            // this.list.push(a)
           }
         })
         .catch(error => {
           console.log(error)
         })
-    },
-    pageDataSetting(total, limit, block, page) {
-      const totalPage = Math.ceil(total / limit)
-      let currentPage = page
-      const first = currentPage > 1 ? parseInt(currentPage, 10) - parseInt(1, 10) : null
-      const end = totalPage !== currentPage ? parseInt(currentPage, 10) + parseInt(1, 10) : null
-
-      let startIndex = (Math.ceil(currentPage / block) - 1) * block + 1
-      let endIndex = startIndex + block > totalPage ? totalPage : startIndex + block - 1
-      let totalList = []
-      for (let index = startIndex; index <= endIndex; index++) {
-        totalList.push(index)
-      }
-      return { first, end, totalList, currentPage }
     }
+    // pageDataSetting(total, limit, block, page) {
+    //   console.log('Community - pageDataSetting : ', this.list)
+    //   const totalPage = Math.ceil(total / limit)
+    //   let currentPage = page
+    //   const first = currentPage > 1 ? parseInt(currentPage, 10) - parseInt(1, 10) : null
+    //   const end = totalPage !== currentPage ? parseInt(currentPage, 10) + parseInt(1, 10) : null
+
+    //   let startIndex = (Math.ceil(currentPage / block) - 1) * block + 1
+    //   let endIndex = startIndex + block > totalPage ? totalPage : startIndex + block - 1
+    //   let totalList = []
+    //   for (let index = startIndex; index <= endIndex; index++) {
+    //     totalList.push(index)
+    //   }
+    //   return { first, end, totalList, currentPage }
+    // }
   }
 }
 </script>
