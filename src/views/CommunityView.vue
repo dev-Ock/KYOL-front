@@ -89,7 +89,13 @@ export default {
   methods: {
     fnWrite() {
       console.log('write a post')
-      this.$router.push('/post')
+      console.log('표시', localStorage.getItem('userNick') == !null)
+      if (localStorage.getItem('userNick')) {
+        this.$router.push('/post')
+      } else {
+        alert('로그인 후 이용할 수 있습니다.')
+        this.$router.push('/signin')
+      }
     },
     pagingMethod(page) {
       console.log('pagingMethod 안에 this.list', this.list)
@@ -113,7 +119,7 @@ export default {
           console.log(this.data)
           for (let i in this.data) {
             let a = this.data[i]
-            this.list.push(a)
+            // this.list.push(a)
           }
         })
         .catch(error => {
