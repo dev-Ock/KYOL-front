@@ -26,6 +26,13 @@
         <button class="btn btn-warning">삭제</button>
         <button class="btn btn-warning">목록</button>
       </div>
+      <br /><br /><br />
+      <hr />
+    </div>
+
+    <div>
+      <textarea class="w-75 p-3" placeholder="댓글은 자신을 보는 거울입니다."></textarea><br />
+      <button class="btn2 btn-warning">Comment</button>
     </div>
   </div>
 </template>
@@ -56,5 +63,9 @@ export default {
 }
 .btn {
   float: right;
+}
+.btn2 {
+  float: left;
+  margin-left: 12.5%;
 }
 </style>
