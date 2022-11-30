@@ -79,6 +79,7 @@ export default {
   methods: {
     fnWrite() {
       console.log('write a post')
+      this.$router.push('/post')
     },
     pagingMethod(page) {
       this.listData = this.list.slice((page - 1) * this.limit, page * this.limit)
