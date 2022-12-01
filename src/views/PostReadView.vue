@@ -17,7 +17,7 @@
         </div>
       </div>
       <div>
-        <button class="btn btn-warning btn3">수정</button>
+        <button class="btn btn-warning btn3" @click="correct">수정</button>
         <button class="btn btn-warning btn3">삭제</button>
         <button class="btn btn-warning btn3">목록</button>
       </div>
@@ -107,7 +107,8 @@ export default {
     recomment: '',
     index: 0,
     data: {},
-    date: ''
+    date: '',
+    realnick: ''
   }),
   mounted() {
     this.postcontent()
@@ -132,12 +133,22 @@ export default {
           this.content = this.data.content
           this.views = this.data.count
           this.createAt = this.data.createdAt
+          this.realnick = localStorage.getItem('userNick')
+
           this.comment = response.data.data.comment
           this.recomment = this.data.data.recomment
         })
         .catch(error => {
           console.log('post-error', error)
         })
+    },
+    correct() {
+      // 아이디 체크
+      if (this.nick == this.realnick) {
+        this.$router.push(`/postupdate/${this.index}`)
+      } else {
+        alert('본인이 쓴 글만 수정가능합니다.')
+      }
     }
   }
 }
