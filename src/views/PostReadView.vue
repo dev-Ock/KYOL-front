@@ -14,11 +14,7 @@
           <p class="card-text">
             {{ content }}
             content<br />
-            content<br />
-            content<br />
-            content<br />
-            content<br />
-            content<br />
+            {{ data[$route.params.id] }}
           </p>
         </div>
       </div>
@@ -112,29 +108,51 @@ export default {
     createAt: '',
     content: '',
     views: '',
-    comments: ''
+    comments: '',
+    index: 0
   }),
+  // mounted() {
+  //   this.checkCommunity()
+  // },
+  // methods: {
+  //   checkCommunity() {
+  //     if (localStorage.getItem('token')) {
+  //       axios
+  //         .get(process.env.VUE_APP_API + '/community/post/read', {
+  //           headers: {
+  //             Authorization: `${localStorage.getItem('token')}`,
+  //             userid: `${localStorage.getItem('userId')}`
+  //           }
+  //         })
+  //         .then(response => {
+  //           console.log('checkCommunity - response : ', response)
+  //           // this.gold = response.data.data.gold
+  //         })
+  //         .catch(error => {
+  //           console.log(error)
+  //         })
+  //     },
   mounted() {
-    this.checkCommunity()
+    this.postcontent()
   },
   methods: {
-    checkCommunity() {
-      if (localStorage.getItem('token')) {
-        axios
-          .get(process.env.VUE_APP_API + '/community/post/read', {
-            headers: {
-              Authorization: `${localStorage.getItem('token')}`,
-              userid: `${localStorage.getItem('userId')}`
-            }
-          })
-          .then(response => {
-            console.log('checkCommunity - response : ', response)
-            // this.gold = response.data.data.gold
-          })
-          .catch(error => {
-            console.log(error)
-          })
-      }
+    async postcontent() {
+      console.log('왜안보임')
+      this.index = this.$route.params.id
+      console.log(this.index)
+      await axios
+        .get(process.env.VUE_APP_API + `/community/post/read/${this.index}`, {
+          headers: {
+            Authorization: `${localStorage.getItem('token')}`
+          }
+        })
+        .then(response => {
+          console.log('post - response : ', response)
+          this.data = response.data
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
 }
