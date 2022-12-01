@@ -53,14 +53,15 @@
             <div class="commentcard">
               <p>{{ nick }} nick</p>
               <p class="text-muted text-sm">{{ createAt }} 2022-12-01</p>
+              <p>{{ coment }}나 잘하지</p>
             </div>
-            <p>{{ coment }}나 잘하지</p>
-            <div class="pad-ver">
-              <div class="btn-group">
-                <a class="btn btn-sm btn-default btn-hover-success" href="#"><i class="fa fa-thumbs-up"></i></a>
-                <a class="btn btn-sm btn-default btn-hover-danger" href="#"><i class="fa fa-thumbs-down"></i></a>
+            <div>
+              <div>
+                <!-- 댓글 좋아요 아이콘 -->
+                <!-- <a class="btn btn-sm btn-default btn-hover-success" href="#"><i class="fa fa-thumbs-up"></i></a> -->
+                <!-- <a class="btn btn-sm btn-default btn-hover-danger" href="#"><i class="fa fa-thumbs-down"></i></a> -->
               </div>
-              <a class="btn btn-sm btn-default btn-hover-primary" href="#">Comment</a>
+              <button class="btn btn-warning btn3">Comment</button>
             </div>
             <hr />
 
@@ -77,11 +78,9 @@
                   <div class="commentcard">
                     <p>{{ nick }} nick</p>
                     <p class="text-muted text-sm">{{ createAt }} 2022-12-01</p>
+                    <p>{{ commentcomment }} 와 너 정말 잘한다!</p>
                   </div>
-                  <p>{{ commentcomment }} 와 너 정말 잘한다!</p>
-                  <div class="pad-ver">
-                    <a class="btn btn-sm btn-default btn-hover-primary" href="#">Comment</a>
-                  </div>
+                  <button class="btn btn-warning btn3">Comment</button>
                   <hr />
                 </div>
               </div>
@@ -231,11 +230,12 @@ body {
 }
 
 .middle .media-left,
-.middle .media-right,
-.middle .media-body {
+.middle .media-right {
   vertical-align: middle;
 }
-
+.middle .media-body {
+  text-align: left !important;
+}
 .thumbnail {
   border-radius: 0;
   border-color: #e9e9e9;
