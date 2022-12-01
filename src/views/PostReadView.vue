@@ -5,13 +5,14 @@
       <div class="card border-dark mb-3">
         <div class="card">
           <div class="card-text">
-            <h3>제목 : Title</h3>
-            작성자 : Nick<br />
-            작성일 : createAt &nbsp; 조회 : 85 &nbsp; 댓글 : 27
+            <h3>제목 : {{ Title }}</h3>
+            작성자 : {{ Nick }}<br />
+            작성일 : {{ createAt }} &nbsp; 조회 : {{ views }} &nbsp; 댓글 : {{ comments }}
           </div>
         </div>
         <div class="card">
           <p class="card-text">
+            {{ content }}
             content<br />
             content<br />
             content<br />
@@ -44,7 +45,15 @@ export default {
   name: 'PostReadView',
   components: {
     NavBar
-  }
+  },
+  data: () => ({
+    title: '',
+    nick: '',
+    createAt: '',
+    content: '',
+    views: '',
+    comments: ''
+  })
 }
 </script>
 
