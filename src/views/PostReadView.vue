@@ -21,10 +21,10 @@
           </p>
         </div>
       </div>
-      <div class="btn">
-        <button class="btn btn-warning">수정</button>
-        <button class="btn btn-warning">삭제</button>
-        <button class="btn btn-warning">목록</button>
+      <div class="btns">
+        <button class="btn btn-warning btn3">수정</button>
+        <button class="btn btn-warning btn3">삭제</button>
+        <button class="btn btn-warning btn3">목록</button>
       </div>
       <br /><br /><br />
       <hr />
@@ -61,11 +61,14 @@ export default {
 .card-text {
   margin-left: 2%;
 }
-.btn {
+.btns {
   float: right;
 }
 .btn2 {
   float: left;
   margin-left: 12.5%;
+}
+.btn3 {
+  margin: 3px;
 }
 </style>
