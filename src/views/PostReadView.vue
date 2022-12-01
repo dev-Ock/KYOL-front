@@ -7,7 +7,7 @@
           <div class="card-text">
             <h3>제목 : {{ title }}</h3>
             작성자 : {{ nick }}<br />
-            작성일 : {{ createAt }} &nbsp; 조회 : {{ views }} &nbsp; 댓글 : {{ comment }}
+            작성일 : {{ createAt }} &nbsp; 조회 : {{ views }} &nbsp; 댓글 : {{ lengthcm }}
           </div>
         </div>
         <div class="card">
@@ -107,7 +107,9 @@ export default {
     recomment: '',
     index: 0,
     data: {},
-    date: ''
+    date: '',
+    lengthcm: 0,
+    count: []
   }),
   mounted() {
     this.postcontent()
@@ -133,7 +135,9 @@ export default {
           this.views = this.data.count
           this.createAt = this.data.createdAt
           this.comment = response.data.data.comment
-          this.recomment = this.data.data.recomment
+          // this.recomment = this.data.data.recomment
+          this.count = response.data.data.comment
+          this.lengthcm = this.count.length
         })
         .catch(error => {
           console.log('post-error', error)
