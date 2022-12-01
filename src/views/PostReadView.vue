@@ -13,8 +13,6 @@
         <div class="card">
           <p class="card-text">
             {{ content }}
-            content<br />
-            {{ data[$route.params.id] }}
           </p>
         </div>
       </div>
@@ -109,7 +107,8 @@ export default {
     views: '',
     comments: '',
     index: 0,
-    data: []
+    data: {},
+    date: ''
   }),
   // mounted() {
   //   this.checkCommunity()
@@ -148,10 +147,15 @@ export default {
         })
         .then(response => {
           console.log('post - response : ', response)
-          this.data = response.data
+          this.data = response.data.data.post
+          this.title = this.data.title
+          this.nick = this.data.nick
+          this.content = this.data.content
+          this.views = this.data.count
+          this.createAt = this.data.createdAt
         })
         .catch(error => {
-          console.log(error)
+          console.log('post-error', error)
         })
     }
   }
