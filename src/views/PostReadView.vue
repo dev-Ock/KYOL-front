@@ -41,7 +41,7 @@
       </div>
     </div>
     <div class="panel">
-      <div class="panel-body">
+      <div class="panel-body2">
         <div class="media-block">
           <a class="media-left" href="#"
             ><img
@@ -212,9 +212,11 @@ body {
 }
 
 .panel-body {
-  padding: 25px 20px;
+  padding: 25px 0px 20px 0px;
 }
-
+.panel-body2 {
+  padding: 25px 20px 20px 80px;
+}
 .media-block .media-left {
   display: block;
   float: left;
@@ -296,6 +298,7 @@ a.text-muted:focus {
   text-align: left;
   margin-bottom: 15px;
   margin-left: 2%;
+  padding: 0px 20px 0px 0px;
 }
 .mar-top {
   margin-top: 15px;
