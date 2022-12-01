@@ -5,7 +5,7 @@
       <div class="container" style="transform: translate(0%, 0%)">
         <div class="card">
           <div class="card-body">
-            <h4>새로운 글 등록</h4>
+            <h4 class="fontcenter">새로운 글 등록</h4>
             <p class="nickk">작성자 : {{ nick }}</p>
             <form>
               <div class="form-group">
@@ -123,5 +123,9 @@ export default {
 }
 .nickk {
   text-align: left;
+}
+
+.fontcenter {
+  text-align: center;
 }
 </style>
