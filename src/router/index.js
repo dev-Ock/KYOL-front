@@ -61,8 +61,8 @@ const routes = [
     component: () => import('@/views/PostView.vue')
   },
   {
-    path: '/postread',
-    name: 'postread',
+    path: '/postdetail/:id',
+    name: 'postdetail',
     component: () => import('@/views/PostReadView.vue')
   },
   {

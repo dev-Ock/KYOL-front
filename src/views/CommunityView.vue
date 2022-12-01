@@ -5,7 +5,15 @@
       <div class="common-buttons">
         <button type="button" class="w3-button w3-round w3-blue-gray" @click="fnWrite()">글쓰기</button>
       </div>
-      <b-table id="my-table" class="table" :items="list" :per-page="perPage" :current-page="currentPage" small>
+      <b-table
+        id="my-table"
+        class="table"
+        :items="list"
+        :per-page="perPage"
+        :current-page="currentPage"
+        small
+        @row-clicked="rowClick"
+      >
         <thead>
           <tr>
             <th>No</th>
@@ -28,6 +36,15 @@
             <td>{{ row.like }}</td>
           </tr>
         </tbody>
+        <template #cell(title)="data">
+          <router-link
+            :to="{
+              name: 'detail',
+              params: { articleno: data.item.articleno }
+            }"
+            >{{ data.item.title }}</router-link
+          >
+        </template>
       </b-table>
       <!-- pagination -->
       <b-pagination
@@ -53,7 +70,8 @@ export default {
     return {
       list: [],
       perPage: 3,
-      currentPage: 1
+      currentPage: 1,
+      pageindex: 0
     }
   },
   computed: {
@@ -69,6 +87,14 @@ export default {
     // this.rows()
   },
   methods: {
+    rowClick(item, index, e) {
+      console.log('인덱스를 알아볼까', item.번호)
+      console.log('이벤트확인', e.target.ariaColIndex)
+      if (e.target.ariaColIndex == 2) {
+        this.pageindex = item.번호
+        this.$router.push(`/postdetail/${this.pageindex}`)
+      }
+    },
     fnWrite() {
       console.log('write a post')
       console.log('표시', localStorage.getItem('userNick') == !null)

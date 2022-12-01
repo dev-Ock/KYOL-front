@@ -5,6 +5,8 @@
       <div class="container" style="transform: translate(0%, 0%)">
         <div class="card">
           <div class="card-body">
+            <h4>새로운 글 등록</h4>
+            <p class="nickk">작성자 : {{ nick }}</p>
             <form>
               <div class="form-group">
                 <input
@@ -59,8 +61,12 @@ export default {
   },
   data: () => ({
     title: '',
-    content: ''
+    content: '',
+    nick: ''
   }),
+  mounted() {
+    this.idname()
+  },
   methods: {
     async location(e) {
       e.preventDefault()
@@ -89,6 +95,10 @@ export default {
             console.log('post : ', error)
           })
       }
+    },
+    idname() {
+      this.nick = localStorage.getItem('userNick')
+      console.log('nick', this.nick)
     }
   }
 }
@@ -110,5 +120,8 @@ export default {
   justify-content: center;
   align-items: center;
   font-family: 'Hahmlet', serif;
+}
+.nickk {
+  text-align: left;
 }
 </style>
