@@ -29,9 +29,16 @@
       <div class="col-md-12 bootstrap snippets">
         <div class="panel">
           <div class="panel-body">
-            <textarea class="form-control" rows="2" placeholder="댓글은 자신을 보는 거울입니다."></textarea>
+            <textarea
+              v-model="reply"
+              class="form-control"
+              rows="2"
+              placeholder="댓글은 자신을 보는 거울입니다."
+            ></textarea>
             <div class="mar-top clearfix">
-              <button class="btn btn-warning btn3" type="submit"><i class="fa fa-pencil fa-fw"></i> 등록</button>
+              <button class="btn btn-warning btn3" type="submit" @click="enroll">
+                <i class="fa fa-pencil fa-fw"></i> 등록
+              </button>
             </div>
           </div>
         </div>
@@ -48,7 +55,7 @@
                 src="https://bootdey.com/img/Content/avatar/avatar1.png"
             /></a>
             <div class="media-body">
-              <p>{{ a.nick }}</p>
+              <p style="margin: 10px">{{ a.nick }}</p>
               <p class="text-muted text-sm">{{ createAt }}</p>
               <p>{{ comment[i].reply }}</p>
             </div>
@@ -110,12 +117,40 @@ export default {
     date: '',
     lengthcm: 0,
     count: [],
-    realnick: ''
+    realnick: '',
+    reply: ''
   }),
   mounted() {
     this.postcontent()
   },
   methods: {
+    async enroll() {
+      console.log(this.reply)
+      if (this.reply == '') {
+        alert('내용을 입력해주세요.')
+      } else {
+        await axios
+          .post(
+            process.env.VUE_APP_API + `/community/comment/add/${this.index}`,
+            {
+              reply: this.reply
+            },
+            {
+              headers: {
+                Authorization: `${localStorage.getItem('token')}`
+              }
+            }
+          )
+          .then(response => {
+            console.log('reply - response : ', response, response.data)
+            this.$router.go()
+            // this.$router.push({ name: 'community' }) // router/index.js 에서 설정한 name
+          })
+          .catch(error => {
+            console.log('reply : ', error)
+          })
+      }
+    },
     async postcontent() {
       console.log('이거:', this.comment)
       console.log('왜안보임')
