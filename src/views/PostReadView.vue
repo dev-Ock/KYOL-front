@@ -7,7 +7,7 @@
           <div class="card-text">
             <h3>제목 : {{ title }}</h3>
             작성자 : {{ nick }}<br />
-            작성일 : {{ createAt }} &nbsp; 조회 : {{ views }} &nbsp; 댓글 : {{ comments }}
+            작성일 : {{ createAt }} &nbsp; 조회 : {{ views }} &nbsp; 댓글 : {{ comment }}
           </div>
         </div>
         <div class="card">
@@ -40,17 +40,17 @@
     <div class="panel">
       <div class="panel-body2">
         <div class="media-block">
-          <a class="media-left" href="#"
-            ><img
-              class="img-circle img-sm"
-              alt="Profile Picture"
-              src="https://bootdey.com/img/Content/avatar/avatar1.png"
-          /></a>
-          <div class="media-body">
-            <div class="commentcard">
-              <p>{{ nick }}</p>
-              <p class="text-muted text-sm">{{ createAt }} 2022-12-01</p>
-              <p>{{ comment }}</p>
+          <div v-for="(a, i) in comment" :key="i" class="commentcard">
+            <a class="media-left" href="#"
+              ><img
+                class="img-circle img-sm"
+                alt="Profile Picture"
+                src="https://bootdey.com/img/Content/avatar/avatar1.png"
+            /></a>
+            <div class="media-body">
+              <p>{{ a.nick }}</p>
+              <p class="text-muted text-sm">{{ createAt }}</p>
+              <p>{{ comment[i].reply }}</p>
             </div>
             <div>
               <div>
@@ -63,10 +63,9 @@
             <hr width="93.5%" align="left" />
           </div>
         </div>
-        <!-- Comments -->
-        <div>
-          <!-- 대댓글 -->
-          <!-- <div class="media-block">
+        <!-- 대댓글 -->
+        <!-- <div> -->
+        <!-- <div class="media-block">
             <a class="media-left" href="#"
               ><img
                 class="img-circle img-sm"
@@ -83,7 +82,7 @@
             </div>
             <hr width="93.5%" align="left" />
           </div> -->
-        </div>
+        <!-- </div> -->
       </div>
     </div>
   </div>
@@ -104,37 +103,18 @@ export default {
     createAt: '',
     content: '',
     views: '',
-    comments: '',
+    comment: [],
+    recomment: '',
     index: 0,
     data: {},
     date: ''
   }),
-  // mounted() {
-  //   this.checkCommunity()
-  // },
-  // methods: {
-  //   checkCommunity() {
-  //     if (localStorage.getItem('token')) {
-  //       axios
-  //         .get(process.env.VUE_APP_API + '/community/post/read', {
-  //           headers: {
-  //             Authorization: `${localStorage.getItem('token')}`,
-  //             userid: `${localStorage.getItem('userId')}`
-  //           }
-  //         })
-  //         .then(response => {
-  //           console.log('checkCommunity - response : ', response)
-  //           // this.gold = response.data.data.gold
-  //         })
-  //         .catch(error => {
-  //           console.log(error)
-  //         })
-  //     },
   mounted() {
     this.postcontent()
   },
   methods: {
     async postcontent() {
+      console.log('이거:', this.comment)
       console.log('왜안보임')
       this.index = this.$route.params.id
       console.log(this.index)
@@ -152,6 +132,8 @@ export default {
           this.content = this.data.content
           this.views = this.data.count
           this.createAt = this.data.createdAt
+          this.comment = response.data.data.comment
+          this.recomment = this.data.data.recomment
         })
         .catch(error => {
           console.log('post-error', error)
