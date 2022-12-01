@@ -65,7 +65,7 @@ export default {
   float: right;
 }
 .btn2 {
-  float: left;
-  margin-left: 12.5%;
+  float: right;
+  margin-right: 12.5%;
 }
 </style>
