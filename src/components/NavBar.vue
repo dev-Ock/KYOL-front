@@ -98,7 +98,6 @@ export default {
           })
       }
     },
-
     loginCheck() {
       if (localStorage.getItem('userNick') == !null) {
         this.loading = true
