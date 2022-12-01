@@ -120,7 +120,7 @@ export default {
     recm: false,
     num: 0,
     postid: 0,
-    recommentid: 0
+    recommentid: 0,
     reply: ''
   }),
   mounted() {
@@ -134,11 +134,13 @@ export default {
       this.recm = true
       console.log(this.num)
       this.postid = this.comment[this.num].id
-// 반복문 돌려서 CommentId를 알아내자
-// this.recommentid = this.recomment.[]CommentId
+      // 반복문 돌려서 CommentId를 알아내자
+      // this.recommentid = this.recomment.[]CommentId
       console.log(this.recommentid)
       if (this.postid == this.recommentid) {
-        console.log('우짜라고')}
+        console.log('우짜라고')
+      }
+    },
     async enroll() {
       console.log(this.reply)
       if (this.reply == '') {
@@ -165,58 +167,58 @@ export default {
             console.log('reply : ', error)
           })
       }
-    },
-    async postcontent() {
-      this.index = this.$route.params.id
-      console.log(this.index)
-      await axios
-        .get(process.env.VUE_APP_API + `/community/post/read/${this.index}`, {
-          headers: {
-            Authorization: `${localStorage.getItem('token')}`
-          }
-        })
-        .then(response => {
-          console.log('post - response : ', response)
-          this.data = response.data.data.post
-          this.title = this.data.title
-          this.nick = this.data.nick
-          this.content = this.data.content
-          this.views = this.data.count
-          this.createAt = this.data.createdAt
-          this.realnick = localStorage.getItem('userNick')
-          this.comment = response.data.data.comment
-          this.recomment = response.data.data.recomment
-          this.count = response.data.data.comment
-          this.lengthcm = this.count.length
-          console.log('대댓:', this.recomment)
-        })
-        .catch(error => {
-          console.log('post-error', error)
-        })
-    },
-    async showRecomment() {
-      await axios
-        .get(process.env.VUE_APP_API + `/community/post/read/${this.index}`, {
-          headers: {
-            Authorization: `${localStorage.getItem('token')}`
-          }
-        })
-        .then(response => {
-          console.log('대댓 - response : ', response)
-          console.log('확인', this.recm)
-        })
-        .catch(error => {
-          console.log('에러다 : ', error)
-          this.closebtn = false
-        })
-    },
-    correct() {
-      // 아이디 체크
-      if (this.nick == this.realnick) {
-        this.$router.push(`/postupdate/${this.index}`)
-      } else {
-        alert('본인이 쓴 글만 수정가능합니다.')
-      }
+    }
+  },
+  async postcontent() {
+    this.index = this.$route.params.id
+    console.log(this.index)
+    await axios
+      .get(process.env.VUE_APP_API + `/community/post/read/${this.index}`, {
+        headers: {
+          Authorization: `${localStorage.getItem('token')}`
+        }
+      })
+      .then(response => {
+        console.log('post - response : ', response)
+        this.data = response.data.data.post
+        this.title = this.data.title
+        this.nick = this.data.nick
+        this.content = this.data.content
+        this.views = this.data.count
+        this.createAt = this.data.createdAt
+        this.realnick = localStorage.getItem('userNick')
+        this.comment = response.data.data.comment
+        this.recomment = response.data.data.recomment
+        this.count = response.data.data.comment
+        this.lengthcm = this.count.length
+        console.log('대댓:', this.recomment)
+      })
+      .catch(error => {
+        console.log('post-error', error)
+      })
+  },
+  async showRecomment() {
+    await axios
+      .get(process.env.VUE_APP_API + `/community/post/read/${this.index}`, {
+        headers: {
+          Authorization: `${localStorage.getItem('token')}`
+        }
+      })
+      .then(response => {
+        console.log('대댓 - response : ', response)
+        console.log('확인', this.recm)
+      })
+      .catch(error => {
+        console.log('에러다 : ', error)
+        this.closebtn = false
+      })
+  },
+  correct() {
+    // 아이디 체크
+    if (this.nick == this.realnick) {
+      this.$router.push(`/postupdate/${this.index}`)
+    } else {
+      alert('본인이 쓴 글만 수정가능합니다.')
     }
   }
 }
