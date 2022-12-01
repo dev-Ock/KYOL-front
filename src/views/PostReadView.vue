@@ -7,7 +7,7 @@
           <div class="card-text">
             <h3>제목 : {{ title }}</h3>
             작성자 : {{ nick }}<br />
-            작성일 : {{ createAt }} &nbsp; 조회 : {{ views }} &nbsp; 댓글 : {{ comment }}
+            작성일 : {{ createAt }} &nbsp; 조회 : {{ views }} &nbsp; 댓글 : {{ lengthcm }}
           </div>
         </div>
         <div class="card">
@@ -108,6 +108,8 @@ export default {
     index: 0,
     data: {},
     date: '',
+    lengthcm: 0,
+    count: [],
     realnick: ''
   }),
   mounted() {
@@ -136,7 +138,9 @@ export default {
           this.realnick = localStorage.getItem('userNick')
 
           this.comment = response.data.data.comment
-          this.recomment = this.data.data.recomment
+          // this.recomment = this.data.data.recomment
+          this.count = response.data.data.comment
+          this.lengthcm = this.count.length
         })
         .catch(error => {
           console.log('post-error', error)
