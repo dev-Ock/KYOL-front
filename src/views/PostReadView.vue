@@ -7,7 +7,7 @@
           <div class="card-text">
             <h3>제목 : {{ title }}</h3>
             작성자 : {{ nick }}<br />
-            작성일 : {{ createAt }} &nbsp; 조회 : {{ views }} &nbsp; 댓글 : {{ comments }}
+            작성일 : {{ createAt }} &nbsp; 조회 : {{ views }} &nbsp; 댓글 : {{ comment }}
           </div>
         </div>
         <div class="card">
@@ -22,7 +22,6 @@
         <button class="btn btn-warning btn3">목록</button>
       </div>
       <br /><br /><br />
-      <hr />
     </div>
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
@@ -30,7 +29,7 @@
       <div class="col-md-12 bootstrap snippets">
         <div class="panel">
           <div class="panel-body">
-            <textarea class="form-control" rows="5" placeholder="댓글은 자신을 보는 거울입니다."></textarea>
+            <textarea class="form-control" rows="2" placeholder="댓글은 자신을 보는 거울입니다."></textarea>
             <div class="mar-top clearfix">
               <button class="btn btn-warning btn3" type="submit"><i class="fa fa-pencil fa-fw"></i> 등록</button>
             </div>
@@ -41,17 +40,17 @@
     <div class="panel">
       <div class="panel-body2">
         <div class="media-block">
-          <a class="media-left" href="#"
-            ><img
-              class="img-circle img-sm"
-              alt="Profile Picture"
-              src="https://bootdey.com/img/Content/avatar/avatar1.png"
-          /></a>
-          <div class="media-body">
-            <div class="commentcard">
-              <p>{{ nick }} nick</p>
-              <p class="text-muted text-sm">{{ createAt }} 2022-12-01</p>
-              <p>나 잘하지</p>
+          <div v-for="(a, i) in comment" :key="i" class="commentcard">
+            <a class="media-left" href="#"
+              ><img
+                class="img-circle img-sm"
+                alt="Profile Picture"
+                src="https://bootdey.com/img/Content/avatar/avatar1.png"
+            /></a>
+            <div class="media-body">
+              <p>{{ a.nick }}</p>
+              <p class="text-muted text-sm">{{ createAt }}</p>
+              <p>{{ comment[i].reply }}</p>
             </div>
             <div>
               <div>
@@ -59,32 +58,31 @@
                 <!-- <a class="btn btn-sm btn-default btn-hover-success" href="#"><i class="fa fa-thumbs-up"></i></a> -->
                 <!-- <a class="btn btn-sm btn-default btn-hover-danger" href="#"><i class="fa fa-thumbs-down"></i></a> -->
               </div>
-              <button class="btn btn-warning btn3">Comment</button>
+              <button class="btn btn-warning btn3 btn4">Comment</button>
             </div>
-            <hr />
-
-            <!-- Comments -->
-            <div>
-              <div class="media-block">
-                <a class="media-left" href="#"
-                  ><img
-                    class="img-circle img-sm"
-                    alt="Profile Picture"
-                    src="https://bootdey.com/img/Content/avatar/avatar2.png"
-                /></a>
-                <div class="media-body">
-                  <div class="commentcard">
-                    <p>{{ nick }} nick</p>
-                    <p class="text-muted text-sm">{{ createAt }} 2022-12-01</p>
-                    <p>와 너 정말 잘한다!</p>
-                  </div>
-                  <button class="btn btn-warning btn3">Comment</button>
-                  <hr />
-                </div>
-              </div>
-            </div>
+            <hr width="93.5%" align="left" />
           </div>
         </div>
+        <!-- 대댓글 -->
+        <!-- <div> -->
+        <!-- <div class="media-block">
+            <a class="media-left" href="#"
+              ><img
+                class="img-circle img-sm"
+                alt="Profile Picture"
+                src="https://bootdey.com/img/Content/avatar/avatar2.png"
+            /></a>
+            <div class="media-body">
+              <div class="commentcard">
+                <p>{{ nick }}</p>
+                <p class="text-muted text-sm">{{ createAt }} 2022-12-01</p>
+                <p>와 너 정말 잘한다!</p>
+              </div>
+              <button class="btn btn-warning btn3 btn4">Comment</button>
+            </div>
+            <hr width="93.5%" align="left" />
+          </div> -->
+        <!-- </div> -->
       </div>
     </div>
   </div>
@@ -105,38 +103,19 @@ export default {
     createAt: '',
     content: '',
     views: '',
-    comments: '',
+    comment: [],
+    recomment: '',
     index: 0,
     data: {},
     date: '',
     realnick: ''
   }),
-  // mounted() {
-  //   this.checkCommunity()
-  // },
-  // methods: {
-  //   checkCommunity() {
-  //     if (localStorage.getItem('token')) {
-  //       axios
-  //         .get(process.env.VUE_APP_API + '/community/post/read', {
-  //           headers: {
-  //             Authorization: `${localStorage.getItem('token')}`,
-  //             userid: `${localStorage.getItem('userId')}`
-  //           }
-  //         })
-  //         .then(response => {
-  //           console.log('checkCommunity - response : ', response)
-  //           // this.gold = response.data.data.gold
-  //         })
-  //         .catch(error => {
-  //           console.log(error)
-  //         })
-  //     },
   mounted() {
     this.postcontent()
   },
   methods: {
     async postcontent() {
+      console.log('이거:', this.comment)
       console.log('왜안보임')
       this.index = this.$route.params.id
       console.log(this.index)
@@ -155,6 +134,9 @@ export default {
           this.views = this.data.count
           this.createAt = this.data.createdAt
           this.realnick = localStorage.getItem('userNick')
+
+          this.comment = response.data.data.comment
+          this.recomment = this.data.data.recomment
         })
         .catch(error => {
           console.log('post-error', error)
@@ -193,6 +175,10 @@ export default {
   margin: 3px;
   float: right;
 }
+.btn4 {
+  margin: -40px 90px;
+  float: right;
+}
 /* .comment {
   background-color: dimgrey;
 } */
@@ -229,7 +215,7 @@ body {
   padding: 25px 0px 20px 0px;
 }
 .panel-body2 {
-  padding: 25px 20px 20px 80px;
+  padding: 25px 0px 20px 110px;
 }
 .media-block .media-left {
   display: block;
@@ -312,7 +298,7 @@ a.text-muted:focus {
   text-align: left;
   margin-bottom: 15px;
   margin-left: 2%;
-  padding: 0px 20px 0px 0px;
+  padding: 0px 20px 20px 0px;
 }
 .mar-top {
   margin-top: 15px;
