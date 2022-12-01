@@ -65,14 +65,13 @@
                 <!-- <a class="btn btn-sm btn-default btn-hover-success" href="#"><i class="fa fa-thumbs-up"></i></a> -->
                 <!-- <a class="btn btn-sm btn-default btn-hover-danger" href="#"><i class="fa fa-thumbs-down"></i></a> -->
               </div>
-              <button class="btn btn-warning btn3 btn4">Comment</button>
+              <button class="btn btn-warning btn3 btn4" @click="clickcomment(i)">Comment</button>
             </div>
             <hr width="93.5%" align="left" />
           </div>
         </div>
-        <!-- 대댓글 -->
-        <!-- <div> -->
-        <!-- <div class="media-block">
+        <div v-for="(b, i) in recomment" :key="i" class="commentcard">
+          <div v-show="recm" class="media-block">
             <a class="media-left" href="#"
               ><img
                 class="img-circle img-sm"
@@ -81,15 +80,15 @@
             /></a>
             <div class="media-body">
               <div class="commentcard">
-                <p>{{ nick }}</p>
+                <p>{{ recomment[i].nick }}</p>
                 <p class="text-muted text-sm">{{ createAt }} 2022-12-01</p>
-                <p>와 너 정말 잘한다!</p>
+                <p>{{ recomment[i].re_reply }}</p>
               </div>
               <button class="btn btn-warning btn3 btn4">Comment</button>
             </div>
             <hr width="93.5%" align="left" />
-          </div> -->
-        <!-- </div> -->
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -111,19 +110,35 @@ export default {
     content: '',
     views: '',
     comment: [],
-    recomment: '',
+    recomment: [],
     index: 0,
     data: {},
     date: '',
     lengthcm: 0,
     count: [],
     realnick: '',
+    recm: false,
+    num: 0,
+    postid: 0,
+    recommentid: 0
     reply: ''
   }),
   mounted() {
     this.postcontent()
+    this.showRecomment()
   },
   methods: {
+    clickcomment(selectcoment) {
+      console.log('클릭중')
+      this.num = selectcoment
+      this.recm = true
+      console.log(this.num)
+      this.postid = this.comment[this.num].id
+// 반복문 돌려서 CommentId를 알아내자
+// this.recommentid = this.recomment.[]CommentId
+      console.log(this.recommentid)
+      if (this.postid == this.recommentid) {
+        console.log('우짜라고')}
     async enroll() {
       console.log(this.reply)
       if (this.reply == '') {
@@ -152,8 +167,6 @@ export default {
       }
     },
     async postcontent() {
-      console.log('이거:', this.comment)
-      console.log('왜안보임')
       this.index = this.$route.params.id
       console.log(this.index)
       await axios
@@ -171,14 +184,30 @@ export default {
           this.views = this.data.count
           this.createAt = this.data.createdAt
           this.realnick = localStorage.getItem('userNick')
-
           this.comment = response.data.data.comment
-          // this.recomment = this.data.data.recomment
+          this.recomment = response.data.data.recomment
           this.count = response.data.data.comment
           this.lengthcm = this.count.length
+          console.log('대댓:', this.recomment)
         })
         .catch(error => {
           console.log('post-error', error)
+        })
+    },
+    async showRecomment() {
+      await axios
+        .get(process.env.VUE_APP_API + `/community/post/read/${this.index}`, {
+          headers: {
+            Authorization: `${localStorage.getItem('token')}`
+          }
+        })
+        .then(response => {
+          console.log('대댓 - response : ', response)
+          console.log('확인', this.recm)
+        })
+        .catch(error => {
+          console.log('에러다 : ', error)
+          this.closebtn = false
         })
     },
     correct() {
