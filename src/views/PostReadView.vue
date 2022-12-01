@@ -53,7 +53,7 @@
             <div class="commentcard">
               <p>{{ nick }} nick</p>
               <p class="text-muted text-sm">{{ createAt }} 2022-12-01</p>
-              <p>{{ coment }}나 잘하지</p>
+              <p>나 잘하지</p>
             </div>
             <div>
               <div>
@@ -78,7 +78,7 @@
                   <div class="commentcard">
                     <p>{{ nick }} nick</p>
                     <p class="text-muted text-sm">{{ createAt }} 2022-12-01</p>
-                    <p>{{ commentcomment }} 와 너 정말 잘한다!</p>
+                    <p>와 너 정말 잘한다!</p>
                   </div>
                   <button class="btn btn-warning btn3">Comment</button>
                   <hr />
@@ -108,7 +108,8 @@ export default {
     content: '',
     views: '',
     comments: '',
-    index: 0
+    index: 0,
+    data: []
   }),
   // mounted() {
   //   this.checkCommunity()
