@@ -36,44 +36,24 @@
         :per-page="perPage"
         aria-controls="my-table"
       ></b-pagination>
-      <!-- <pagination :page-setting="pageDataSetting(total, limit, block, page)" @paging="pagingMethod" /> -->
     </div>
-
-    <!-- <div>로그인/비 로그인 구분</div>
-    <div>게시판 목록들 쭉 테이블 형태로// 제목, 작성자, 등록일, 조회(수), 좋아요/community/list</div>
-    <div>게시판 글 리스트 번호, 글쓰기 버튼, 글 검색창(제목과 닉네임으로 검색)</div>
-    <div>글쓰기 페이지/community/post/add</div> -->
   </div>
 </template>
 
 <script>
 import NavBar from '@/components/NavBar.vue'
-// import Table from 'buefy/dist/components/table'
-// import Pagination from '../components/Pagination.vue'
 import axios from 'axios'
-// import Paginate from 'vuejs-paginate'
-// Vue.component('BTable', Table)
 
 export default {
   name: 'CommunityView',
   components: {
     NavBar
-    // Pagination
   },
   data() {
     return {
       list: [],
-      listData: [],
-      requestBody: {},
       perPage: 3,
       currentPage: 1
-      // total: this.list.length,
-      // page: 1,
-      // limit: 5,
-      // block: 5
-      // page: this.$router.query.page ? this.$router.query.page : 1,
-      // size: this.$router.query.size ? this.$router.query.size : 10,
-      // keyword: this.$router.query.keyword,
     }
   },
   computed: {
@@ -99,12 +79,16 @@ export default {
         this.$router.push('/signin')
       }
     },
-    // pagingMethod(page) {
-    //   console.log('pagingMethod 안에 this.list', this.list)
-    //   this.listData = this.list.slice((page - 1) * this.limit, page * this.limit)
-    //   this.page = page
-    //   this.pageDataSetting(this.total, this.limit, this.block, page)
-    // },
+    fnView() {
+      console.log('퍋 a post')
+      console.log('표시', localStorage.getItem('userNick') == !null)
+      // if (localStorage.getItem('userNick')) {
+      //   this.$router.push('/post')
+      // } else {
+      //   alert('로그인 후 이용할 수 있습니다.')
+      //   this.$router.push('/signin')
+      // }
+    },
     async fnGetList2() {
       console.log('GET / posts when Board is loading')
       console.log('token', localStorage.getItem('token'))
@@ -118,31 +102,31 @@ export default {
           console.log('Community - response : ', response)
           console.log('Community - this.list : ', this.list)
           this.data = response.data.data
-          console.log(this.data)
+          console.log('Community - this.data : ', this.data)
           for (let i in this.data) {
-            let a = this.data[i]
-            this.list.push(a)
+            let listData = {
+              번호: this.data[i].id,
+              제목: this.data[i].title,
+              글쓴이: this.data[i].nick,
+              등록일: this.data[i].createdAt,
+              조회: this.data[i].count,
+              추천: this.data[i].like
+
+              // No: this.data[i].id,
+              // title: this.data[i].title,
+              // Author: this.data[i].nick,
+              // uploaded: this.data[i].createdAt,
+              // count: this.data[i].count,
+              // like: this.data[i].like
+            }
+            // let listData = this.data[i]
+            this.list.push(listData)
           }
         })
         .catch(error => {
           console.log(error)
         })
     }
-    // pageDataSetting(total, limit, block, page) {
-    //   console.log('Community - pageDataSetting : ', this.list)
-    //   const totalPage = Math.ceil(total / limit)
-    //   let currentPage = page
-    //   const first = currentPage > 1 ? parseInt(currentPage, 10) - parseInt(1, 10) : null
-    //   const end = totalPage !== currentPage ? parseInt(currentPage, 10) + parseInt(1, 10) : null
-
-    //   let startIndex = (Math.ceil(currentPage / block) - 1) * block + 1
-    //   let endIndex = startIndex + block > totalPage ? totalPage : startIndex + block - 1
-    //   let totalList = []
-    //   for (let index = startIndex; index <= endIndex; index++) {
-    //     totalList.push(index)
-    //   }
-    //   return { first, end, totalList, currentPage }
-    // }
   }
 }
 </script>
