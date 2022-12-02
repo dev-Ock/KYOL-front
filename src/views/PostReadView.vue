@@ -253,7 +253,7 @@ export default {
   background-color: dimgrey;
 } */
 body {
-  margin-top: 20px;
+  /* margin-top: 20px; */
   background: #ebeef0;
 }
 
