@@ -72,7 +72,6 @@ export default {
   }),
   mounted() {
     this.checkLocalStorage()
-
     this.checkGold()
   },
   methods: {
