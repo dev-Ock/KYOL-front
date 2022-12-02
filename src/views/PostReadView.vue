@@ -17,9 +17,9 @@
         </div>
       </div>
       <div>
-        <button class="btn btn-warning btn3" @click="correct">수정</button>
-        <button class="btn btn-warning btn3">삭제</button>
-        <button class="btn btn-warning btn3">목록</button>
+        <button class="btn btn-warning btn3" @click="golist">목록</button>
+        <button v-show="invisible" class="btn btn-warning btn3" @click="deletepost">삭제</button>
+        <button v-show="invisible" class="btn btn-warning btn3" @click="correct">수정</button>
       </div>
       <br /><br /><br />
     </div>
@@ -121,7 +121,8 @@ export default {
     num: 0,
     postid: 0,
     recommentid: 0,
-    reply: ''
+    reply: '',
+    invisible: false
   }),
   mounted() {
     this.postcontent()
@@ -140,6 +141,25 @@ export default {
       if (this.postid == this.recommentid) {
         console.log('우짜라고')
       }
+    },
+    golist() {
+      this.$router.push({ name: 'community' })
+    },
+    async deletepost() {
+      console.log('cehcek1', this.index)
+      await axios
+        .delete(process.env.VUE_APP_API + `/community/post/delete/${this.index}`, {
+          headers: {
+            Authorization: `${localStorage.getItem('token')}`
+          }
+        })
+        .then(response => {
+          console.log('delete:', response)
+          this.$router.push({ name: 'community' })
+        })
+        .catch(error => {
+          console.log('delete:', error)
+        })
     },
     async enroll() {
       console.log(this.reply)
@@ -191,6 +211,9 @@ export default {
           this.count = response.data.data.comment
           this.lengthcm = this.count.length
           console.log('대댓:', this.recomment)
+          if (localStorage.getItem('userNick') == this.nick) {
+            this.invisible = true
+          }
         })
         .catch(error => {
           console.log('post-error', error)
