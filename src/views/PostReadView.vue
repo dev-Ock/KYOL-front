@@ -68,25 +68,27 @@
               <button class="btn btn-warning btn3 btn4" @click="clickcomment(i)">Comment</button>
             </div>
             <hr width="93.5%" align="left" />
-          </div>
-        </div>
-        <div v-for="(b, i) in recomment" :key="i" class="commentcard">
-          <div v-show="recm" class="media-block">
-            <a class="media-left" href="#"
-              ><img
-                class="img-circle img-sm"
-                alt="Profile Picture"
-                src="https://bootdey.com/img/Content/avatar/avatar2.png"
-            /></a>
-            <div class="media-body">
-              <div class="commentcard">
-                <p>{{ recomment[i].nick }}</p>
-                <p class="text-muted text-sm">{{ createAt }} 2022-12-01</p>
-                <p>{{ recomment[i].re_reply }}</p>
+
+            <!-- 대댓글 -->
+            <div v-for="(b, i) in recomment" :key="i" class="commentcard">
+              <div v-show="recm" class="media-block">
+                <a class="media-left" href="#"
+                  ><img
+                    class="img-circle img-sm"
+                    alt="Profile Picture"
+                    src="https://bootdey.com/img/Content/avatar/avatar2.png"
+                /></a>
+                <div class="media-body">
+                  <div class="commentcard">
+                    <p>{{ recomment[i].nick }}</p>
+                    <p class="text-muted text-sm">{{ createAt }} 2022-12-01</p>
+                    <p>{{ recomment[i].re_reply }}</p>
+                  </div>
+                  <button class="btn btn-warning btn3 btn4">Comment</button>
+                </div>
+                <hr width="93.5%" align="left" />
               </div>
-              <button class="btn btn-warning btn3 btn4">Comment</button>
             </div>
-            <hr width="93.5%" align="left" />
           </div>
         </div>
       </div>
@@ -132,11 +134,16 @@ export default {
     clickcomment(selectcoment) {
       console.log('클릭중')
       this.num = selectcoment
-      this.recm = true
       console.log(this.num)
       this.postid = this.comment[this.num].id
       // 반복문 돌려서 CommentId를 알아내자
-      // this.recommentid = this.recomment.[]CommentId
+      console.log('값을 알아보자', this.recommentid)
+      for (let i = 0; i < this.recomment.length; i++) {
+        this.recommentid = this.recomment[i].CommentId
+        if (this.recommentid == this.postid) {
+          this.recm = true
+        }
+      }
       console.log(this.recommentid)
       if (this.postid == this.recommentid) {
         console.log('우짜라고')
@@ -211,6 +218,7 @@ export default {
           this.count = response.data.data.comment
           this.lengthcm = this.count.length
           console.log('대댓:', this.recomment)
+          //commentid가 같은 것만
           if (localStorage.getItem('userNick') == this.nick) {
             this.invisible = true
           }
