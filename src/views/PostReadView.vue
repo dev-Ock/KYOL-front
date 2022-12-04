@@ -58,6 +58,11 @@
               <p style="margin: 10px">{{ a.nick }}</p>
               <p class="text-muted text-sm">{{ createAt }}</p>
               <p>{{ comment[i].reply }}</p>
+              <button @click="writerecomment">답글달기</button>
+              <div v-show="recm2">
+                <textarea v-model="reply2" class="form-control" placeholder="댓글은 자신을 보는 거울입니다."></textarea>
+                <button @click="gorecomment(i)">확인</button>
+              </div>
             </div>
             <div>
               <div>
@@ -65,7 +70,7 @@
                 <!-- <a class="btn btn-sm btn-default btn-hover-success" href="#"><i class="fa fa-thumbs-up"></i></a> -->
                 <!-- <a class="btn btn-sm btn-default btn-hover-danger" href="#"><i class="fa fa-thumbs-down"></i></a> -->
               </div>
-              <button class="btn btn-warning btn3 btn4" @click="clickcomment(i)">Comment</button>
+              <button class="btn btn-warning btn3 btn4" @click="clickcomment(i)">대댓글보기</button>
             </div>
             <hr width="93.5%" align="left" />
 
@@ -120,17 +125,49 @@ export default {
     count: [],
     realnick: '',
     recm: false,
+    recm2: false,
     num: 0,
     postid: 0,
     recommentid: 0,
     reply: '',
-    invisible: false
+    invisible: false,
+    reply2: '',
+    found: 0
   }),
   mounted() {
     this.postcontent()
     this.showRecomment()
   },
   methods: {
+    async gorecomment(selectrecomment) {
+      this.num3 = selectrecomment
+      this.postid = this.comment[this.num3].id
+      await axios
+        .post(
+          process.env.VUE_APP_API + `/community/recomment/add/${this.index}/${this.postid}`,
+          {
+            reply2: this.reply2
+          },
+          {
+            headers: {
+              Authorization: `${localStorage.getItem('token')}`
+            }
+          }
+        )
+        .then(response => {
+          console.log('reply2 - response : ', response, response.data)
+          this.$router.go()
+          // this.$router.push({ name: 'community' }) // router/index.js 에서 설정한 name
+        })
+        .catch(error => {
+          console.log('reply2 : ', error)
+        })
+    },
+    writerecomment(e) {
+      console.log('대댓글다는 칸 보여주', e)
+      // 반복문 돌려서 CommentId를 알아내자
+      this.recm2 = true
+    },
     clickcomment(selectcoment) {
       console.log('클릭중')
       this.num = selectcoment
