@@ -28,7 +28,7 @@
     <div class="container bootdey">
       <div class="col-md-12 bootstrap snippets">
         <div class="panel">
-          <div class="panel-body">
+          <div v-show="invisible2" class="panel-body">
             <textarea
               v-model="reply"
               class="form-control"
@@ -58,8 +58,11 @@
               <p style="margin: 10px">{{ a.nick }}</p>
               <p class="text-muted text-sm">{{ createAt }}</p>
               <p>{{ comment[i].reply }}</p>
-              <button @click="writerecomment">답글달기</button>
-              <div v-show="recm2">
+              <button v-show="invisible2" @click="writerecomment(i)">답글달기</button>
+              <button v-show="invisible2" class="btn btn-danger btn3 btn4" @click="deletecomment(comment[i].id)">
+                삭제
+              </button>
+              <div v-if="i == check">
                 <textarea v-model="reply2" class="form-control" placeholder="댓글은 자신을 보는 거울입니다."></textarea>
                 <button @click="gorecomment(i)">확인</button>
               </div>
@@ -70,13 +73,15 @@
                 <!-- <a class="btn btn-sm btn-default btn-hover-success" href="#"><i class="fa fa-thumbs-up"></i></a> -->
                 <!-- <a class="btn btn-sm btn-default btn-hover-danger" href="#"><i class="fa fa-thumbs-down"></i></a> -->
               </div>
-              <button class="btn btn-warning btn3 btn4" @click="clickcomment(i)">대댓글보기</button>
+              <button class="btn btn-warning btn3 btn4" @click="clickcomment(comment[i].id, recomment, i)">
+                대댓글보기
+              </button>
             </div>
             <hr width="93.5%" align="left" />
 
             <!-- 대댓글 -->
-            <div v-for="(b, i) in recomment" :key="i" class="commentcard">
-              <div v-show="recm" class="media-block">
+            <div v-for="(b, ii) in recommentlist" :key="ii" class="commentcard">
+              <div v-if="i == check2" class="media-block">
                 <a class="media-left" href="#"
                   ><img
                     class="img-circle img-sm"
@@ -85,11 +90,17 @@
                 /></a>
                 <div class="media-body">
                   <div class="commentcard">
-                    <p>{{ recomment[i].nick }}</p>
+                    <p>{{ recommentlist[ii].nick }}</p>
                     <p class="text-muted text-sm">{{ createAt }} 2022-12-01</p>
-                    <p>{{ recomment[i].re_reply }}</p>
+                    <p>{{ recommentlist[ii].re_reply }}</p>
                   </div>
-                  <button class="btn btn-warning btn3 btn4">Comment</button>
+                  <button
+                    v-show="invisible2"
+                    class="btn btn-danger btn3 btn4"
+                    @click="deleterecomment(recommentlist[ii].id)"
+                  >
+                    삭제
+                  </button>
                 </div>
                 <hr width="93.5%" align="left" />
               </div>
@@ -132,62 +143,109 @@ export default {
     reply: '',
     invisible: false,
     reply2: '',
-    found: 0
+    found: 0,
+    commentId: 0,
+    check: -1,
+    recommentlist: [],
+    check2: -1,
+    deletenum: 0,
+    invisible2: true
   }),
   mounted() {
     this.postcontent()
     this.showRecomment()
   },
   methods: {
-    async gorecomment(selectrecomment) {
-      this.num3 = selectrecomment
-      this.postid = this.comment[this.num3].id
-      await axios
-        .post(
-          process.env.VUE_APP_API + `/community/recomment/add/${this.index}/${this.postid}`,
-          {
-            reply2: this.reply2
-          },
-          {
-            headers: {
-              Authorization: `${localStorage.getItem('token')}`
+    async gorecomment(num) {
+      console.log('확인하자', num)
+      this.postid = this.comment[num].PostId
+      this.commentId = this.comment[num].id
+      if (this.reply2 == '') {
+        alert('내용을 입력해주세요.')
+      } else {
+        await axios
+          .post(
+            process.env.VUE_APP_API + `/community/recomment/add/${this.postid}/${this.commentId}`,
+            {
+              re_reply: this.reply2
+            },
+            {
+              headers: {
+                Authorization: `${localStorage.getItem('token')}`
+              }
             }
-          }
-        )
-        .then(response => {
-          console.log('reply2 - response : ', response, response.data)
-          this.$router.go()
-          // this.$router.push({ name: 'community' }) // router/index.js 에서 설정한 name
-        })
-        .catch(error => {
-          console.log('reply2 : ', error)
-        })
+          )
+          .then(response => {
+            console.log('re_reply - response : ', response, response.data)
+            this.$router.go()
+            // this.$router.push({ name: 'community' }) // router/index.js 에서 설정한 name
+          })
+          .catch(error => {
+            console.log('re_reply : ', error)
+          })
+      }
     },
-    writerecomment(e) {
-      console.log('대댓글다는 칸 보여주', e)
-      // 반복문 돌려서 CommentId를 알아내자
-      this.recm2 = true
+    writerecomment(num) {
+      this.check = num
     },
-    clickcomment(selectcoment) {
-      console.log('클릭중')
-      this.num = selectcoment
-      console.log(this.num)
-      this.postid = this.comment[this.num].id
+    clickcomment(click1, click2, num) {
+      console.log('확인1 : commentId', click1)
+      console.log('확인2 : Array : All recommends', click2)
+      console.log('확인3')
+      this.check2 = num
       // 반복문 돌려서 CommentId를 알아내자
       console.log('값을 알아보자', this.recommentid)
-      for (let i = 0; i < this.recomment.length; i++) {
-        this.recommentid = this.recomment[i].CommentId
-        if (this.recommentid == this.postid) {
-          this.recm = true
+      this.recommentlist = []
+      for (let i = 0; i < click2.length; i++) {
+        if (click1 == click2[i].CommentId) {
+          this.recommentlist.push(click2[i])
         }
       }
+      console.log('배열 담기나', this.recommentlist)
       console.log(this.recommentid)
+      this.recm = true
       if (this.postid == this.recommentid) {
         console.log('우짜라고')
       }
     },
     golist() {
       this.$router.push({ name: 'community' })
+    },
+    async deletecomment(id) {
+      this.deletenum = id
+      alert('삭제하시겠습니까?')
+      await axios
+        .delete(process.env.VUE_APP_API + `/community/comment/delete/${this.deletenum}`, {
+          headers: {
+            Authorization: `${localStorage.getItem('token')}`
+          }
+        })
+        .then(response => {
+          console.log('deletecomment:', response)
+          this.$router.go()
+        })
+        .catch(error => {
+          console.log('deletecomment:', error)
+          alert('본인이 쓴 댓글만 삭제할 수 있습니다.')
+        })
+    },
+    async deleterecomment(id) {
+      this.deletenum = id
+      alert('삭제하시겠습니까?')
+      await axios
+        .delete(process.env.VUE_APP_API + `/community/recomment/delete/${this.deletenum}`, {
+          headers: {
+            Authorization: `${localStorage.getItem('token')}`
+          }
+        })
+        .then(response => {
+          console.log('deletecomment:', response)
+          this.$router.go()
+        })
+        .catch(error => {
+          console.log('deletecomment:', error)
+          alert('본인이 쓴 댓글만 삭제할 수 있습니다.')
+        })
     },
     async deletepost() {
       console.log('cehcek1', this.index)
@@ -248,7 +306,7 @@ export default {
           this.nick = this.data.nick
           this.content = this.data.content
           this.views = this.data.count
-          this.createAt = this.data.createdAt
+          this.createAt = String(this.data.createdAt).substring(0, 10)
           this.realnick = localStorage.getItem('userNick')
           this.comment = response.data.data.comment
           this.recomment = response.data.data.recomment
@@ -258,6 +316,9 @@ export default {
           //commentid가 같은 것만
           if (localStorage.getItem('userNick') == this.nick) {
             this.invisible = true
+          }
+          if (localStorage.getItem('userNick') == null) {
+            this.invisible2 = false
           }
         })
         .catch(error => {
