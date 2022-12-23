@@ -49,6 +49,7 @@
       <!-- pagination -->
       <b-pagination
         v-model="currentPage"
+        class="pagination justify-content-center"
         :total-rows="rows"
         :per-page="perPage"
         aria-controls="my-table"
@@ -69,7 +70,7 @@ export default {
   data() {
     return {
       list: [],
-      perPage: 3,
+      perPage: 10,
       currentPage: 1,
       pageindex: 0
     }
@@ -134,7 +135,7 @@ export default {
               번호: this.data[i].id,
               제목: this.data[i].title,
               글쓴이: this.data[i].nick,
-              등록일: this.data[i].createdAt,
+              등록일: String(this.data[i].createdAt).substring(0, 10),
               조회: this.data[i].count,
               추천: this.data[i].like
 
