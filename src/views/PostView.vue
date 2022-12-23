@@ -3,9 +3,9 @@
     <NavBar></NavBar>
     <div style="position: relative" class="center">
       <div class="container" style="transform: translate(0%, 0%)">
+        <h1 class="title">New Post</h1>
         <div class="card">
           <div class="card-body">
-            <h4 class="fontcenter">새로운 글 등록</h4>
             <p class="nickk">작성자 : {{ nick }}</p>
             <form>
               <div class="form-group">
@@ -37,7 +37,10 @@
 
               <div class="btnbtn">
                 <div class="col-auto btnbtn">
-                  <router-link :to="{ path: '/community' }" class="btn btn-warning">
+                  <router-link
+                    :to="{ path: '/community' }"
+                    class="btn btn-warning"
+                  >
                     <i class="fa">취소</i>
                   </router-link>
                 </div>
@@ -127,5 +130,11 @@ export default {
 
 .fontcenter {
   text-align: center;
+}
+
+.title {
+  color: #ffffff;
+  margin: -160px 0px 40px 0px;
+  text-align: left;
 }
 </style>

@@ -3,17 +3,28 @@
     <NavBar></NavBar>
     <div style="position: relative" class="center">
       <div class="container" style="transform: translate(0%, 0%)">
+        <h1 class="title">Modify Post</h1>
         <div class="card">
-          <h4 class="fontcenter">글 수정</h4>
+          <!-- <h4 class="fontcenter">글 수정</h4> -->
           <div class="card-body">
             <p class="nickk">작성자 : {{ newData.nick }}</p>
             <form>
               <div class="form-group">
-                <input id="postsTitle" v-model="newData.title" type="text" class="form-control" />
+                <input
+                  id="postsTitle"
+                  v-model="title"
+                  type="text"
+                  class="form-control"
+                />
               </div>
 
               <div class="form-group">
-                <textarea id="postsContent" v-model="newData.content" rows="10" class="form-control inputmargin" />
+                <textarea
+                  id="postsContent"
+                  v-model="content"
+                  rows="10"
+                  class="form-control inputmargin"
+                />
               </div>
             </form>
             <div style="width: 100%; text-align: center">
@@ -25,7 +36,10 @@
 
               <div class="btnbtn">
                 <div class="col-auto btnbtn">
-                  <router-link :to="{ path: '/community' }" class="btn btn-warning">
+                  <router-link
+                    :to="{ path: '/community' }"
+                    class="btn btn-warning"
+                  >
                     <i class="fa">취소</i>
                   </router-link>
                 </div>
@@ -150,5 +164,11 @@ export default {
 
 .fontcenter {
   text-align: center;
+}
+
+.title {
+  color: #ffffff;
+  margin: -160px 0px 40px 0px;
+  text-align: left;
 }
 </style>

@@ -2,15 +2,12 @@
   <div class="communityHome">
     <NavBar></NavBar>
     <div class="board-list">
-      <div class="common-buttons">
-        <button
-          type="button"
-          class="w3-button w3-round w3-blue-gray"
-          @click="fnWrite()"
-        >
+      <!-- <div class="common-buttons">
+        <button type="button" class="btn btn-warning" @click="fnWrite()">
           글쓰기
         </button>
-      </div>
+      </div> -->
+      <h1 class="commutitle">Community</h1>
       <b-table
         id="my-table"
         class="table"
@@ -21,16 +18,6 @@
         @row-clicked="rowClick"
         @row-hovered="rowHovered"
       >
-        <!-- <thead>
-          <tr>
-            <th>No</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>등록일</th>
-            <th>조회수</th>
-            <th>좋아요</th>
-          </tr>
-        </thead> -->
         <tbody>
           <tr v-for="(row, i) in list" :key="i">
             <td>{{ row.id }}</td>
@@ -61,6 +48,16 @@
         :per-page="perPage"
         aria-controls="my-table"
       ></b-pagination>
+    </div>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <div class="common-buttons">
+      <button type="button" class="btn btn-warning" @click="fnWrite()">
+        <i class="fa fa-pencil fa-fw"></i>
+        글쓰기
+      </button>
     </div>
   </div>
 </template>
@@ -176,8 +173,18 @@ export default {
 </script>
 
 <style>
+.communityHome {
+  background: url('~@/assets/images/space2.gif') 100% 100% / cover no-repeat;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Hahmlet', serif;
+}
+
+.table {
+  background-color: #ffffff;
+}
 .board-list {
-  width: 768px;
+  width: 70vw;
   margin: auto;
 }
 
@@ -189,11 +196,38 @@ export default {
 
 .board-contents {
   padding: 12px 8px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #ffffff;
 }
 
 .common-buttons {
   padding: 8px;
   text-align: right;
+  margin: -110px 222.5px 0px 0px;
 }
+.pagination {
+  margin-top: 60px;
+  --bs-pagination-bg: none;
+  --bs-pagination-disabled-bg: none;
+  --bs-pagination-active-color: #000000;
+  --bs-pagination-active-bg: #ffc310;
+  --bs-pagination-active-border-color: #ffffff;
+}
+
+.page-link {
+  color : #ffc310;
+}
+
+.active>.page-link, .page-link.active {
+    z-index: 3;
+    color: var(--bs-pagination-active-color);
+    background-color: var(--bs-pagination-active-bg);
+    border-color: var(--bs-pagination-active-border-color);
+}
+
+.commutitle {
+  color: #ffffff;
+  margin: 20px 0px 40px 0px;
+  text-align: left;
+}
+
 </style>
