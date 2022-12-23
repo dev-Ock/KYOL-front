@@ -111,13 +111,10 @@ export default {
         })
         .then(response => {
           console.log('login - response : ', response)
-
           localStorage.setItem('token', response.data.token)
           localStorage.setItem('userId', response.data.user.id)
           localStorage.setItem('userNick', response.data.user.nick)
-
           console.log(localStorage.getItem('userNick'))
-
           this.$router.push({ name: 'home' })
         })
         .catch(error => {
