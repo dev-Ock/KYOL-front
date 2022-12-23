@@ -6,14 +6,14 @@
         <div class="card">
           <h4 class="fontcenter">글 수정</h4>
           <div class="card-body">
-            <p class="nickk">작성자 : {{ nick }}</p>
+            <p class="nickk">작성자 : {{ newData.nick }}</p>
             <form>
               <div class="form-group">
-                <input id="postsTitle" v-model="title" type="text" class="form-control" />
+                <input id="postsTitle" v-model="newData.title" type="text" class="form-control" />
               </div>
 
               <div class="form-group">
-                <textarea id="postsContent" v-model="content" rows="10" class="form-control inputmargin" />
+                <textarea id="postsContent" v-model="newData.content" rows="10" class="form-control inputmargin" />
               </div>
             </form>
             <div style="width: 100%; text-align: center">
@@ -49,9 +49,16 @@ export default {
   },
   data: () => ({
     index: 0,
-    title: '',
-    nick: '',
-    content: ''
+    oldData: {
+      title: '',
+      nick: '',
+      content: ''
+    },
+    newData: {
+      title: '',
+      nick: '',
+      content: ''
+    }
   }),
   created() {
     this.correctcontent()
@@ -59,6 +66,7 @@ export default {
   methods: {
     async correctcontent() {
       console.log('내용 수정')
+      console.log('내용 수정 페이지들어옴')
       this.index = this.$route.params.id
       console.log(this.index)
       await axios
@@ -70,36 +78,47 @@ export default {
         .then(response => {
           console.log('postupdate - response : ', response)
           this.data = response.data.data.post
-          this.title = this.data.title
-          this.nick = this.data.nick
-          this.content = this.data.content
+          this.oldData.title = this.data.title
+          this.oldData.nick = this.data.nick
+          this.oldData.content = this.data.content
+          this.newData.title = this.data.title
+          this.newData.nick = this.data.nick
+          this.newData.content = this.data.content
         })
         .catch(error => {
           console.log('postupdate-error', error)
         })
     },
     async location() {
-      console.log('로케이션')
-      await axios
-        .put(
-          process.env.VUE_APP_API + `/community/post/after-update/${this.index}`,
-          {
-            title: this.title,
-            content: this.content
-          },
-          {
-            headers: {
-              Authorization: `${localStorage.getItem('token')}`
+      console.log('newData 찍어보자 : ', this.newData)
+      console.log('oldData 찍어보자 : ', this.oldData)
+      console.log('결과 찍어보자 : ', this.oldData !== this.newData)
+      if (this.newData.content !== this.oldData.content || this.newData.title !== this.oldData.title) {
+        console.log('로케이션')
+        await axios
+          .put(
+            process.env.VUE_APP_API + `/community/post/after-update/${this.index}`,
+            {
+              title: this.newData.title,
+              content: this.newData.content
+            },
+            {
+              headers: {
+                Authorization: `${localStorage.getItem('token')}`
+              }
             }
-          }
-        )
-        .then(response => {
-          console.log('update - response : ', response, response.data)
-          this.$router.push({ name: 'community' }) // router/index.js 에서 설정한 name
-        })
-        .catch(error => {
-          console.log('update : ', error)
-        })
+          )
+          .then(response => {
+            console.log('update - response : ', response, response.data)
+            alert('Modify completed')
+            this.$router.push({ name: 'community' }) // router/index.js 에서 설정한 name
+          })
+          .catch(error => {
+            console.log('update : ', error)
+          })
+      } else {
+        alert('Nothing Changed')
+      }
     }
   }
 }
