@@ -1,13 +1,17 @@
 <template>
-  <div>
+  <div class="communityHome">
     <NavBar></NavBar><br />
     <div class="basic">
       <div class="card border-dark">
         <div class="card">
           <div class="card-text">
             <h3>제목 : {{ title }}</h3>
-            작성자 : {{ nick }}<br />
-            작성일 : {{ createAt }} &nbsp; 조회 : {{ views }} &nbsp; 댓글 : {{ lengthcm }}
+            <br />
+            <h6>작성자 : {{ nick }}<br /></h6>
+            <h6>
+              작성일 : {{ createAt }} &nbsp; 조회 : {{ views }} &nbsp; 댓글 :
+              {{ lengthcm }}
+            </h6>
           </div>
         </div>
         <div class="card">
@@ -17,33 +21,41 @@
         </div>
       </div>
       <div>
-        <button class="btn btn-warning btn3" @click="golist">목록</button>
-        <button v-show="invisible" class="btn btn-warning btn3" @click="deletepost">삭제</button>
-        <button v-show="invisible" class="btn btn-warning btn3" @click="correct">수정</button>
+        <button class="btn btn4" @click="golist">목록</button>
+        <button
+          v-show="invisible"
+          class="btn btn4"
+          style="margin-top: 20px"
+          @click="deletepost"
+        >
+          삭제
+        </button>
       </div>
-      <br /><br /><br />
     </div>
 
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
-    <div class="container bootdey">
-      <div class="col-md-12 bootstrap snippets">
-        <div class="panel">
-          <div v-show="invisible2" class="panel-body">
-            <textarea
-              v-model="reply"
-              class="form-control"
-              rows="2"
-              placeholder="댓글은 자신을 보는 거울입니다."
-            ></textarea>
-            <div class="mar-top clearfix">
-              <button class="btn btn-warning btn3" type="submit" @click="enroll">
-                <i class="fa fa-pencil fa-fw"></i> 등록
-              </button>
-            </div>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+
+    <div class="col-md-12 bootstrap snippets">
+      <div class="panel">
+        <div v-show="invisible2" class="panel-body">
+          <textarea
+            v-model="reply"
+            class="form-control"
+            rows="2"
+            placeholder="댓글은 자신을 보는 거울입니다."
+          ></textarea>
+          <div class="mar-top clearfix">
+            <button class="btn btn-warning btn3" type="submit" @click="enroll">
+              <i class="fa fa-pencil fa-fw"></i> 등록
+            </button>
           </div>
         </div>
       </div>
     </div>
+
     <div class="panel">
       <div class="panel-body2">
         <div class="media-block">
@@ -56,31 +68,60 @@
             /></a>
             <div class="media-body">
               <p style="margin: 10px">{{ a.nick }}</p>
-              <p class="text-muted text-sm">{{ createAt }}</p>
-              <p>{{ comment[i].reply }}</p>
-              <button v-show="invisible2" @click="writerecomment(i)">답글달기</button>
-              <button v-show="invisible2" class="btn btn-danger btn3 btn4" @click="deletecomment(comment[i].id)">
+              <p class="text-muted text-sm" style="margin: 10px">
+                {{ createAt }}
+              </p>
+              <p style="margin: 10px">{{ comment[i].reply }}</p>
+              <!-- <button
+                class="btn btn-warning"
+                v-show="invisible2"
+                @click="writerecomment(i)"
+              >
+                답글달기
+              </button> -->
+              <button
+                v-show="invisible2"
+                class="btn btn4"
+                @click="deletecomment(comment[i].id)"
+              >
                 삭제
               </button>
               <div v-if="i == check">
-                <textarea v-model="reply2" class="form-control" placeholder="댓글은 자신을 보는 거울입니다."></textarea>
-                <button @click="gorecomment(i)">확인</button>
+                <textarea
+                  v-model="reply2"
+                  class="form-control"
+                  placeholder="댓글은 자신을 보는 거울입니다."
+                ></textarea>
+                <button class="btn btn-warning" @click="gorecomment(i)">
+                  확인
+                </button>
               </div>
             </div>
-            <div>
-              <div>
-                <!-- 댓글 좋아요 아이콘 -->
-                <!-- <a class="btn btn-sm btn-default btn-hover-success" href="#"><i class="fa fa-thumbs-up"></i></a> -->
-                <!-- <a class="btn btn-sm btn-default btn-hover-danger" href="#"><i class="fa fa-thumbs-down"></i></a> -->
-              </div>
-              <button class="btn btn-warning btn3 btn4" @click="clickcomment(comment[i].id, recomment, i)">
+            <div class="cmt2">
+              <button
+                class="btn btn-warning"
+                style="flex: 10px; width: 15px; margin: 5px; padding: 5px"
+                v-show="invisible2"
+                @click="writerecomment(i)"
+              >
+                답글달기
+              </button>
+              <button
+                class="btn btn-warning"
+                style="flex: 10px; width: 15px; margin: 5px; padding: 5px"
+                @click="clickcomment(comment[i].id, recomment, i)"
+              >
                 대댓글보기
               </button>
             </div>
             <hr width="93.5%" align="left" />
 
             <!-- 대댓글 -->
-            <div v-for="(b, ii) in recommentlist" :key="ii" class="commentcard">
+            <div
+              v-for="(b, ii) in recommentlist"
+              :key="ii"
+              class="commentcard2"
+            >
               <div v-if="i == check2" class="media-block">
                 <a class="media-left" href="#"
                   ><img
@@ -89,14 +130,14 @@
                     src="https://bootdey.com/img/Content/avatar/avatar2.png"
                 /></a>
                 <div class="media-body">
-                  <div class="commentcard">
+                  <div class="commentcard2">
                     <p>{{ recommentlist[ii].nick }}</p>
-                    <p class="text-muted text-sm">{{ createAt }} 2022-12-01</p>
+                    <p class="text-muted text-sm">{{ createAt }}</p>
                     <p>{{ recommentlist[ii].re_reply }}</p>
                   </div>
                   <button
                     v-show="invisible2"
-                    class="btn btn-danger btn3 btn4"
+                    class="btn btn4"
                     @click="deleterecomment(recommentlist[ii].id)"
                   >
                     삭제
@@ -354,17 +395,25 @@ export default {
 </script>
 
 <style>
+.communityHome {
+  background: url('~@/assets/images/space2.gif') 100% 100% / cover no-repeat;
+  /* height: 100vh; */
+  width: 100vw;
+  font-family: 'Hahmlet', serif;
+}
+
 .basic {
   text-align: center;
   display: inline-block;
   margin: auto;
-  width: 90%;
+  width: 60%;
 }
 .card {
   text-align: left;
 }
 .card-text {
   margin-left: 2%;
+  padding: 25px;
 }
 .btn2 {
   float: right;
@@ -375,8 +424,12 @@ export default {
   float: right;
 }
 .btn4 {
-  margin: -40px 90px;
+  margin: -100px 90px;
   float: right;
+  color: red;
+}
+.cmt {
+  margin-left: 10px;
 }
 /* .comment {
   background-color: dimgrey;
@@ -412,10 +465,11 @@ body {
 
 .panel-body {
   padding: 25px 0px 20px 0px;
+  width: 60vw;
+  margin: auto;
+  margin-bottom: 30px;
 }
-.panel-body2 {
-  padding: 25px 0px 20px 110px;
-}
+
 .media-block .media-left {
   display: block;
   float: left;
@@ -429,6 +483,7 @@ body {
   display: block;
   overflow: hidden;
   width: auto;
+  padding-left: 10px;
 }
 
 .middle .media-left,
@@ -494,12 +549,30 @@ a.text-muted:focus {
   padding: 5px 10px;
 }
 .commentcard {
+  background-color: #ffffff;
+  width: 60vw;
   text-align: left;
-  margin-bottom: 15px;
-  margin-left: 2%;
-  padding: 0px 20px 20px 0px;
+  margin-bottom: 10px;
+  padding: 10px 10px 10px 10px;
+  /* border-radius: 10px; */
+  margin: auto;
+}
+.commentcard2 {
+  background-color: #ffffff;
+  width: 58vw;
+  text-align: left;
+  margin-bottom: 10px;
+  padding: 10px 10px 10px 10px;
+  /* border-radius: 10px; */
+  margin: auto;
 }
 .mar-top {
   margin-top: 15px;
+}
+.cmt2 {
+  display: flex;
+  margin: 10px;
+  padding: 10px;
+  width: 300px;
 }
 </style>
