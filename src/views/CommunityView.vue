@@ -3,7 +3,13 @@
     <NavBar></NavBar>
     <div class="board-list">
       <div class="common-buttons">
-        <button type="button" class="w3-button w3-round w3-blue-gray" @click="fnWrite()">글쓰기</button>
+        <button
+          type="button"
+          class="w3-button w3-round w3-blue-gray"
+          @click="fnWrite()"
+        >
+          글쓰기
+        </button>
       </div>
       <b-table
         id="my-table"
@@ -13,8 +19,9 @@
         :current-page="currentPage"
         small
         @row-clicked="rowClick"
+        @row-hovered="rowHovered"
       >
-        <thead>
+        <!-- <thead>
           <tr>
             <th>No</th>
             <th>제목</th>
@@ -23,7 +30,7 @@
             <th>조회수</th>
             <th>좋아요</th>
           </tr>
-        </thead>
+        </thead> -->
         <tbody>
           <tr v-for="(row, i) in list" :key="i">
             <td>{{ row.id }}</td>
@@ -40,7 +47,7 @@
           <router-link
             :to="{
               name: 'detail',
-              params: { articleno: data.item.articleno }
+              params: { articleno: data.item.articleno },
             }"
             >{{ data.item.title }}</router-link
           >
@@ -115,6 +122,16 @@ export default {
       //   alert('로그인 후 이용할 수 있습니다.')
       //   this.$router.push('/signin')
       // }
+    },
+    rowHovered(item, index, e) {
+      e.preventDefault()
+      console.log('인덱스를 알아볼까', item.번호)
+      console.log('마우스이벤트확인', e.target)
+      // console.log(e.fromElement.ariaColIndex)
+      if (e.fromElement.ariaColIndex == 2) {
+        e.fromElement.style.cursor = 'pointer'
+        // this.pageindex = item.번호
+      }
     },
     async fnGetList2() {
       console.log('GET / posts when Board is loading')
