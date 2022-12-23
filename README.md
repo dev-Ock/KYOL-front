@@ -100,111 +100,102 @@
   <br>
   <br>
 
-## Home, 로그인, 회원가입 기능 (22.10.11)
+## 기본세팅, 로그인 기능, 회원가입 기능, routers (22.10.12)
 
-- App.vue, eslintrc.js, .env, components/NavBar.vue
-- 기본설정 및 셋팅
+- 기본설정 및 세팅
+- router/index.js (라우터 설정)
+- Signin.vue (로그인 페이지)
+- Signup.Vue (회원가입 페이지)
 
-## Home, 로그인, 회원가입 기능2 + routers (22.10.12)
+## 랭킹, 상점 api함수 설정 및 NavBar 로그인 전/후 설정 (22.10.13)
 
-- Gameview.vue 
-- Signin.vue, Signup.Vue, github, MypageView.vue, HomeView.vue
-- 화면 구현, axios, request, response 
+- Signin.vue (토큰 설정)
+- components/NavBar.vue (로그인 전/후 NavBar 구현)
+- HomeView.vue (배경 디자인)
+- RankingView.vue (랭킹 api함수 설정)
+- ShopView.vue (상점 api함수 설정)
 
-## Game 기능, router 기능 (22.10.13)
+## 랭킹, 상점, 게임 페이지 디자인 및 데이터 설계 (22.10.14)
 
-- Signin.vue, Signup.Vue, github, MypageView.vue (로그인 로그아웃)
-- components/NavBar.vue ()
-- routes/game.js 
-- routes/mypage.js
-- GameView.vue, components/gamedata/GameScreen.vue
-- HomeView.vue
-- shopView.vue
-
-## router 기능들 구체적으로 빌드업, assets 추가시작 (22.10.14)
-
-- Gameview.vue 
-- HomeView.vue
+- RankingView.vue (화면 디자인 및 데이터 설계)
 - MypageView.vue (CSS 수정)
-- shopView.vue (상점기능 open, Modal)
-- assets/images
+- shopView.vue (화면 디자인 및 모달창)
+- GameScreen.vue (화면 디자인 및 데이터 설계)
 
-## router 기능들 구체적으로 빌드업, assets 추가 (22.10.15)
-빌드업 (22.10.16)
+## api주소 수정 (22.10.16)
 
-- GameView.vue
-- MypageView.vue (회원정보 수정 삭제)
-- shopView.vue 
-- RankingView.vue
+- MypageView.vue (api주소 수정)
 
-## router 기능들 구체적으로 빌드업2 + 에러수정 (22.10.16)
-- Gameview.vue 
-- MypageView.vue
-- shopView.vue
-- RankingView.vue
-
-## 유효성검사기능 추가 및 수정 + 에러수정 (22.10.17)
+## 게임 기능, 회원가입 유효성 검사 및 로그인 실패 후속 처리, 상점 구매 기능 (22.10.17)
 
 - Gameview.vue, GameScreen.vue (기본적인 게임에서 필요한 기능 구현 마무리 + 버그수정 + axios update 기능)
-- NavBar.vue (코드수정)
-- SignupView.vue (유효성검사 기능)
-- Signin.vue, Signup.Vue (로그인 실패 후속처리)
-- ShopView.vue (구매기능)
+- SignupView.vue (유효성 검사 기능)
+- SigninView.vue, SignupView.Vue (로그인 실패 후속 처리 구현)
+- ShopView.vue (구매 기능)
+- HomeView.vue (게스트 화면 구현)
 
-## Game 기능 추가개발 + 에러수정 및 버그수정 + UI 개선 (22.10.18)
+## 게임 기능 추가 개발, 에러 수정 및 버그수정, UI 개선 (22.10.18)
 
 - Gameview.vue, GameScreen.vue (이미지 추가및 랜더링추가, 버그수정)
-- ShopView.vue, HomeView.vue (연동)
-- Signup.vue (수정)
-- Ranking (탈퇴한 회원정보 핸들링)
-- Store 기능 추가
-- Signin.vue, Signup.Vue (변수 핸들링 변경, 버그수정)
-- Signin.vue, Signup.Vue (토큰 체크추가)
-- GearView.vue (기능 추가 및 버그수정)
+- RankingView.vue (CSS 수정)
+- store/index.js (스토어 설정)
+- Signin.vue, Signup.Vue (토큰 체크 및 버그 수정)
+- GearView.vue (게임 시작 전 장착 페이지 화면 구성 및 데이터 설계)
 
-## 각 페이지 기능 개선 및 에러수정 + store 기능 개선 + NotFound 페이지생성 (22.10.19)
+## 각 페이지 기능 개선 및 에러 수정 + store 기능 개선 + NotFound 페이지 생성 (22.10.19)
 
-- Gameview.vue, GameScreen.vue (게임 디자인 보완)
+- Gameview.vue, GameScreen.vue (디자인 보완)
 - ShopView.vue (모달창 수정)
-- HomeView.vue (배경화면 조절)
 - RankingView.vue (표 위치 수정)
 - MypageView.vue (디자인 수정)
-- SigninView.vue (위치 수정)
-- SignupView.vue (위치 수정)
-- store/index.js (store기능 수정)
+- SigninView.vue, SignupView.vue (디자인 수정)
+- store/index.js (store 기능 수정)
 - NotFound.vue (404페이지 생성)
 
-## 각 페이지 기능 개선 및 에러수정  (22.10.20)
+## 각 페이지 기능 개선 및 에러 수정 (22.10.20)
 
-- Gameview.vue, GameScreen.vue (게임 디자인 보완)
+- Gameview.vue, GameScreen.vue (버튼 기능)
 - ShopView.vue (배경 디자인 수정)
-- HomeView.vue (위치 및 배경 수정)
+- HomeView.vue (로그인 페이지 이동 버튼)
 - RankingView.vue (디자인 수정)
 - MypageView.vue (닉네임, 비밀번호 수정버튼 보완)
 - SigninView.vue (디자인 수정)
 - SignupView.vue (디자인 수정)
 
-## 각 페이지 기능 개선 및 에러수정2  (22.10.21)
-- Gameview.vue, GameScreen.vue
-- revise buttons
-- revise Modal function
-- Screen CSS update - HomeView, SigninView, GameView
-
+## 각 페이지 디자인 수정 및 코드정리 (22.10.21)
 
 ## 코드 정리 (22.10.24)
-- HomeView.vue
-- GameScreen.vue, GearView.vue
-- ShopView.vue, MypageView.vue, RankingView.vue
-- SignupView.vue, PwView.vue
 
 ## 코드 정리 (22.10.25)
-- NavBar.vue, NotFound.vue
-- GameScreen.vue, GearView.vue
-- ShopView.vue
-- SignupView.vue, PwView.vue
 
-## 코드 정리 (22.10.29)
-- NavBar.vue, NotFound.vue
-- GameScreen.vue
-- ShopView.vue
-- SignupView.vue, PwView.vue
+## 코드 정리 (22.11.01)
+
+## 게시판 페이지 생성 (22.11.27 & 22.11.28)
+- CommunityView.vue (페이지 생성)
+
+## 게시판 페이지 화면 구성 및 데이터 설계 (22.11.29)
+- CommunityView.vue (화면 구성 및 데이터 설계)
+
+## 게시판 페이지 화면 페이지네이션 (22.11.29)
+- CommunityView.vue (페이지네이션)
+
+## 게시글 작성 화면 구성 (22.11.29)
+- PostView.vue (화면 구성)
+
+## 게시글 수정 화면 구성, 게시글 등록 데이터 설계, 게시글 상세페이지 화면 구성 (22.11.30)
+- PostUpdateView.vue (화면 구성)
+- PostView.vue (데이터 설계)
+- PostReadView.vue (화면 구성)
+
+## 게시글 상세페이지 데이터 설계 및 댓글 구현 (22.12.01)
+- PostReadView.vue (데이터 설계 및 댓글 구현)
+
+## 오류 수정 및 대댓글 화면 구성 (22.12.02)
+- PostReadView.vue (오류 수정 및 대댓글 화면 구성)
+
+## 답글 달기 구현 (22.12.04)
+- PostReadView.vue (답글 달기 구현)
+
+## UI 수정 및 대댓글 구현 (22.12.04)
+- CommunityView.vue (CSS 수정)
+- PostReadView.vue (CSS수정 및 대댓글 구현)
