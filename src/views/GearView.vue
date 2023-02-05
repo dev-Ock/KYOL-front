@@ -2,7 +2,7 @@
   <div class="gearhome">
     <div>
       <div class="block">
-        <audio autoplay loop src="../assets/videos/videoplaybackGearView.mp3"></audio>
+        <audio autoplay  muted loop src="../assets/videos/videoplaybackGearView.mp3"></audio>
         <img class="block" src="../assets/item/logo4.png" />
         <img class="block" src="../assets/item/logo5.png" />
         <div>
