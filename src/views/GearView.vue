@@ -2,14 +2,41 @@
   <div class="gearhome">
     <div>
       <div class="block">
-        <audio autoplay  muted loop src="../assets/videos/videoplaybackGearView.mp3"></audio>
-        <img class="block" src="../assets/item/logo4.png" />
-        <img class="block" src="../assets/item/logo5.png" />
+        <audio
+          autoplay
+          muted
+          loop
+          src="../assets/videos/videoplayback5.mp3"
+        />
+        <img
+          class="block"
+          src="../assets/item/logo4.png"
+        >
+        <img
+          class="block"
+          src="../assets/item/logo5.png"
+        >
         <div>
-          <div v-for="(a, i) in array" id="i" :key="i" class="hh">
-            <img class="mt-5 bb" width="150px" :src="array[i]" :class="ft === i ? 'choose' : ''" />
-            <div></div>
-            <button type="button" class="btn btn-warning" @click="select(i)">선택</button>
+          <div
+            v-for="(a, i) in array"
+            id="i"
+            :key="i"
+            class="hh"
+          >
+            <img
+              class="mt-5 bb"
+              width="150px"
+              :src="array[i]"
+              :class="ft === i ? 'choose' : ''"
+            >
+            <div />
+            <button
+              type="button"
+              class="btn btn-warning"
+              @click="select(i)"
+            >
+              선택
+            </button>
           </div>
         </div>
       </div>
@@ -17,11 +44,14 @@
         <div class="box effect1">
           <router-link to="/game">
             <button class="pushable">
-              <button class="front"></button>
+              <button class="front" />
             </button>
           </router-link>
         </div>
-        <img class="block2" src="../assets/item/logo6.png" />
+        <img
+          class="block2"
+          src="../assets/item/logo6.png"
+        >
       </div>
     </div>
   </div>
